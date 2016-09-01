@@ -95,7 +95,7 @@
                 </div>
                 <div class="share-actions">
                     <div class="pull-left note-color font12" style="padding-top: 8px">
-                        {% if not share['liked'] %}
+                        {% if not share.get("liked", False) %}
                         <a href="javascript:void(0)" data-share-id="{{ share['_id'] }}" class="note-color share-like-link">
                             <i class="fa fa-thumbs-o-up"></i>
                             赞{% if share['like_times'] > 0 %}{{ share['like_times'] }}{% end %}
@@ -129,7 +129,7 @@
                         </span>
                         &nbsp;
                         <span>
-                            <a href="javascript:void(0)" data-share-id="{{ share['_id'] }}" {% if share['uploader']['_id'] != current_user['_id'] %}data-cost="{{share['cost']}}"{% end %} class="share-download-button button button-flat-caution button-tiny">下载</a>
+                            <a href="javascript:void(0)" data-share-id="{{ share['_id'] }}" {% if not current_user or share['uploader']['_id'] != current_user['_id'] %}data-cost="{{share['cost']}}"{% end %} class="share-download-button button button-flat-caution button-tiny">下载</a>
                         </span>
                     </div>
                     <div class="clearfix"></div>
@@ -139,8 +139,8 @@
 
         {% include 'share-comment-list.html' %}
 
+        {% if current_user %}
         {% include '../../base/template/modals.html' %}
-
         <div class="btn-toolbar mt50" data-role="editor-toolbar" data-target="#editor">
             <div class="btn-group" >
                 <a class="btn" data-edit="bold" title="粗体"><i class="fa fa-bold"></i></a>
@@ -185,6 +185,7 @@
             <div class="clearfix">
             </div>
         </div>
+        {% end %}
     </div>
     <div class="sidebar">
         <div class="sidebar-inner">

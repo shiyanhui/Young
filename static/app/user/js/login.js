@@ -30,7 +30,7 @@ function login() {
     }
 
     $.ajax({
-        url: "/login",
+        url: "/login" + window.location.search,
         type: "POST",
         dataType: "json",
         data: {
@@ -47,7 +47,7 @@ function login() {
                     id: 0
                 });
             } else {
-                window.location.href = "/";
+                window.location.href = data.next;
             }
         },
         error: function(jqXHR , textStatus , errorThrown){

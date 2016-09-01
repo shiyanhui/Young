@@ -78,7 +78,6 @@ class CommunityBaseHandler(BaseHandler):
 
 
 class CommunityHandler(CommunityBaseHandler):
-    @authenticated
     @gen.coroutine
     def get(self):
         sort = self.get_argument('sort', "time")
@@ -92,7 +91,7 @@ class CommunityHandler(CommunityBaseHandler):
             page = 1
 
         query = {
-            'user_id': self.current_user['_id'],
+            'user_id': self.current_user and self.current_user['_id'],
             'sort': sort,
             'skip': (page - 1) * COMMUNITY_SETTINGS["topic_number_per_page"],
             'limit': COMMUNITY_SETTINGS['topic_number_per_page']
@@ -120,7 +119,10 @@ class CommunityHandler(CommunityBaseHandler):
             page
         )
 
-        kwargs = yield self.get_sidebar_arguments()
+        kwargs = {}
+        if self.current_user:
+            kwargs = yield self.get_sidebar_arguments()
+
         kwargs.update({
             'sort': sort,
             'current_node': node,
@@ -139,16 +141,15 @@ class CommunityHandler(CommunityBaseHandler):
 class TopicHandler(CommunityBaseHandler):
     '''得到某一话题'''
 
-    @authenticated
     @gen.coroutine
     def get(self, topic_id):
         topic = yield TopicDocument.get_topic(
-            topic_id, self.current_user['_id']
+            topic_id, self.current_user and self.current_user['_id']
         )
         if not topic:
             raise HTTPError(404)
 
-        if topic['author']['_id'] != self.current_user['_id']:
+        if self.current_user and topic['author']['_id'] != self.current_user['_id']:
             yield TopicDocument.update(
                 {'_id': topic['_id']}, {'$inc': {'read_times': 1}}
             )
@@ -534,7 +535,6 @@ class TopicCommentNewHandler(CommunityBaseHandler):
 class TopicCommentMoreHandler(CommunityBaseHandler):
     '''加载更多话题评论'''
 
-    @authenticated
     @gen.coroutine
     def post(self):
         form = TopicCommentMoreForm(self.request.arguments)
@@ -690,7 +690,6 @@ class TopicLikeHandler(CommunityBaseHandler):
 class NodeHandler(CommunityBaseHandler):
     '''得到某一个节点'''
 
-    @authenticated
     @gen.coroutine
     def get(self, node_id):
         current_node = yield NodeDocument.get_node(node_id)
@@ -711,7 +710,7 @@ class NodeHandler(CommunityBaseHandler):
         )
         topic_list = yield TopicDocument.get_topic_list(
             node_id=node_id,
-            user_id=self.current_user['_id'],
+            user_id=self.current_user and  self.current_user['_id'],
             sort=sort,
             skip=(page - 1) * COMMUNITY_SETTINGS["topic_number_per_page"],
             limit=COMMUNITY_SETTINGS['topic_number_per_page']

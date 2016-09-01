@@ -84,7 +84,7 @@
                             <span class="red-color font14">精贴</span>
                             {% end %}
 
-                            {% if topic['author']['_id'] == current_user['_id'] and not topic['anonymous'] %}
+                            {% if current_user and topic['author']['_id'] == current_user['_id'] %}
                             <span class="font14">
                                 <a href="/community/topic/edit?topic_id={{ topic['_id'] }}" class="note-color">
                                     <i class="fa fa-pencil-square-o"></i> 编辑
@@ -148,6 +148,7 @@
 
         {% include 'topic-comment-list.html' %}
 
+        {% if current_user %}
         {% include '../../base/template/modals.html' %}
         <div class="btn-toolbar mt50" data-role="editor-toolbar" data-target="#editor">
             <div class="btn-group" >
@@ -193,6 +194,7 @@
             <div class="clearfix">
             </div>
         </div>
+        {% end %}
     </div>
     <div class="sidebar">
         <div class="sidebar-inner">

@@ -50,7 +50,9 @@ class LoginHandler(BaseHandler):
 
     @gen.coroutine
     def post(self):
-        response_data = {}
+        response_data = {
+            "next": self.get_argument("next", "/")
+        }
 
         form = LoginForm(self.request.arguments)
         if form.validate():
@@ -118,7 +120,7 @@ class LogoutHandler(BaseHandler):
         self.session.clear()
         self.clear_all_cookies()
 
-        self.redirect('/login')
+        self.redirect('/')
 
 
 class RegisterTemplateHandler(BaseHandler):
@@ -263,7 +265,6 @@ class AvatarStaticFileHandler(BaseHandler):
 
 
 class ProfileCoverStaticFileHandler(BaseHandler):
-    @authenticated
     @gen.coroutine
     def get(self, cover_type, id_, content_type=None):
         if cover_type == 'user':

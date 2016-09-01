@@ -126,7 +126,7 @@
                                                 |
                                             </span>
                                             &nbsp;
-                                            <a href="javascript:void(0)" data-share-id="{{ share['_id'] }}" {% if share['uploader']['_id'] != current_user['_id'] %}data-cost="{{share['cost']}}"{% end %} class="share-download-button button button-flat-caution button-tiny">下载</a>
+                                            <a href="javascript:void(0)" data-share-id="{{ share['_id'] }}" {% if not current_user or share['uploader']['_id'] != current_user['_id'] %}data-cost="{{share['cost']}}"{% end %} class="share-download-button button button-flat-caution button-tiny">下载</a>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>

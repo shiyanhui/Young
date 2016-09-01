@@ -41,12 +41,15 @@
                     </li>
                 </ul>
                 {% end %}
+
                 <ul class="nav pull-right">
                     <li class="search-input">
                         <form class="navbar-search pull-left">
                             <input type="text" name="search" class="search-query" placeholder="搜人、搜话题、搜分享">
                         </form>
                     </li>
+
+                    {% if current_user %}
                     <li class="dropdown" id="unread-message-numbers">
                         <a class="dropdown-toggle note-color" data-toggle="dropdown">
                             <span>
@@ -90,13 +93,6 @@
                                     &nbsp;好友请求&nbsp;
                                 </a>
                             </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="javascript:void(0)" id="my-order-list-notification-link">
-                                    <i class="fa fa-circle-o"></i>
-                                    &nbsp;我的订单&nbsp;
-                                </a>
-                            </li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -131,6 +127,13 @@
                             </li>
                         </ul>
                     </li>
+                    {% else %}
+                    <li>
+                        <a href="/login">
+                            登录
+                        </a>
+                    </li>
+                    {% end %}
                 </ul>
             </div>
         </div>

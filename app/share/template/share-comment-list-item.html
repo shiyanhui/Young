@@ -30,7 +30,7 @@
                 <div class="pull-right">
                     <span id="share-comment-action-{{ comment['_id'] }}" class="share-comment-action">
                         <small>
-                            {% if not comment['anonymous'] and current_user['_id'] != comment['author']['_id'] %}
+                            {% if not comment['anonymous'] and current_user and  current_user['_id'] != comment['author']['_id'] %}
                             <a href="javascript:void(0)" class="coffee-color reply-share-comment-link"
                                     data-author-id="{{ comment['author']['_id'] }}" data-author-name="{{ comment['author']['name'] }}">
                                 <i class="fa fa-reply fa-lg"></i>回复

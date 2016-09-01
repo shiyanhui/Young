@@ -235,6 +235,10 @@ var message_updater = {
         message_updater.n += 1;
     },
     onError: function(jqXHR, textStatus, errorThrown) {
+        if (jqXHR.status == 403) {
+            return;
+        }
+
         if (textStatus == "timeout") {
             message_updater.poll();
         } else if (!message_updater.forbidden) {

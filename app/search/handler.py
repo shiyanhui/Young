@@ -14,7 +14,6 @@ __all__ = ['SearchHandler']
 
 
 class SearchHandler(BaseHandler):
-    @authenticated
     @gen.coroutine
     def get(self):
         form = SearchForm(self.request.arguments)

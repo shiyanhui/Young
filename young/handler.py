@@ -197,13 +197,15 @@ class BaseHandler(RequestHandler, UtilMixin):
         self.clear_cookie('session_id')
 
     def get_theme(self):
+        if not self.current_user:
+            return "default"
+
         user_setting = app.user.document.UserSettingDocument.get_user_setting_sync(
             self.current_user['_id'])
 
-        theme = 'default'
         try:
             theme = user_setting['theme']
         except:
-            pass
+            theme = 'default'
 
         return theme

@@ -21,8 +21,7 @@ class StatusHandler(ProfileBaseHandler):
     @authenticated
     @gen.coroutine
     def get(self, user_id=None):
-        if user_id is None:
-            user_id = self.current_user['_id']
+        user_id = user_id or self.current_user['_id']
 
         kwargs = yield self.get_header_arguments(user_id)
         if not kwargs['can_seen']:

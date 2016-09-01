@@ -82,7 +82,7 @@
     {% end %}
     <div class="font12 note-color topic-actions">
         <div class="pull-left">
-            {% if not topic['liked'] %}
+            {% if not topic.get("liked", False) %}
             <a href="javascript:void(0)" class="note-color topic-like-link" data-topic-id="{{ topic['_id'] }}">
                 <i class="fa fa-thumbs-o-up"></i>
                 赞{% if topic['like_times'] > 0 %}{{ topic['like_times'] }}{% end %}

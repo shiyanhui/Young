@@ -160,14 +160,13 @@ class ShareBaseHandler(BaseHandler):
 
 
 class ShareHandler(ShareBaseHandler):
-    @authenticated
     @gen.coroutine
     def get(self):
         kwargs = yield self.get_sidebar_arguments()
 
         recommend_func = ShareDownloadDocument.get_hot_download_list
-
         recommend_share_list = yield recommend_func()
+
         uploader_list = yield ShareDocument.get_uploader_list()
         newest_share_list = yield ShareDocument.get_share_list(limit=6)
 
@@ -238,7 +237,8 @@ class ShareNewHandler(ShareBaseHandler):
         }).count()
 
         if resumableTotalChunks == count:
-            # 此处又插入最后一个上传的chunk的原因是为了防止，最后一个chunk多次上传后，插入多个分享
+            # 此处又插入最后一个上传的chunk的原因是为了防止，最后一个chunk多
+            # 次上传后，插入多个分享
             yield TemporaryFileDocument.insert(document)
 
             _category = yield ShareCategoryDocument.find_one({
@@ -263,7 +263,9 @@ class ShareNewHandler(ShareBaseHandler):
             yield TemporaryFileDocument.remove({'upload_token': upload_token})
 
             if total_size != resumableTotalSize:
-                response_data.update({'message': '上传过程中数据受损，请重新上传！'})
+                response_data.update({
+                    'message': '上传过程中数据受损，请重新上传！'
+                })
             else:
                 gridfs = ShareDocument.get_gridfs()
 
@@ -320,7 +322,6 @@ class ShareNewCancelHandler(ShareBaseHandler):
 
 
 class ShareCategoryHandler(ShareBaseHandler):
-    @authenticated
     @gen.coroutine
     def get(self):
         form = ShareCategoryForm(self.request.arguments)
@@ -341,7 +342,6 @@ class ShareCategoryHandler(ShareBaseHandler):
             category=category,
             limit=SHARE_SETTINGS['share_number_per_page']
         )
-
         share_number = yield ShareDocument.get_share_number(
             category=category
         )
@@ -464,11 +464,10 @@ class ShareDownloadHandler(ShareBaseHandler):
 
 
 class ShareOneHandler(ShareBaseHandler):
-    @authenticated
     @gen.coroutine
     def get(self, share_id):
         share = yield ShareDocument.get_share(
-            share_id, self.current_user['_id']
+            share_id, self.current_user and self.current_user['_id']
         )
         if not share:
             raise HTTPError(404)

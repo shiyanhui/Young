@@ -49,6 +49,13 @@
         }
     };
 
+    $(document).ajaxComplete(function(ev, jqXHR, options) {
+        if (jqXHR.status == 403 && options.url != "/message/update") {
+            window.location.href = "/login";
+        }
+        return true;
+    });
+
     $(document).ready(function() {
         $(".fancybox-close-button").live("click", function() {
             $.fancybox.close();

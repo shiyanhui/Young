@@ -169,6 +169,7 @@
     </div>
     <div class="sidebar">
         <div class="sidebar-inner">
+            {% if current_user %}
             <div class="flat-block summary-numbers">
                 <div class="flat-block-header">
                     <a href="/profile" class="coffee-color">
@@ -211,6 +212,7 @@
                     <div class="clearfix"></div>
                 </div>
             </div>
+            {% end %}
 
             <div class="flat-block hot-topic-list-part">
                 <div class="flat-block-header">
