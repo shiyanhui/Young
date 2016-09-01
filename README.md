@@ -1,18 +1,17 @@
 <img src='static/img/logo.png' width='400' title='Young, a full-featured form'>
 
-A Full-featured form software built with love by [Lime](http://lime66.com) in
-[Python](https://www.python.org/).
+Young是一个用Python写的功能丰富的、界面小清新的类似NodeBB的社区软件。
 
-[中文README](https://github.com/shiyanhui/Young/blob/master/README_CN.md)
+[README in English](https://github.com/shiyanhui/Young/blob/master/README_EN.md)
 
 ## Features:
 
-- Classified topics
-- Anonymity Support
-- Social Network (tweet, friends etc.)
-- IM Chat
-- Real-time Notification
-- Resource Share
+- 话题按主题分类，你可以查看某一主题的话题
+- 支持匿名发帖，匿名评论
+- 社交功能（朋友圈，发状态）
+- 像QQ一样即时聊天
+- 实时提醒
+- 资源分享
 
 ## Screenshots
 
@@ -26,41 +25,39 @@ A Full-featured form software built with love by [Lime](http://lime66.com) in
 
 ## Installation
 
-On Unbuntu 16.04:
+在Unbuntu 16.04上
 
     git clone https://github.com/shiyanhui/Young.git
     cd Young && ./scripts/install.sh
 
-Then set your mongodb environment:
+然后设置你的Mongodb环境
 
-    1. open /etc/mongod.conf, add
+    1. 修改/etc/mongod.conf，添加
 
         replication:
             replSetName: rs0
 
-    2. restart mongodb
+    2. 重启Mongodb服务
 
         service mongod restart
 
-    3. enter mongo client and execute
+    3. 启动mongo，执行initiate
 
-        mogno
+        mongo
         rs.initiate()
 
-The next step you shoud initialize the database.
+下一步需要做的是初始化Mongodb数据库
 
     fab init
 
-If you want to set up your own mail server, execute **setup_mail.sh**,
-which will install postfix.
+如果你想自己搭建Email服务器，运行setup_mail.sh脚本
 
     ./scripts/setup_mail.sh
 
-**NOTE**:
+**注意**:
 
-**scripts/install.sh** is only tested on Ubuntu-16.04, so on other
-platform you may install manually. Just do as **scripts/install.sh** do step
-by step.
+**scripts/install.sh** 只在Ubuntu16.04上面测试过，如果你是Ubuntu其他版本或者其他
+操作系统，你需要手动安装。**scripts/install.sh** 稍微修改一下，一步一步安装即可。
 
 ## Requirements
 
@@ -72,28 +69,28 @@ by step.
 
 ## Development
 
-- you should start all required services before you run it.
+- 在运行之前必须启动所有依赖的服务
 
 ```bash
     fab start_service
 ```
 
-- build the resource.
+- 在非debug模式中，每次修改后，需要重建资源
 
 ```bash
     fab build
 ```
 
-- run it locally.
+- 本地运行
 
 ```bash
-    # debug mode is close by default, it will automatically build before run
+    # 默认为非debug模式，run之前会自动地build
     fab run
 
-    # run it in debug mode
+    # 启用debug模式
     fab run:debug=true
 ```
 
 ## License
 
-Young is licensed under the [GNU General Public License v3 (GPL-3)](http://www.gnu.org/copyleft/gpl.html).
+[GNU General Public License v3 (GPL-3)](http://www.gnu.org/copyleft/gpl.html).
