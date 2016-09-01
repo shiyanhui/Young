@@ -257,7 +257,7 @@ function login() {
 
                         Messenger().post({
                             id: 0,
-                            message: "验证邮件发送成功! 请前往你的邮箱查看!",
+                            message: "验证邮件发送成功! 请前往你的邮箱查看! 如果没有，请检查垃圾邮件！",
                             showCloseButton: true,
                             type: "success"
                         });
@@ -319,7 +319,7 @@ function login() {
 
                         Messenger().post({
                             id: 0,
-                            message: "激活邮件发送成功! 请前往你的邮箱查看!",
+                            message: "激活邮件发送成功! 请前往你的邮箱查看！如果没有，请检查垃圾邮件！",
                             showCloseButton: true,
                             type: "success"
                         });
