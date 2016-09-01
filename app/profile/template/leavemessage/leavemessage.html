@@ -1,0 +1,70 @@
+{% extends ../profile.html %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('plugin/iCheck/skins/all.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/wysiwyg-young/css/bootstrap-wysiwyg.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/profile/css/profile.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('plugin/jquery.scrollTo/jquery.scrollTo.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/iCheck/icheck.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/wysiwyg-young/external/jquery.hotkeys.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/wysiwyg-young/js/bootstrap-wysiwyg.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/profile/js/leave_message.js') }}" defer></script>
+{% end %}
+
+{% block app %}
+<div class="container mt20">
+    <div class="btn-group">
+        <a href="/profile/status/{{ user['_id'] }}#header" class="btn">
+            <i class="fa fa-comments"></i> 状态
+        </a>
+        <a href="/profile/topic/{{ user['_id'] }}#header" class="btn">
+            <i class="fa fa-quote-left"></i> 话题
+        </a>
+        <a href="/profile/leavemessage/{{ user['_id'] }}#header" class="btn btn-danger">
+            <i class="fa fa-edit"></i> 留言
+        </a>
+    </div>
+</div>
+
+<div class="container mt20">
+    {% include 'leavemessage-list.html' %}
+</div>
+
+{% if user_setting['enable_leaving_message'] %}
+<div class="container leavemessage-actions-part">
+    <div id="show-replyer-label"></div>
+    <div id="leavemessage-editor" class="wysiwyg-editor"></div>
+    <div class="leavemessage-actions">
+        <div class="pull-left anonymous-checkbox">
+            <table>
+                <tbody>
+                    <tr>
+                        <td width="20px">
+                            <input id="private-leavemessage-checkbox" type="checkbox">
+                        </td>
+                        <td>
+                            私密留言{% if current_user['_id'] != user['_id'] %}(只有自己和{{ user['name'] }}可见){% end %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pull-right">
+            <button id="submit-leavemessage-button" type="button" data-user-id="{{ user['_id'] }}" class="button button-flat-caution button-small">留言</button>
+        </div>
+        <div class="clearfix">
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container leavemessage-actions-part flack-block background-white" style="height: 200px;">
+    <div class="flack-block-content text-center mt60">
+        该用户禁止了留言
+    </div>
+</div>
+{% end %}
+
+{% end %}

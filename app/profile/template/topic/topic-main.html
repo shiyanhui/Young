@@ -1,0 +1,74 @@
+<div class="flat-block">
+    <div class="flat-block-header">
+        {% if current_user['_id'] == user['_id'] %}我{% elif user['user_type']=='league' or user['sex']=='male' %}他{% else %}她{% end %}的话题
+    </div>
+    <div class="flat-block-content topic-list">
+        {% if topic_list %}
+        <table>
+            <tbody>
+                {% for topic in topic_list %}
+                    {% if not topic['anonymous'] %}
+                <tr>
+                    <td width="630px" class="border-bottom">
+                        <div>
+                            <a href="/community/topic/{{ topic['_id'] }}" class="black-color topic-title">
+                                {{ topic['title'] }}
+                            </a>
+                        </div>
+                        <div class="mt5">
+                            <div class="pull-left">
+                                <ul class="tags">
+                                    {% for node in topic['nodes'] %}
+                                    <li><a href="javascript:void(0)" class="small-tag">{{ node['name'] }}</a></li>
+                                    {% end %}
+                                </ul>
+                            </div>
+                            <div class="pull-left note-color font12">
+                                {% if current_user['_id'] != user['_id'] %}
+                                <a href="/profile/{{ topic['author']['_id'] }}" class="coffee-color"
+                                        data-userid="{{ topic['author']['_id'] }}">
+                                    {{ topic['author']['name'] }}
+                                </a>
+                                •
+                                {% end %}
+
+                                {{ handler.translate_time(topic['last_update_time']) }}
+
+                                {% if topic['last_comment'] %}
+                                •
+                                最后评论来自
+                                    {% if topic['last_comment']['anonymous'] %}
+                                匿名
+                                    {% else %}
+                                <a href="/profile/{{ topic['last_comment']['author']['_id'] }}" class="coffee-color"
+                                        data-userid="{{ topic['last_comment']['author']['_id'] }}">
+                                    {{ topic['last_comment']['author']['name'] }}
+                                </a>
+                                    {% end %}
+                                {% end %}
+                                •
+                                <i class="fa fa-thumbs-o-up"></i> {{ topic['like_times'] }}
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                        </div>
+                    </td>
+                    <td width="50px" align="center" class="border-bottom">
+                        {% if topic['comment_times'] > 0 %}
+                        <span class="badge">{{ topic['comment_times'] }}</span>
+                        {% end \%}
+                    </td>
+                </tr>
+                    {% end %}
+                {% end %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="no-topic-list">
+            <div class="no-topic-list-inner note-color text-center">
+            尚无话题
+            </div>
+        </div>
+        {% end %}
+    </div>
+</div>

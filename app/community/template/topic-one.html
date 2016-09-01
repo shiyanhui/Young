@@ -1,0 +1,280 @@
+{% extends "../../base/template/appbase.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('plugin/iCheck/skins/all.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/highlightjs/styles/foundation.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/wysiwyg-young/css/bootstrap-wysiwyg.css') }}">
+
+<!-- build:jquery-textextcss -->
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.core.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.plugin.arrow.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.plugin.autocomplete.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.plugin.clear.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.plugin.focus.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.plugin.prompt.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.plugin.tags.css') }}">
+<!-- endbuild -->
+
+<link rel="stylesheet" href="{{ static_url('app/community/css/community.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/community/css/topic-one.css') }}">
+{% end %}
+
+{% block javascript_in_head %}
+<script type="text/javascript" src="{{ static_url('plugin/MathJax/MathJax.js') }}"></script>
+{% end %}
+
+{% block javascript_in_body %}
+
+<!-- build:jquery-textextjs -->
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.core.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.ajax.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.arrow.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.autocomplete.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.clear.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.filter.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.focus.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.prompt.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.suggestions.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.tags.js') }}"></script>
+<!-- endbuild -->
+
+<script type="text/javascript" src="{{ static_url('plugin/wysiwyg-young/external/jquery.hotkeys.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/wysiwyg-young/js/bootstrap-wysiwyg.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/iCheck/icheck.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/highlightjs/highlight.pack.js')}}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery.scrollTo/jquery.scrollTo.min.js') }}" defer></script>
+
+<!-- build:fileuploadjs -->
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.iframe-transport.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.fileupload.js') }}" defer></script>
+<!-- endbuild -->
+
+<script type="text/javascript" src="{{ static_url('app/community/js/community_base.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/community/js/topic-one.js') }}" defer></script>
+{% end %}
+
+{% block nav_collapse %}
+<ul class="nav">
+    <li class="active">
+        <a href="/community">
+            社区
+        </a>
+    </li>
+    <li>
+        <a href="/share">
+            分享
+        </a>
+    </li>
+</ul>
+{% end %}
+{% block body %}
+<div class="container mt60">
+    <div class="main-content">
+        <div class="flat-block topic">
+            <div class="flat-block-content">
+                <div>
+                    <div class="pull-left" style="width: 580px">
+                        <div class="topic-title">
+                            {{ topic['title'] }}
+
+                            {% if topic['top'] %}
+                            <span class="red-color font14">置顶</span>
+                            {% elif topic['perfect'] %}
+                            <span class="red-color font14">精贴</span>
+                            {% end %}
+
+                            {% if topic['author']['_id'] == current_user['_id'] and not topic['anonymous'] %}
+                            <span class="font14">
+                                <a href="/community/topic/edit?topic_id={{ topic['_id'] }}" class="note-color">
+                                    <i class="fa fa-pencil-square-o"></i> 编辑
+                                </a>
+                            </span>
+                            {% end %}
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        {% if not topic['anonymous'] %}
+                        <a href="/profile/{{ topic['author']['_id'] }}" data-userid="{{ topic['author']['_id'] }}">
+                            <img src="{{ handler.get_avatar(topic['author']['_id'], 'thumbnail50x50') }}" class="avatar avatar-small">
+                        </a>
+                        {% end %}
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                </div>
+            </div>
+            <div class="flat-block-content">
+                {% if 'content' in topic and topic['content'] %}
+                <div class="topic-content">
+                    {% raw topic['content'] %}
+                </div>
+                {% end %}
+                <div class="topic-info font12 note-color">
+                    <div class="pull-left">
+                        {% if not topic['liked'] %}
+                        <a href="javascript:void(0)" data-topic-id="{{ topic['_id'] }}" class="note-color topic-like-link">
+                            <i class="fa fa-thumbs-o-up"></i>
+                            赞{% if topic['like_times'] > 0 %}{{ topic['like_times'] }}{% end %}
+                        </a>
+                        {% else %}
+                        <span class="red-color">
+                            <i class="fa fa-thumbs-o-up"></i>
+                            赞{% if topic['like_times'] > 0 %}{{ topic['like_times'] }}{% end %}
+                        </span>
+                        {% end %}
+                        •
+                        <a href="javascript:void(0)" id="comment-link" class="note-color">
+                            评论
+                            {% if topic['comment_times'] > 0 %}
+                                {{ topic['comment_times'] }}
+                            {% end %}
+                        </a>
+                        •
+                        <span class="note-color">浏览{{ topic['read_times'] }}</span>
+                        &nbsp;
+                        {% for node in topic['nodes'] %}
+                        <a href="/community/node/{{ node['_id'] }}" class="small-tag">{{ node['name'] }}</a>
+                        {% end %}
+
+                    </div>
+                    <div class="pull-right note-color">
+                        {{ handler.translate_time(topic['publish_time']) }}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'topic-comment-list.html' %}
+
+        {% include '../../base/template/modals.html' %}
+        <div class="btn-toolbar mt50" data-role="editor-toolbar" data-target="#editor">
+            <div class="btn-group" >
+                <a class="btn" data-edit="bold" title="粗体"><i class="fa fa-bold"></i></a>
+                <a class="btn" data-edit="italic" title="斜体"><i class="fa fa-italic"></i></a>
+                <a class="btn" data-edit="underline" title="下划线"><i class="fa fa-underline"></i></a>
+            </div>
+            <div class="btn-group">
+                <a class="btn" data-edit="insertUnorderedList" title="无序列表"><i class="fa fa-list-ul"></i></a>
+                <a class="btn" data-edit="insertOrderedList" title="有序列表"><i class="fa fa-list-ol"></i></a>
+            </div>
+            <div class="btn-group">
+                <a class="btn command-InsertLink" title="插入链接"><i class="fa fa-chain"></i></a>
+                <a class="btn command-InsertCode" title="插入代码"><i class="fa fa-code"></i></a>
+                <a class="btn command-InsertMath" title="数学公式"><i class="fa fa-superscript"></i></a>
+                <a class="btn command-AddImage" title="添加图片"><i class="fa fa-picture-o"></i></a>
+            </div>
+            <div class="btn-group">
+                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+            </div>
+        </div>
+        <div id="show-replyer-label"></div>
+        <div id="editor" class="wysiwyg-editor mt5"></div>
+        <div class="submit-comment-part">
+            <div class="pull-left anonymous-checkbox">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input id="comment-anonymous-checkbox" type="checkbox" name="anonymous">
+                            </td>
+                            <td>
+                                匿名评论
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pull-right">
+                <button id="submit-comment-button" data-topic-id="{{ topic['_id'] }}" type="button" class="button button-flat-caution button-small">提交</button>
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="sidebar-inner">
+            {% if like_list %}
+            <div class="flat-block like-list-part">
+                <div class="flat-block-header">
+                    他们觉得很赞
+                </div>
+                <div class="flat-block-content like-list">
+                    {% set rows = (0 if len(like_list) % 5 == 0 else 1) + int(len(like_list) / 5) %}
+                    <table>
+                        {% for i in xrange(rows) %}
+                        <tr {% if i >= 2 %}class="like-list-item hidden"{% end %}>
+                            {% for j in xrange(5) %}
+                                {% if 5*i+j < len(like_list) %}
+                                <td width="50px" align="center">
+                                    <div>
+                                        <a href="/profile/{{ like_list[5*i+j]['liker']['_id'] }}" data-userid="{{ like_list[5*i+j]['liker']['_id'] }}">
+                                            <img src="{{ handler.get_avatar(like_list[5*i+j]['liker']['_id'], 'thumbnail50x50') }}" class="avatar avatar-small">
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <small>{{ like_list[5*i+j]['liker']['name'][:6] }}</small>
+                                    </div>
+                                </td>
+                                {% end %}
+                            {% end %}
+                        </tr>
+                        {% end %}
+                    </table>
+                    {% if rows > 2 %}
+                        <div style="padding: 0 10px">
+                            <div class="pull-right">
+                                <a id="like-toggle-link" href="javascript:void(0)" data-status="closed">展开<i class="fa fa-long-arrow-down"></i></a>
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                        </div>
+                    {% end %}
+                </div>
+            </div>
+            {% end %}
+
+            <div class="flat-block">
+                <div class="flat-block-header">
+                    你可能感兴趣
+                </div>
+                <div class="recommend-topic-list">
+                    {% if recommend_topic_list %}
+                    <ul class="unstyled similar-topic-list">
+                        {% for recommend_topic in recommend_topic_list %}
+                        <li>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="/profile/{{ recommend_topic['author']['_id'] }}">
+                                                <img src="{{ handler.get_avatar(recommend_topic['author']['_id'], 'thumbnail50x50') }}" class="avatar-small">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/community/topic/{{ recommend_topic['_id'] }}" class="black-color">
+                                                {{ recommend_topic['title'] }}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </li>
+                        {% end %}
+                    </ul>
+                    {% else %}
+                    <div class="no-recommend-topic-list">
+                        <div class="no-recommend-topic-list-inner note-color text-center">
+                            无推荐话题
+                        </div>
+                    </div>
+                    {% end %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}

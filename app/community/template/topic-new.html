@@ -1,0 +1,142 @@
+{% extends "../../base/template/appbase.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('plugin/iCheck/skins/all.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/highlightjs/styles/foundation.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/wysiwyg-young/css/bootstrap-wysiwyg.css') }}">
+
+<!-- build:jquery-textextcss -->
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.core.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.plugin.arrow.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.plugin.autocomplete.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.plugin.clear.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.plugin.focus.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.plugin.prompt.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/jquery-textext/src/css/textext.plugin.tags.css') }}">
+<!-- endbuild -->
+
+<link rel="stylesheet" href="{{ static_url('app/community/css/topic-new.css') }}">
+{% end %}
+
+{% block javascript_in_head %}
+<script type="text/javascript" src="{{ static_url('plugin/MathJax/MathJax.js') }}" ></script>
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('plugin/wysiwyg-young/external/jquery.hotkeys.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/wysiwyg-young/js/bootstrap-wysiwyg.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/iCheck/icheck.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/highlightjs/highlight.pack.js')}}" defer></script>
+
+<!-- build:jquery-textextjs -->
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.core.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.ajax.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.arrow.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.autocomplete.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.clear.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.filter.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.focus.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.prompt.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.suggestions.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery-textext/src/js/textext.plugin.tags.js') }}"></script>
+<!-- endbuild -->
+
+<!-- build:fileuploadjs -->
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.iframe-transport.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.fileupload.js') }}" defer></script>
+<!-- endbuild -->
+
+<script type="text/javascript" src="{{ static_url('app/community/js/topic-new.js') }}" ></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        {% if action == "new" and node_one %}
+            $('#node-list-input').textext()[0].tags().addTags([ "{{ node_one['name'] }}" ]);
+        {% elif action == "edit" %}
+            {% for node in topic['nodes'] %}
+                $('#node-list-input').textext()[0].tags().addTags([ "{{ node['name'] }}" ]);
+            {% end %}
+        {% end %}
+    });
+</script>
+{% end %}
+
+{% block nav_collapse %}
+<ul class="nav">
+    <li class="active">
+        <a href="/community">
+            社区
+        </a>
+    </li>
+    <li>
+        <a href="/share">
+            分享
+        </a>
+    </li>
+</ul>
+{% end %}
+
+{% block body %}
+<div class="container mt60">
+    <div class="row">
+        <div class="span10 offset1">
+            <form id="topic-new-modal" class="block">
+                <div class="content text-content">
+                    <div>
+                        <div style="height: 40px;">
+                            <input id="question-title" type="text" name="question-title" placeholder="标题, 不超过100字" {% if action == "edit" %}value="{{ topic['title'] }}"{% end %}>
+                        </div>
+                        <div class="mt10">
+                            内容(可选)
+                        </div>
+                        <div class="btn-toolbar mt5" data-role="editor-toolbar" data-target="#editor">
+                            <div class="btn-group">
+                                <a class="btn" data-edit="bold" title="粗体"><i class="fa fa-bold"></i></a>
+                                <a class="btn" data-edit="italic" title="斜体"><i class="fa fa-italic"></i></a>
+                                <a class="btn" data-edit="underline" title="下划线"><i class="fa fa-underline"></i></a>
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn" data-edit="insertUnorderedList" title="无序列表"><i class="fa fa-list-ul"></i></a>
+                                <a class="btn" data-edit="insertOrderedList" title="有序列表"><i class="fa fa-list-ol"></i></a>
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn command-InsertLink" title="插入链接"><i class="fa fa-chain"></i></a>
+                                <a class="btn command-InsertCode" title="插入代码"><i class="fa fa-code"></i></a>
+                                <a class="btn command-InsertMath" title="数学公式"><i class="fa fa-superscript"></i></a>
+                                <a class="btn command-AddImage" title="添加图片"><i class="fa fa-picture-o"></i></a>
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+                                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+                            </div>
+                            <div id="editor" class="wysiwyg-editor background-white mt10">{% if action == "edit" and 'content' in topic and topic['content'] %}{% raw topic['content'] %}{% end %}</div>
+                        </div>
+                    </div>
+                    <div class="mt10">
+                        <div>
+                            所属节点(回车添加, 1-3个):
+                        </div>
+                        <div class="mt5" style="height: 40px;">
+                            <input id="node-list-input" type="text" name="node-list">
+                        </div>
+                        <div id="belonged-nodes-error"></div>
+                    </div>
+                    <div class="mt10">
+                        <div>
+                            <div class="pull-left">
+                                <input id="anonymous" type="checkbox" name="anonymous" style="display: inline-block" {% if action == "edit" and topic['anonymous'] %}checked{% end %}> 匿名
+                            </div>
+                            <div class="pull-right">
+                                <a href="javascript:void(0)" id="publish-topic-button" class="button button-flat-caution button-small" data-url="{% if action == "new" %}/community/topic/new{% else %}/community/topic/edit?topic_id={{ topic['_id'] }}{% end %}">发布</a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% include '../../base/template/modals.html' %}
+        </div>
+    </div>
+</div>
+{% end %}

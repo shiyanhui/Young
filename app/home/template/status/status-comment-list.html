@@ -1,0 +1,19 @@
+<div class="triangle-border top-right">
+    <div>
+        <table id="status-comment-table-{{ status['_id'] }}" class="table-bottom-border table-border-default-padding">
+            {% for status_comment in status_comment_list %}
+                {% include 'status-comment-list-item.html' %}
+            {% end %}
+        </table>
+    </div>
+
+    <div class="mt10">
+        <div id="show-replyer-label-{{ status['_id'] }}"></div>
+        <div>
+            <textarea id="status-comment-textarea-{{ status['_id'] }}" name="comment" style="width: 97.5%;"></textarea>
+        </div>
+    </div>
+    <div class="mt10">
+        <button class="status-comment-submit-button button button-tiny button-flat-caution" data-status-id="{{ status['_id']}}">评论</button>
+    </div>
+</div>

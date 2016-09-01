@@ -1,0 +1,84 @@
+.sidebar-left{
+    float: left;
+    width: 180px;
+}
+.sidebar-left .summary-numbers{
+    min-height: 130px;
+}
+.sidebar-left .summary-numbers .info{
+    margin-top: 10px;
+}
+.sidebar-left .summary-numbers .info .number{
+    font-size: 16px;
+}
+.sidebar-left .summary-numbers .info table tr td{
+    border-right: 1px solid #eeeeee;
+}
+.sidebar-left .summary-numbers .info table tr td:last-child{
+    border-right-width: 0;
+}
+
+.sidebar-left .home-navbar{
+    margin-top: 10px;
+    min-height: 500px;
+}
+.sidebar-left .home-navbar .home-navbar-item{
+    padding: 8px 10px 8px 15px;
+    border-bottom: 1px solid #EEE;
+    cursor: pointer;
+}
+.sidebar-left .home-navbar .active{
+    border-left: 3px solid #DD4B39;
+}
+.sidebar-left .home-navbar .message-collapse{
+    font-size: 12px;
+    padding: 5px 0 0 10px
+}
+.sidebar-left .home-navbar .message-collapse li:first-child{
+    border-top: 1px solid #EEE;
+    padding-top: 5px;
+}
+
+.sidebar-right{
+    float: right;;
+    width: 180px;
+}
+
+.main-content{
+    width: 600px;
+    margin: 0 180px;
+}
+.main-content .main-content-inner{
+    margin:0 10px;
+}
+
+.recommand-friend-list-part{
+    margin-bottom: 15px
+}
+.recommand-friend-list{
+    padding: 8px
+}
+.recommand-friend-list table tr th,
+.recommand-friend-list table tr td{
+    padding: 5px 0;
+    border-bottom: 1px dashed #ccc;
+}
+.recommand-friend-list table tr:first-child th,
+.recommand-friend-list table tr:first-child td{
+    padding-top: 0;
+}
+.recommand-friend-list table tr:last-child th,
+.recommand-friend-list table tr:last-child td{
+    padding-bottom: 0;
+    border-bottom-width: 0
+}
+.recommand-friend-list img{
+    width: 40px;
+    height: 40px;
+}
+.no-recommand-friend-list{
+    min-height: 150px;
+    color: #999999;
+    text-align: center;
+    padding-top: 50px;
+}

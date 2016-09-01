@@ -1,0 +1,13 @@
+<div id="topic-comment-list" class="flat-block topic-comment-list">
+    {% for comment in comment_list %}
+        {% include 'topic-comment-list-item.html' %}
+    {% end %}
+</div>
+
+{% if comment_list and len(comment_list) >= COMMUNITY_SETTINGS['topic_comment_number_per_page'] %}
+<div class="load-more-topic-comment-part">
+    <button id="load-more-topic-comment-button" class="btn btn-block btn-primary"
+        type="button" data-topic-id="{{ topic['_id'] }}" data-page="1">更多评论
+    </button>
+</div>
+{% end %}

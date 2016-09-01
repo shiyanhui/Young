@@ -1,0 +1,109 @@
+{% extends "../home.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('app/home/css/home.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/home/css/status.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<!-- build:fileuploadjs -->
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}" ></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.iframe-transport.js') }}" ></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.fileupload.js') }}" ></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-load-image/js/load-image.all.min.js') }}" ></script>
+<!-- endbuild -->
+
+<script type="text/javascript" src="{{ static_url('app/home/js/home.js') }}" ></script>
+<script type="text/javascript" src="{{ static_url('app/home/js/status.js') }}" ></script>
+<script type="text/javascript" src="{{ static_url('app/home/js/status_.js') }}" ></script>
+{% end %}
+
+{% block sidebar_left %}
+<div class="flat-block home-navbar">
+    <ul class="unstyled">
+        <li class="home-navbar-item active">
+            <a href="/home" class="coffee-color"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;圈子</a>
+        </li>
+        <li id="friends-link" class="home-navbar-item">
+            <a href="/home/friends" class="coffee-color"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;朋友</a>
+        </li>
+        <li class="home-navbar-item" data-toggle="collapse" data-target="#message-type-list">
+            <a href="javascript:void(0)" class="coffee-color"><i class="fa fa-envelope"></i>&nbsp;&nbsp;消息</a>
+            <div id="message-type-list" class="collapse out">
+                <ul class="unstyled message-collapse">
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic._FRIENDS_DYNAMIC }}" class="coffee-color">
+                            <i class="fa fa-circle-o"></i> 朋友动态
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic._COMMENT_AND_REPLY }}" class="coffee-color">
+                            <i class="fa fa-circle-o"></i> 评论和回复
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic.LIKE }}" class="coffee-color">
+                            <i class="fa fa-circle-o"></i> 赞
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic.CHAT_MESSAGE_NEW }}" class="coffee-color">
+                            <i class="fa fa-circle-o"></i> 私聊
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic.FRIEND_REQUEST_NEW }}" class="coffee-color">
+                            <i class="fa fa-circle-o"></i> 好友请求
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+{% end %}
+
+{% block main_content %}
+<div id="home-main-content" class="main-content">
+    <div class="home-middle-status">
+        <div class="flat-block">
+            <div class="flat-block-header border-bottom">
+                <div class="pull-left">
+                    发布文字或照片
+                </div>
+                <div id="font-left" class="pull-right number-left">
+                    还可以输入 <span class="number">140</span> 字
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div>
+                <textarea id="status-textarea" placeholder="想说点什么?"></textarea>
+            </div>
+        </div>
+        <div class="options">
+            <table class="coffee-color">
+                <tr>
+                    <td width="513px" valign="top">
+                        <div class="pull-left" style="width: 60px">
+                            <span class="file-button">
+                                <input id="file-input" type="file" name="picture"><i class="fa fa-camera-retro fa-lg"></i> 照片
+                            </span>
+                        </div>
+                        <div id="photo-name" class="pull-left note-color" style="width: 160px; overflow: hidden">
+                        </div>
+                        <div class="clearfix"></div>
+                    </td>
+                    <td>
+                        <button id="publish-status-button" data-file="no" class="button button-flat-caution button-tiny">
+                            发布
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        {% include 'status-list.html' %}
+    </div>
+</div>
+{% end %}

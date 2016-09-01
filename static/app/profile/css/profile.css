@@ -1,0 +1,172 @@
+/* 
+* @Author: lime
+* @Date:   2013-12-08 07:14:10
+* @Last Modified by:   lime
+* @Last Modified time: 2014-06-02 15:23:34
+*/
+
+.main-content {
+    position: relative;
+    float: left;
+    width: 680px;
+}
+.sidebar {
+    position: relative;
+    float: right;
+    width: 280px;
+}
+.sidebar .sidebar-inner {
+    padding: 0px 0px 0px 10px;
+}
+
+.personal-header{
+    margin-top: 42px;
+    width: 960px;
+    min-height: 410px;
+    background: #ffffff;
+}
+.personal-header .background-picture{
+    width: 960px;
+    height: 300px;
+    overflow: hidden;
+    background: url( '/static/img/profile-cover/21.jpg' );
+    -moz-background-size: 960px;
+    -webkit-background-size: 960px;
+    background-size:960px;
+}
+.personal-header .user-info{
+    position: relitive;
+    width: 166px;
+    min-height: 215px; 
+    margin: -130px 0 0 30px;
+}
+.personal-header .user-info .avatar-part{
+    position: relitive; 
+    width: 166px;
+    height: 215px; 
+    background: #ffffff; 
+    -moz-box-shadow: 0px 1px 5px #999999;
+    -webkit-box-shadow: 0px 1px 5px #999999;
+    box-shadow: 0px 1px 5px #999999;
+}
+.personal-header .user-info .user-avatar{
+    width: 160px;
+    height: 160px;
+    margin: 3px;
+}
+.personal-header .user-info .extra-info{
+    position: relative; 
+    margin: -80px 0px 0px 170px; 
+    width: 725px;
+    font-size: 12px;
+}
+.personal-header .user-info .extra-info .inner{
+    padding: 20px 15px;
+}
+.personal-header .user-info .extra-info .extra{
+    margin-top: 10px;
+    color:#6C6351
+}
+
+.summary-numbers a{
+    color:#6C6351
+}
+.summary-numbers .number{
+    font-size: 16px;
+}
+.summary-numbers .border-right{
+    border-right: 1px solid #eee;
+}
+
+.league-bulletin{
+    min-height: 150px;
+    margin-bottom: 15px
+}
+.league-bulletin .flat-block-content{
+    padding: 15px;
+}
+.no-league-bulletin{
+    color: #999999;
+    text-align: center;
+    margin-top: 10px;
+}
+.no-league-bulletin .no-league-bulletin-inner{
+    padding-top: 30px
+}
+
+.no-league-members-list{
+    color: #999999;
+    text-align: center;
+    margin-top: 10px;
+}
+.no-league-members-list .no-league-members-list-inner{
+    padding-top: 30px;
+}
+
+.league-members-list{
+    min-height: 150px;
+    margin-bottom: 15px
+}
+.league-members-list .flat-block-content{
+    min-height: 120px;
+    padding: 10px 5px;
+}
+.league-members-list td{
+    padding: 5px 0
+}
+.league-members-list .more{
+    margin: 5px 5px 10px 0px;
+}
+
+.visitor-access-limit-page{
+    margin: 30px auto; 
+    min-height: 200px
+}
+.visitor-access-limit-page .visitor-access-limit-page-inner{
+    text-align: center; 
+    margin-top: 50px
+}
+
+.leavemessage-list-part{
+}
+.leavemessage-list-part .leavemessage-list-part-inner{
+    padding: 20px
+}
+.leavemessage-list tr td{
+    padding: 15px 0;
+}
+.leavemessage-list tr:first-child td{
+    padding-top: 0;
+}
+.leavemessage-list tr:last-child td{
+    padding-bottom: 0;
+    border-bottom-width: 0
+}
+.leavemessage-list .avatar{
+    width: 70px!important;
+    height: 70px!important;
+}
+.leavemessage-list .leavemessage-info{
+    padding-left: 20px
+}
+.leavemessage-list .leavemessage-content{
+    margin-top: 5px
+}
+.leavemessage-list .leavemessage-action{
+    display: none;
+}
+
+.leavemessage-actions-part{
+    margin-top: 30px;
+}
+.leavemessage-actions{
+    margin-top: 10px
+}
+.leavemessage-actions .leavemessage-permission-select{
+    width: 150px; 
+    margin-right: 15px
+}
+
+.load-more-leavemessage-part{
+    margin-top: 10px
+}

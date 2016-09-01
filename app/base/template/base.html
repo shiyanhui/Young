@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Young社区</title>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/x-icon" href="{{ static_url('favicon.ico') }}">
+
+        <!-- build:basecss -->
+        <link rel="stylesheet" href="{{ static_url('plugin/bootstrap-young/css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ static_url('plugin/font-awesome/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ static_url('plugin/Buttons/css/buttons.css') }}">
+        <link rel="stylesheet" href="{{ static_url('plugin/messenger/build/css/messenger.css') }}">
+        <link rel="stylesheet" href="{{ static_url('plugin/messenger/build/css/messenger-theme-future.css') }}">
+        <link rel="stylesheet" href="{{ static_url('plugin/fancybox/source/jquery.fancybox.css') }}">
+        <link rel="stylesheet" href="{{ static_url('plugin/fancybox/source/helpers/jquery.fancybox-buttons.css') }}">
+        <link rel="stylesheet" href="{{ static_url('plugin/fancybox/source/helpers/jquery.fancybox-thumbs.css') }}">
+        <!-- endbuild -->
+
+        {% block link %}{% end %}
+
+        <script type="text/javascript" src="{{ static_url('plugin/jquery/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ static_url('app/base/js/base.js') }}" defer></script>
+
+        {% block appbase_script_link %}{% end %}
+
+        <link rel="stylesheet" href="{{ static_url('app/base/css/base.css') }}">
+
+        {% block javascript_in_head %}{% end %}
+        {% block javascript %}{% end %}
+        {% block style %}{% end %}
+    </head>
+    <body>
+        {% block navbar %}{% end %}
+        <div class="public-body">
+            {% block body %}{% end %}
+            <div class="clearfix"></div>
+        </div>
+        {% block footer %}
+        <div class="public-footer note-color">
+            Copyright© 2016 Young社区. All Rights Reserved.
+        </div>
+        {% end %}
+
+        <!-- build:basejs -->
+        <script type="text/javascript" src="{{ static_url('plugin/bootstrap-young/js/bootstrap.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/typeahead.js/dist/typeahead.bundle.min.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/handlebars/handlebars.min.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/messenger/build/js/messenger.min.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/messenger/build/js/messenger-theme-future.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/store-js/store.min.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/store-js/store+json2.min.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/fancybox/source/jquery.fancybox.pack.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/fancybox/source/helpers/jquery.fancybox-buttons.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/fancybox/source/helpers/jquery.fancybox-thumbs.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/fancybox/source/helpers/jquery.fancybox-media.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/sprintf/dist/sprintf.min.js') }}" defer></script>
+        <!-- endbuild -->
+
+        {% block javascript_in_body %}{% end %}
+    </body>
+</html>

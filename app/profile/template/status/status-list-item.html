@@ -1,0 +1,55 @@
+<div data-status-item="{{ status['_id'] }}" class="status-list-item flat-block">
+    <div class="user-avatar">
+        <a href="/profile/{{ status['author']['_id'] }}" data-userid="{{ status['author']['_id'] }}">
+            <img src="{{ handler.get_avatar(status['author']['_id'], 'thumbnail50x50') }}">
+        </a>
+    </div>
+    <div class="status-header">
+        <div class="header-inner">
+            <small>
+                <a href="/profile/{{ status['author']['_id'] }}" data-userid="{{ status['author']['_id'] }}" class="coffee-color">
+                    {{ status['author']['name'] }}
+                </a>
+            </small>
+            <div class="pull-right">
+                <small>{{ handler.translate_time(status['publish_time']) }}</small>
+            </div>
+        </div>
+    </div>
+    <div class="content status-content">
+        <div>
+            {{ status['content'] }}
+        </div>
+        {% if 'photo' in status %}
+        <div class="mt5">
+            <a href="{{ status['photo']['url'] }}" class="fancybox fancybox.image">
+                <img src="{{ status['photo']['thumbnail'] }}">
+            </a>
+        </div>
+        {% end %}
+        <div style="padding-bottom: 15px">
+            <div class="pull-right">
+                <small>
+                    {% if status['liked'] %}
+                    <span class="red-color status-likers" {% if status['like_list'] %}data-toggle="tooltip"
+                            title="{{ '、'.join([like['liker']['name'] for like in status['like_list']]) }}"{% end %}>
+                        <i class="fa fa-thumbs-o-up"></i> 赞{% if status['like_times'] > 0 %}{{ status['like_times'] }}{% end %}
+                    </span>
+                    {% else %}
+                    <a href="javascript:void(0)" class="coffee-color status-like-link status-likers"
+                            data-status-id="{{ status['_id'] }}"
+                            {% if status['like_list'] %}data-toggle="tooltip"
+                            title="{{ '、'.join([like['liker']['name'] for like in status['like_list']]) }}"{% end %}>
+                        <i class="fa fa-thumbs-o-up"></i> 赞{% if status['like_times'] > 0 %}{{ status['like_times'] }}{% end %}
+                    </a>
+                    {% end %}
+                    •
+                    <a href="javascript:void(0)" data-status-id="{{ status['_id'] }}"  data-toggle-status="closed" class="coffee-color status-comment-link">
+                        评论{% if status['comment_times'] > 0 %}{{ status['comment_times'] }}{% end %}
+                    </a>
+                </small>
+            </div>
+        </div>
+        <div id="status-comments-wrap-{{ status['_id'] }}"></div>
+    </div>
+</div>

@@ -1,0 +1,206 @@
+{% if message_topic == MessageTopic.COMMENT %}
+    {% set app = message['message_type'].split(':')[-1] %}
+
+    {% if app == 'status' %}
+
+        <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+        评论了你的状态
+        {% if message['data']['status']['content'] %}
+        <a href="/profile/status" class="note-color">
+            {{ message['data']['status']['content'][:20] }}{% if len(message['data']['status']['content']) > 20 %}...{% end %}
+        </a>
+        {% end %}
+
+        {% if message['data']['status']['content'] %}
+            {{ message['data']['content'] }}
+        {% else %}
+            <a href="/profile/status/{{ message['data']['status']['author']['_id'] }}#header" class="note-color">
+                {{ message['data']['content'][:20] }}{% if len(message['data']['content']) > 20 %}...{% end %}
+            </a>
+        {% end %}
+
+    {% elif app == 'topic' %}
+
+        {% if 'anonymous' in message['data'] and message['data']['anonymous'] %}
+        <span class="note-color">匿名</span>
+        {% else %}
+        <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+        {% end %}
+        评论了你的话题
+        <a href="/community/topic/{{ message['data']['topic']['_id'] }}" class="note-color">
+            {{ message['data']['topic']['title'][:20] }}{% if len(message['data']['topic']['title']) > 20 %}...{% end %}
+        </a>:
+        {% set _content = handler.get_text(message['data']['content']) %}
+        {{ _content[:100] }}{% if len(_content) > 100 %}...{% end %}
+
+    {% elif app == 'share' %}
+
+        {% if 'anonymous' in message['data'] and message['data']['anonymous'] %}
+        <span class="note-color">匿名</span>
+        {% else %}
+        <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+        {% end %}
+        评论了你的分享
+        <a href="/share/{{ message['data']['share']['_id'] }}" class="note-color">
+            {{ message['data']['share']['title'][:20] }}{% if len(message['data']['share']['title']) > 20 %}...{% end %}
+        </a>:
+        {% set _content = handler.get_text(message['data']['content']) %}
+        {{ _content[:100] }}{% if len(_content) > 100 %}...{% end %}
+
+    {% end %}
+
+{% elif message_topic == MessageTopic.REPLY %}
+    {% set app = message['message_type'].split(':')[-1] %}
+
+    {% if app == 'status' %}
+
+        {% if 'anonymous' in message['data'] and message['data']['anonymous'] %}
+        <span class="note-color">匿名</span>
+        {% else %}
+        <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+        {% end %}
+        在状态
+        {% if message['data']['status']['content'] %}
+        <a href="/profile/status/{{ message['data']['status']['author']['_id'] }}#header" class="note-color">
+            {{ message['data']['status']['content'][:20] }}{% if len(message['data']['status']['content']) > 20 %}...{% end %}
+        </a>
+        {% end %}
+        中回复你:
+        {% if message['data']['status']['content'] %}
+            {{ message['data']['content'] }}
+        {% else %}
+            <a href="/profile/status/{{ message['data']['status']['author']['_id'] }}#header" class="note-color">
+                {{ message['data']['content'][:20] }}{% if len(message['data']['content']) > 20 %}...{% end %}
+            </a>
+        {% end %}
+
+    {% elif app == 'topic' %}
+
+        {% if 'anonymous' in message['data'] and message['data']['anonymous'] %}
+        <span class="note-color">匿名</span>
+        {% else %}
+        <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+        {% end %}
+        在话题
+        <a href="/community/topic/{{ message['data']['topic']['_id'] }}" class="note-color">
+            {{ message['data']['topic']['title'][:20] }}{% if len(message['data']['topic']['title']) > 20 %}...{% end %}
+        </a>
+        中回复你:
+        {% set _content = handler.get_text(message['data']['content']) %}
+        {{ _content[:100] }}{% if len(_content) > 100 %}...{% end %}
+
+    {% elif app == 'leavemessage' %}
+
+        <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+        在其留言板中回复你:
+        <a href="/profile/leavemessage/{{ message['data']['user']['_id'] }}" class="note-color">
+            {% set _content = handler.get_text(message['data']['content']) %}
+            {{ _content[:100] }}{% if len(_content) > 100 %}...{% end %}
+        </a>
+
+    {% elif app == 'share' %}
+
+        {% if 'anonymous' in message['data'] and message['data']['anonymous'] %}
+        <span class="note-color">匿名</span>
+        {% else %}
+        <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+        {% end %}
+        在分享
+        <a href="/share/{{ message['data']['share']['_id'] }}" class="note-color">
+            {{ message['data']['share']['title'][:20] }}{% if len(message['data']['share']['title']) > 20 %}...{% end %}
+        </a>
+        中回复你:
+        {% set _content = handler.get_text(message['data']['content']) %}
+        {{ _content[:100] }}{% if len(_content) > 100 %}...{% end %}
+
+    {% end %}
+
+{% elif message_topic == MessageTopic.LIKE %}
+
+    {% set app = message['message_type'].split(':')[-1] %}
+
+    {% if app == 'status' %}
+
+        <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+        赞了你的状态
+        {% if message['data']['status']['content'] %}
+        <a href="/profile/status" class="note-color">
+            {{ message['data']['status']['content'][:20] }}{% if message['data']['status']['content'] > 20 %}...{% end %}
+        </a>
+        {% end %}
+
+    {% elif app == 'topic' %}
+
+        <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+        赞了你的话题
+        <a href="/community/topic/{{ message['data']['topic']['_id'] }}" class="note-color">
+            {{ message['data']['topic']['title'][:20] }}{% if len(message['data']['topic']['title']) > 20 %}...{% end %}
+        </a>
+
+    {% elif app == 'share' %}
+
+        <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+        赞了你的分享
+        <a href="/share/{{ message['data']['share']['_id'] }}" class="note-color">
+            {{ message['data']['share']['title'][:20] }}{% if len(message['data']['share']['title']) > 20 %}...{% end %}
+        </a>
+
+    {% end %}
+
+{% elif message_topic == MessageTopic.AT %}
+{% elif message_topic == MessageTopic.STATUS_NEW %}
+
+    <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+    <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+    发布了新状态:
+    {% if message['data']['content'] %}
+    <a href="/profile/status/{{ message['sender']['_id'] }}" class="note-color">
+        {{ message['data']['content'][:20] }}{% if len(message['data']['content']) > 20 %}...{% end %}
+    </a>
+    {% end %}
+
+{% elif message_topic == MessageTopic.TOPIC_NEW %}
+
+    <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+    <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+    发布了话题:
+    <a href="/community/topic/{{ message['data']['_id'] }}" class="note-color">
+        {{ message['data']['title'][:20] }}{% if len(message['data']['title']) > 20 %}...{% end %}
+    </a>
+
+{% elif message_topic == MessageTopic.FRIEND_REQUEST_NEW %}
+
+    <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+    <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+    请求添加你为好友
+    <a href="/home/message?category=friend_request_new" class="note-color">点击查看</a>
+
+{% elif message_topic == MessageTopic.LEAVE_MESSAGE_NEW %}
+
+    <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+    <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+    给你留言:
+    <a href="/profile/leavemessage" class="note-color">
+        {{ message['data']['content'][:20] }}{% if len(message['data']['content']) > 20 %}...{% end %}
+    </a>
+
+{% elif message_topic == MessageTopic.SHARE_NEW %}
+
+    <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+    <a href="/profile/{{ message['sender']['_id'] }}" class="note-color">{{ message['sender']['name'] }}</a>
+    发布了新分享:
+    <a href="/share/{{ message['data']['_id'] }}" class="note-color">
+        {{ message['data']['title'] }}
+    </a>
+
+{% end %}

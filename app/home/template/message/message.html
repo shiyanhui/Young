@@ -1,0 +1,87 @@
+{% extends "../home.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('app/home/css/home.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/home/css/message.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('app/home/js/home.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/home/js/message.js') }}" defer></script>
+{% end %}
+
+{% block sidebar_left %}
+<div class="flat-block home-navbar">
+    <ul class="unstyled">
+        <li class="home-navbar-item">
+            <a href="/home" class="coffee-color"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;圈子</a>
+        </li>
+        <li id="friends-link" class="home-navbar-item">
+            <a href="/home/friends" class="coffee-color"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;朋友</a>
+        </li>
+        <li class="home-navbar-item active" data-toggle="collapse" data-target="#message-type-list">
+            <a href="javascript:void(0)" class="coffee-color"><i class="fa fa-envelope"></i>&nbsp;&nbsp;消息</a>
+            <div id="message-type-list" class="collapse in">
+                <ul class="unstyled message-collapse" >
+                    <li style="display: block">
+                        <a href="/home/message?category={{ MessageTopic._FRIENDS_DYNAMIC }}"
+                                class="{% if category == MessageTopic._FRIENDS_DYNAMIC %}orange-color{% else %}coffee-color{% end %}">
+                            <i class="fa fa-circle-o"></i> 朋友动态
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic._COMMENT_AND_REPLY }}"
+                                class="{% if category == MessageTopic._COMMENT_AND_REPLY %}orange-color{% else %}coffee-color{% end %}">
+                            <i class="fa fa-circle-o"></i> 评论和回复
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic.LIKE }}"
+                                class="{% if category == MessageTopic.LIKE %}orange-color{% else %}coffee-color{% end %}">
+                            <i class="fa fa-circle-o"></i> 赞
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic.CHAT_MESSAGE_NEW }}"
+                                class="{% if category == MessageTopic.CHAT_MESSAGE_NEW %}orange-color{% else %}coffee-color{% end %}">
+                            <i class="fa fa-circle-o"></i> 私聊
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic.FRIEND_REQUEST_NEW }}"
+                                class="{% if category == MessageTopic.FRIEND_REQUEST_NEW %}orange-color{% else %}coffee-color{% end %}">
+                            <i class="fa fa-circle-o"></i> 好友请求
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+{% end %}
+
+{% block main_content %}
+<div id="home-main-content" class="main-content">
+    <div class="main-content-inner">
+        {% if category == MessageTopic._FRIENDS_DYNAMIC %}
+            {% include 'message-friends-dynamic-list.html' %}
+        {% elif category == MessageTopic._COMMENT_AND_REPLY %}
+            {% include 'message-comment-and-reply-list.html' %}
+        {% elif category == MessageTopic.LIKE %}
+            {% include 'message-like-list.html' %}
+        {% elif category == MessageTopic.CHAT_MESSAGE_NEW %}
+            {% include 'message-chat-message-list.html' %}
+        {% elif category == MessageTopic.FRIEND_REQUEST_NEW %}
+            {% include 'message-friend-request-list.html' %}
+        {% end %}
+
+        {% if message_list and len(message_list) >= HOME_SETTINGS['message_number_per_page'] %}
+        <div class="load-more-message-part">
+            <button id="load-more-message-button" class="btn btn-block btn-primary"
+                type="button" data-page="1" data-category="{{ category }}">加载更多
+            </button>
+        </div>
+        {% end %}
+    </div>
+</div>
+{% end %}

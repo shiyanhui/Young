@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{ static_url('app/chat/css/chat.css') }}">
+    </head>
+    <body>
+        <div class="chat-panel">
+            <div class="header">
+                &nbsp;
+                <a href="javascript:void(0)" class="minimize-panel"><i class="fa fa-minus"></i></a>
+                <a href="javascript:void(0)" class="close-panel"><i class="fa fa-times"></i></a>
+            </div>
+            <div id="chat-body" class="body">
+                <div id="chat-label" class="chat-label">
+                    <span id="pull-chat-history"><i class="fa fa-hand-o-down"></i> 下拉查看历史消息</span>
+                </div>
+                <table class="table-border-default-padding">
+                    <tbody id="chat-contents-list"></tbody>
+                </table>
+            </div>
+            <div>
+                <textarea id="chat-input-field" class="chat-input-field" placeholder="Enter发送"></textarea>
+            </div>
+        </div>
+        <script type="text/javascript" src="{{ static_url('app/chat/js/chat-panel.js') }}" defer></script>
+    </body>
+</html>
+
+
+

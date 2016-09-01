@@ -1,0 +1,77 @@
+{% extends "setting.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('plugin/switchery/dist/switchery.css') }}"></link>
+<link rel="stylesheet" href="{{ static_url('app/setting/css/setting.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/setting/css/setting-private.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('plugin/switchery/dist/switchery.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/setting/js/setting-private.js') }}" defer></script>
+{% end %}
+
+{% block javascript %}
+{% end %}
+
+{% block setting-navbar %}
+<ul class="unstyled setting-navbar coffee-color">
+    <li class="border-bottom">
+        <a href="/setting/profile">基本资料</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/avatar">头像设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/theme">主题设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/profile/cover">个人封面</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/password">修改密码</a>
+    </li>
+    <li class="border-bottom active">
+        <a href="/setting/private">隐私设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/notification">提醒设置</a>
+    </li>
+</ul>
+{% end %}
+
+{% block setting_content %}
+<div class="main-content">
+    <div class="inner">
+        <div class="flat-block setting-private">
+            <legend>隐私设置</legend>
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">允许陌生人访问个人主页: </label>
+                    <div class="controls">
+                        <input type="checkbox" class="switchery" id="allow-stranger-visiting-profile" {% if user_setting['allow_stranger_visiting_profile'] %}checked{% end %}>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">允许陌生人给我留言: </label>
+                    <div class="controls">
+                        <input type="checkbox" class="switchery" id="enable-leaving-message" {% if user_setting['enable_leaving_message'] %}checked{% end %}>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">允许陌生人和我私聊: </label>
+                    <div class="controls">
+                        <input type="checkbox" class="switchery" id="allow-stranger-chat-with-me" {% if user_setting['allow_stranger_chat_with_me'] %}checked{% end %}>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">加我为朋友时需要验证: </label>
+                    <div class="controls">
+                        <input type="checkbox" class="switchery" id="require-verify-when-add-friend" {% if user_setting['require_verify_when_add_friend'] %}checked{% end %}>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% end %}

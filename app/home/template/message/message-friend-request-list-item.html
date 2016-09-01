@@ -1,0 +1,12 @@
+<tr class="message-list-item border-bottom message-list-item-{{ message['sender']['_id'] }}">
+    <td width="460px">
+        <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['sender']['_id'] }}">{{ message['sender']['name'] }}</a>
+        请求添加你为好友
+        <span class="note-color font12">{{ handler.translate_time(message['time']) }}</span>
+    </td>
+    <td width="100px" align="center">
+        <a href="javascript:void(0)" class="friend-request-agree-link" data-user-id="{{ message['sender']['_id'] }}">同意</a>
+        <a href="javascript:void(0)" class="friend-request-refuse-link" data-user-id="{{ message['sender']['_id'] }}">拒绝</a>
+    </td>
+</tr>

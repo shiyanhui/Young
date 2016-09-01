@@ -1,0 +1,128 @@
+{% extends "../home.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('plugin/alertify.js/themes/alertify.core.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/alertify.js/themes/alertify.bootstrap.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/home/css/home.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/home/css/friends.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('plugin/alertify.js/lib/alertify.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/home/js/home.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/home/js/friends.js') }}" defer></script>
+{% end %}
+
+{% block sidebar_left %}
+<div class="flat-block home-navbar">
+    <ul class="unstyled">
+        <li class="home-navbar-item">
+            <a href="/home" class="coffee-color"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;圈子</a>
+        </li>
+        <li id="friends-link" class="home-navbar-item active">
+            <a href="/home/friends" class="coffee-color"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;朋友</a>
+        </li>
+        <li class="home-navbar-item" data-toggle="collapse" data-target="#message-type-list">
+            <a href="javascript:void(0)" class="coffee-color"><i class="fa fa-envelope"></i>&nbsp;&nbsp;消息</a>
+            <div id="message-type-list" class="collapse out">
+                <ul class="unstyled message-collapse">
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic._FRIENDS_DYNAMIC }}" class="coffee-color">
+                            <i class="fa fa-circle-o"></i> 朋友动态
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic._COMMENT_AND_REPLY }}" class="coffee-color">
+                            <i class="fa fa-circle-o"></i> 评论和回复
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic.LIKE }}" class="coffee-color">
+                            <i class="fa fa-circle-o"></i> 赞
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic.CHAT_MESSAGE_NEW }}" class="coffee-color">
+                            <i class="fa fa-circle-o"></i> 私聊
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/home/message?category={{ MessageTopic.FRIEND_REQUEST_NEW }}" class="coffee-color">
+                            <i class="fa fa-circle-o"></i> 好友请求
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+{% end %}
+
+
+{% block main_content %}
+<div id="home-main-content" class="main-content">
+    <div class="friends-list">
+        <div class="flat-block">
+            <div class="flat-block-header">
+                我的朋友
+                {% if friend_list %}
+                <span class="note-color">共{{ len(friend_list) }}个</span>
+                {% end %}
+            </div>
+            <div class="friends-list-inner">
+                {% if friend_list %}
+                <table class="table-border-default-padding table-bottom-dashed-border">
+                    {% for friend in friend_list%}
+                    <tr class="friends-list-item" data-friend-id="{{ friend['_id'] }}">
+                        <td width="50px">
+                            <img src="{{ handler.get_avatar(friend['_id'], 'thumbnail50x50') }}" class="avatar" style="width: 40px; height: 40px">
+                        </td>
+                        <td width="370px">
+                            <div>
+                                <div>
+                                    <a href="/profile/{{ friend['_id'] }}" data-userid="{{ friend['_id'] }}" class="coffee-color"> {{ friend['name'] }}</a>{% if 'signature' in friend and friend['signature'] %}, {{ friend['signature'] }} {% end %}
+                                </div>
+                            </div>
+                        </td>
+                        <td width="160px">
+                            <div>
+                                <ul id="action-list-{{ friend['_id'] }}" class="unstyled action-list">
+                                    <li>
+                                        <small>
+                                            <a class="action-shield {% if friend['shielded'] %}red-color{% end %}"
+                                                    data-friend-id="{{ friend['_id'] }}" href="javascript:void(0)">
+                                                <i class="fa fa-eye-slash"></i> 屏蔽
+                                            </a>
+                                        </small>
+                                    </li>
+                                    <li>
+                                        <small>
+                                            <a class="action-block {% if friend['blocked'] %}red-color{% end %}"
+                                                    data-friend-id="{{ friend['_id'] }}" href="javascript:void(0)">
+                                                <i class="fa fa-square"></i> 拉黑
+                                            </a>
+                                        </small>
+                                    </li>
+                                    <li>
+                                        <small>
+                                            <a class="action-delete" data-friend-id="{{ friend['_id'] }}" href="javascript:void(0)">
+                                                <i class="fa fa-minus"></i> 删除
+                                            </a>
+                                        </small>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    {% end %}
+                </table>
+                {% else %}
+                <div class="no-friends note-color">
+                    当前尚未添加朋友
+                </div>
+                {% end %}
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}

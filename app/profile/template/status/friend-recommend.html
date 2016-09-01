@@ -1,0 +1,41 @@
+<div id="recommend-friend-block" class="flat-block recommand-friend-list-part">
+    <div class="flat-block-header">
+        <div class="pull-left">
+        你可能感兴趣
+        </div>
+        <div class="pull-right">
+            <a href="javascript:void(0)" id="friend-recommend-link" class="coffee-color">换一批</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    {% if recommend_friend_list %}
+    <div class="recommand-friend-list">
+        <table>
+            {% for recommend_friend in recommend_friend_list %}
+            <tr>
+                <td width="50px">
+                    <a href="/profile/{{ recommend_friend['_id'] }}" data-userid="{{ recommend_friend['_id'] }}">
+                        <img src="{{ handler.get_avatar(recommend_friend['_id'], 'thumbnail50x50')}}">
+                    </a>
+                </td>
+                <td width="160px">
+                    <a href="/profile/{{ recommend_friend['_id'] }}" data-userid="{{ recommend_friend['_id'] }}" data-extra-direction="bottom"
+                        class="coffee-color">{{ recommend_friend['name'] }}</a>
+                </td>
+                <td width="60px" align="center">
+                    <a href="javascript:void(0)" class="add-friend-button" data-user-id="{{ recommend_friend['_id'] }}">
+                        <span class="label label-success"><i class="fa fa-plus"></i>朋友</span>
+                    </a>
+                </td>
+            </tr>
+            {% end %}
+        </table>
+    </div>
+    {% else %}
+    <div class="no-recommand-friend-list">
+        <div class="no-recommand-friend-list-inner note-color">
+            暂无推荐
+        </div>
+    </div>
+    {% end %}
+</div>

@@ -1,0 +1,26 @@
+.message-list{
+    padding: 10px;
+    min-height: 589px;
+}
+.message-list .message-list-item td{
+    padding: 10px 0;
+}
+.message-list .message-list-item:first-child td{
+    padding-top: 0;
+}
+.message-list .message-list-item:last-child td{
+    border-bottom-width: 0
+}
+.message-list .message-list-item img{
+    max-width: 200px
+}
+
+.no-message-list{
+    min-height: 640px
+}
+.no-message-list .no-message-list-inner{
+    padding-top: 160px
+}
+.load-more-message-part{
+    margin-top: 10px;
+}

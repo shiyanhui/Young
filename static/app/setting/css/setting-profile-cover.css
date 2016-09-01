@@ -1,0 +1,25 @@
+/* 
+* @Author: lime
+* @Date:   2014-03-01 17:59:29
+* @Last Modified by:   lime
+* @Last Modified time: 2014-03-01 18:05:02
+*/
+
+.setting-profile-cover-part{
+    padding: 10px 20px 20px 20px
+}
+
+.setting-profile-cover-part .form{
+    padding: 10px 50px
+}
+
+.setting-profile-cover-item{
+    padding: 5px; 
+    border: 1px solid #cccccc
+}
+
+.setting-profile-cover-selected{
+    position: relative;
+    margin-top: -40px;
+    margin-right: 20px;
+}

@@ -1,0 +1,22 @@
+.recommend-share-table tr{
+}
+.recommend-share-table tr:last-child{
+    border-bottom-width: 0
+}
+.recommend-share-table tr td{
+    padding: 10px 0
+}
+.no-share-table{
+    min-height: 200px;
+    padding-top: 100px
+}
+
+.uploader-table tr td{
+    padding: 5px 0
+}
+.uploader-table tr:first-child td{
+    padding-top: 10px
+}
+.uploader-table tr:last-child td{
+    padding-bottom: 10px
+}

@@ -1,0 +1,19 @@
+<div class="flat-block container leavemessage-list-part" {% if not leave_message_list%}style="display: none;"{% end %}>
+    <div class="flat-block-content leavemessage-list-part-inner">
+        <table class="leavemessage-list">
+            <tbody id="leavemessage-list">
+                {% for leave_message in leave_message_list %}
+                    {% include 'leavemessage-list-item.html' %}
+                {% end %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% if leave_message_list and len(leave_message_list) >= PROFILE_SETTINGS['leave_message_number_per_page'] %}
+<div class="container load-more-leavemessage-part">
+    <button id="load-more-leavemessage-button" class="btn btn-block btn-primary"
+        type="button" data-page="1" data-user-id="{{ user['_id'] }}">更多留言
+    </button>
+</div>
+{% end %}

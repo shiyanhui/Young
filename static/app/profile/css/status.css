@@ -1,0 +1,120 @@
+/* 
+* @Author: lime
+* @Date:   2014-01-10 16:01:11
+* @Last Modified by:   lime
+* @Last Modified time: 2014-06-02 09:14:16
+*/
+
+.status-list{
+    width: 4px;
+    margin: 0px 338px; 
+    background: rgba(0,0,0,0.1);
+}
+.status-list .status-list-inner{
+    width: 680px;
+    margin-left: -338px; 
+}
+.status-list .status-list-inner .status-list-item{
+    border: 1px solid #ddd;
+    background: #ffffff; 
+    margin-bottom: 35px;
+}
+.status-list .status-list-inner .status-list-item:last-child{
+    margin-bottom: 0;
+}
+.status-list .status-list-inner .status-list-item .user-avatar{
+    background: #ffffff;
+    /*position: relative;*/
+    z-index: 100;
+    margin-top: -24px;
+    margin-left: 15px;
+    width: 56px;
+    height: 23px; 
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd; 
+    border-right: 1px solid #ddd;
+}
+.status-list .status-list-inner .status-list-item .user-avatar img{
+    width: 50px; 
+    height: 50px; 
+    margin: 3px;
+}
+.status-list .status-list-inner .status-list-item .status-header{
+    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.status-list .status-list-inner .status-list-item .status-header .header-inner{
+    margin-left: 70px;
+}
+.status-list .status-list-inner .status-list-item .content{
+    margin: 15px;
+}
+.status-list .status-list-inner .status-list-item .links{
+}
+.status-list .status-list-inner .status-list-item .links .reply-link{
+    margin-right: 15px;
+}
+.status-content img{
+    max-width: 150px;
+}
+.load-more-status{
+    margin: 10px
+}
+.status-liked{
+    color: red
+}
+.status-liked:hover{
+    color: red
+}
+.no-status-list{
+    min-height: 700px;
+    margin-top: -20px
+}
+.no-status-list .no-status-list-inner{
+    padding-top: 100px; 
+    text-align: center
+}
+
+.recommand-friend-list-part{
+    margin-bottom: 15px
+}
+.recommand-friend-list{
+    padding: 8px;
+    min-height: 100px;
+}
+.recommand-friend-list table tr th,
+.recommand-friend-list table tr td{
+    padding: 5px 0;
+    border-bottom: 1px dashed #ccc;
+}
+.recommand-friend-list table tr:first-child th,
+.recommand-friend-list table tr:first-child td{
+    padding-top: 0;
+}
+.recommand-friend-list table tr:last-child th,
+.recommand-friend-list table tr:last-child td{
+    padding-bottom: 0;
+    border-bottom-width: 0
+}
+
+.recommand-friend-list img{
+    width: 40px;
+    height: 40px;
+}
+.no-recommand-friend-list{
+    text-align: center;
+    min-height: 100px
+}
+.no-recommand-friend-list{
+    padding-top: 30px
+}

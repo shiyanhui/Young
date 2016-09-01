@@ -1,0 +1,63 @@
+{% extends "setting.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('app/setting/css/setting.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/setting/css/setting-theme.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('app/setting/js/setting-theme.js') }}" defer></script>
+{% end %}
+
+{% block setting-navbar %}
+<ul class="unstyled setting-navbar coffee-color">
+    <li class="border-bottom">
+        <a href="/setting/profile">基本资料</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/avatar">头像设置</a>
+    </li>
+    <li class="border-bottom active">
+        <a href="/setting/theme">主题设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/profile/cover">个人封面</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/password">修改密码</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/private">隐私设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/notification">提醒设置</a>
+    </li>
+</ul>
+{% end %}
+
+{% block setting_content %}
+<div class="main-content">
+    <div class="inner">
+        <div class="flat-block setting-theme">
+            <legend>主题设置</legend>
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">主题: </label>
+                    <div class="controls">
+                        <select name="theme">
+                            <option value="default" {% if user_setting['theme'] == 'default' %}selected{% end %}>
+                                默认主题
+                            </option>
+                            <option value="black" {% if user_setting['theme'] == 'black' %}selected{% end %}>
+                                酷黑主题
+                            </option>
+                        </select>
+                        &nbsp;&nbsp;
+                        <button id="save-theme-button" type="button" class="button button-flat-caution button-small">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% end %}

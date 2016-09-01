@@ -1,0 +1,109 @@
+.main-content {
+    position: relative;
+    float: left;
+    width: 680px;
+}
+.sidebar {
+    position: relative;
+    float: right;
+    width: 280px;
+}
+.sidebar .sidebar-inner {
+    padding: 0px 0px 0px 10px;
+}
+
+.share{
+    padding: 15px
+}
+.share .share-file-type{
+    width: 150px
+}
+.share .share-main{
+    width: 500px
+}
+.share .share-main .share-name{
+    width: 450px
+}
+.share .share-main .share-uploader{
+    width: 50px
+}
+.share .share-actions{
+    margin-top: 10px
+}
+
+.share-comment-list{
+    margin-top: 40px;
+    padding: 0 15px;
+}
+.share-comment-list .share-comment-item{
+    padding: 10px 0;
+}
+.share-comment-list .share-comment-item:first-child{
+    padding-top: 15px;
+}
+.share-comment-list .share-comment-item:last-child{
+    padding-bottom: 15px;
+    border-bottom-width: 0
+}
+.share-comment-list .share-comment-item .share-author-avatar{
+    width: 40px
+}
+.share-comment-list .share-comment-item .share-main{
+    width: 605px
+}
+.share-comment-list .share-comment-item .share-publish-time{
+    margin-left: 5px
+}
+.share-comment-list .share-comment-item .share-main .share-comment-action{
+    display: none;
+    margin-right: 10px
+}
+.share-comment-list .share-comment-item .share-main .share-comment-content{
+    padding: 5px 30px 0 0
+}
+
+.submit-comment-part{
+    margin-top: 10px
+}
+.submit-comment-part .anonymous-checkbox{
+    width: 200px
+}
+
+.like-list-part{
+    margin-bottom: 15px
+}
+.like-list{
+    min-height: 100px; 
+    padding: 5px
+}
+.like-list table th,
+.like-list table td{
+    padding: 5px 0;
+}
+.like-list-none{
+    text-align: center; 
+    margin-top: 20px
+}
+
+.similar-share-list{
+    min-height: 200px;
+}
+.similar-share-list li{
+    border-bottom: 1px dashed #ccc;
+    padding: 5px 0;
+}
+.similar-share-list li:last-child{
+    border-bottom-width: 0px;
+}
+.similar-share-list li:first-child{
+    padding-top: 10px;
+}
+.recommend-share-list{
+    padding: 0 10px!important
+}
+.no-recommend-share-list{
+    min-height: 150px;
+}
+.no-recommend-share-list .no-recommend-share-list-inner{
+    padding-top: 50px;
+}

@@ -1,0 +1,75 @@
+{% set m_sum = sum(unread_message_numbers.values()) %}
+
+<a class="dropdown-toggle note-color" data-toggle="dropdown">
+    <span {% if m_sum > 0 %}class="red-color"{% end %}>
+        <i class="fa fa-envelope-o"></i> {% if m_sum > 0 %}<span class="font12">新</span>{% end %}
+    </span>
+</a>
+<ul class="dropdown-menu" >
+    <li>
+        <a href="/home/message?category={{ MessageTopic._FRIENDS_DYNAMIC }}">
+            <i class="fa fa-circle-o"></i>
+            &nbsp;朋友动态&nbsp;
+            {% if unread_message_numbers[MessageTopic._FRIENDS_DYNAMIC] > 0 %}
+            <span class="red-color" style="font-size: 15px; font-weight: bold">
+                {{ unread_message_numbers[MessageTopic._FRIENDS_DYNAMIC] }}
+            </span>
+            {% end %}
+        </a>
+    </li>
+    <li>
+        <a href="/home/message?category={{ MessageTopic._COMMENT_AND_REPLY }}">
+            <i class="fa fa-circle-o"></i>
+            &nbsp;评论和回复&nbsp;
+            {% if unread_message_numbers[MessageTopic._COMMENT_AND_REPLY] > 0 %}
+            <span class="red-color" style="font-size: 15px; font-weight: bold">
+                {{ unread_message_numbers[MessageTopic._COMMENT_AND_REPLY] }}
+            </span>
+            {% end %}
+        </a>
+    </li>
+    <li>
+        <a href="/home/message?category={{ MessageTopic.LIKE }}">
+            <i class="fa fa-circle-o"></i>
+            &nbsp;赞 <i class="fa fa-thumbs-o-up"></i>&nbsp;
+            {% if unread_message_numbers[MessageTopic.LIKE] > 0 %}
+            <span class="red-color" style="font-size: 15px; font-weight: bold">
+                {{ unread_message_numbers[MessageTopic.LIKE] }}
+            </span>
+            {% end %}
+        </a>
+    </li>
+    <li>
+        <a href="/home/message?category={{ MessageTopic.CHAT_MESSAGE_NEW }}">
+            <i class="fa fa-circle-o"></i>
+            &nbsp;私聊&nbsp;
+            {% if unread_message_numbers[MessageTopic.CHAT_MESSAGE_NEW] > 0 %}
+            <span class="red-color" style="font-size: 15px; font-weight: bold">
+                {{ unread_message_numbers[MessageTopic.CHAT_MESSAGE_NEW] }}
+            </span>
+            {% end %}
+        </a>
+    </li>
+    <li>
+        <a href="/profile/leavemessage#header">
+            <i class="fa fa-circle-o"></i>
+            &nbsp;留言&nbsp;
+            {% if unread_message_numbers[MessageTopic.LEAVE_MESSAGE_NEW] > 0 %}
+            <span class="red-color" style="font-size: 15px; font-weight: bold">
+                {{ unread_message_numbers[MessageTopic.LEAVE_MESSAGE_NEW] }}
+            </span>
+            {% end %}
+        </a>
+    </li>
+    <li>
+        <a href="/home/message?category={{ MessageTopic.FRIEND_REQUEST_NEW }}">
+            <i class="fa fa-circle-o"></i>
+            &nbsp;好友请求&nbsp;
+            {% if unread_message_numbers[MessageTopic.FRIEND_REQUEST_NEW] > 0 %}
+            <span class="red-color" style="font-size: 15px; font-weight: bold">
+                {{ unread_message_numbers[MessageTopic.FRIEND_REQUEST_NEW] }}
+            </span>
+            {% end %}
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,106 @@
+{% extends "setting.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('app/setting/css/setting.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/setting/css/setting-profile-cover.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<!-- build:fileuploadjs -->
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.iframe-transport.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.fileupload.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-load-image/js/load-image.all.min.js') }}" defer></script>
+<!-- endbuild -->
+
+<script type="text/javascript" src="{{ static_url('app/setting/js/setting-profile-cover.js') }}" ></script>
+{% end %}
+
+
+{% block setting-navbar %}
+<ul class="unstyled setting-navbar coffee-color">
+    <li class="border-bottom">
+        <a href="/setting/profile">基本资料</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/avatar">头像设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/theme">主题设置</a>
+    </li>
+    <li class="border-bottom active">
+        <a href="/setting/profile/cover">个人封面</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/password">修改密码</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/private">隐私设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/notification">提醒设置</a>
+    </li>
+</ul>
+{% end %}
+
+{% block setting_content %}
+<div class="main-content">
+    <div class="inner">
+        <div class="flat-block">
+            <div class="flat-block-content setting-profile-cover-part">
+                <legend>
+                    <div class="pull-left">
+                        个人封面
+                    </div>
+                    <div class="pull-right">
+                        <span class="button button-flat-caution glow file-button button-small">
+                            <span><i class="fa fa-upload"></i> 上传自定义封面</span><input id="fileupload" type="file" name="cover">
+                        </span>
+                    </div>
+                    <div class="clearfix"></div>
+                </legend>
+                <div class="form">
+                    <table class="table-border-default-padding">
+                        {% set rows_num = len(profile_cover_list) + (1 if len(profile_cover_list) % 2 else 0) %}
+                        {% for i in xrange(rows_num) %}
+                        <tr>
+                            {% if i*2 < len(profile_cover_list) %}
+                            <td width="360px" valign="top">
+                                <div style="padding-right: 20px;">
+                                    <div class="setting-profile-cover-item">
+                                        <a href="javascript:void(0)" data-extra-profile-cover-id="{{ profile_cover_list[2*i]['_id'] }}" class="setting-profile-cover">
+                                            <img src="{{ profile_cover_list[2*i]['photo']['thumbnail'] }}" style="width: 100%">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="profile-cover-{{ profile_cover_list[2*i]['_id'] }}" class="pull-right choosen-as-profile-cover setting-profile-cover-selected" style="{% if 'profile_cover' in user_setting and user_setting['profile_cover'] and str(profile_cover_list[2*i]['_id']) != str(user_setting['profile_cover'].id) %}display: none{% end %}">
+                                    <img src="{{ static_url('icons/right.png') }}">
+                                </div>
+                            </td>
+                            {% end %}
+
+                            {% if i*2 + 1 < len( profile_cover_list ) %}
+                            <td width="360px" valign="top">
+                                <div style="padding-left: 20px;">
+                                    <div class="setting-profile-cover-item">
+                                        <a href="javascript:void(0)" data-extra-profile-cover-id="{{ profile_cover_list[2*i+1]['_id'] }}" class="setting-profile-cover">
+                                            <img src="{{ profile_cover_list[2*i+1]['photo']['thumbnail'] }}" style="width: 100%">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="profile-cover-{{ profile_cover_list[2*i+1]['_id'] }}" class="pull-right choosen-as-profile-cover setting-profile-cover-selected" style="position: relative;margin-top: -40px;margin-right: 20px;
+                                        {% if 'profile_cover' in user_setting and user_setting['profile_cover'] and str(profile_cover_list[2*i+1]['_id']) != str(user_setting['profile_cover']) %}display: none{% end %}">
+                                    <img src="{{ static_url('icons/right.png') }}">
+                                </div>
+                            </td>
+                            {% end %}
+                        </tr>
+                        {% end %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}
+

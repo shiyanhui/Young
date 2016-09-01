@@ -1,0 +1,18 @@
+{% extends "../home.html" %}
+
+{% block body %}
+<div class="container mt60">
+    {% include "home-sidebar-left.html" %}
+    <div class="sidebar-right">
+        <div class="block">
+            <div class="header">
+                小贴士
+            </div>
+            <div style="padding: 20px;">
+                在这里你可以管理你的社团成员
+            </div>
+        </div>
+    </div>
+    {% include "league_member_list.html" %}
+</div>
+{% end %}

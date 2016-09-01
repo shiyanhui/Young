@@ -1,0 +1,26 @@
+<div class="flat-block node-description-edit-template">
+    <div class="flat-block-header">
+        <div class="pull-left">
+            修改节点描述
+        </div>
+        <div class="pull-right">
+            <a class="fancybox-close-button close-button black-color" href="javascript:void(0)">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="flat-block-content node-description-edit-template-content">
+        <textarea id="node-description-textarea" placeholder="请输入节点描述, 不超过300字.">{% if 'description' in node and node['description'] %}{{ node['description'] }}{% end %}</textarea>
+        <div class="mt10">
+            <div class="pull-left note-color">
+                你的修改操作将会被记录
+            </div>
+            <div class="pull-right">
+                <button id="save-node-description-button" type="button" class="button button-flat-caution"
+                    data-node-id="{{ node['_id'] }}">保存
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

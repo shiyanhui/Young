@@ -1,0 +1,57 @@
+{% extends "setting.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('plugin/switchery/dist/switchery.css') }}"></link>
+<link rel="stylesheet" href="{{ static_url('app/setting/css/setting.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/setting/css/setting-notification.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('plugin/switchery/dist/switchery.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/setting/js/setting-notification.js') }}" defer></script>
+{% end %}
+
+{% block setting-navbar %}
+<ul class="unstyled setting-navbar coffee-color">
+    <li class="border-bottom">
+        <a href="/setting/profile">基本资料</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/avatar">头像设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/theme">主题设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/profile/cover">个人封面</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/password">修改密码</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/private">隐私设置</a>
+    </li>
+    <li class="border-bottom active">
+        <a href="/setting/notification">提醒设置</a>
+    </li>
+</ul>
+{% end %}
+
+{% block setting_content %}
+<div class="main-content">
+    <div class="inner">
+        <div class="flat-block setting-notification">
+            <legend>提醒设置</legend>
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">离线消息邮件提醒: </label>
+                    <div class="controls">
+                        <input type="checkbox" class="switchery" id="email-notify-when-offline"
+                            {% if user_setting['email_notify_when_offline'] %}checked{% end %}>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% end %}

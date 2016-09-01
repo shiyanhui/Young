@@ -1,0 +1,57 @@
+.chat-panel{
+    width: 500px;
+    min-height: 500px;
+}
+.chat-panel .header{
+    background: url(/static/app/chat/img/chat-header-bg.png);
+    padding: 8px;
+    border-bottom: 1px solid #cccccc;
+}
+.chat-panel .header .minimize-panel{
+    position: absolute;
+    top: 8px;
+    right: 28px;
+    display: block;
+    color: #666;
+    width: 14px;
+    height: 14px;
+    z-index: 2;
+}
+.chat-panel .header .close-panel{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: block;
+    color: #666;
+    width: 14px;
+    height: 14px;
+    z-index: 2;
+}
+.chat-panel .body{
+    padding: 10px 8px;
+    height: 400px;
+    overflow-y: scroll;
+}
+.chat-panel .body .chat-label{
+    text-align: center;
+    color: gray;
+}
+.chat-panel .body table th,
+.chat-panel .body table td{
+    padding: 5px;
+}
+.chat-panel .chat-input-field{
+    min-width: 100%;
+    max-width: 100%;
+    height: 80px;
+    border-width: 0px;
+    border-top: 1px solid #eee;
+}
+.message .left-part,
+.message .right-part {
+    width: 50px;
+}
+.message .middle-part {
+    max-width: 384px;
+    min-width: 384px;
+}

@@ -1,0 +1,32 @@
+<tr class="status-comment-item" data-status-comment-id="{{ status_comment['_id'] }}">
+    <td valign="top" width="35px">
+        <div>
+            <img src="{{ handler.get_avatar(status_comment['author']['_id'], 'thumbnail50x50') }}"
+                class="avatar avatar-mini">
+        </div>
+    </td>
+    <td width="460px">
+        <div >
+            <small>
+                <a href="/profile/{{ status_comment['author']['_id'] }}" data-userid="{{ status_comment['author']['_id'] }}">
+                    {{ status_comment['author']['name'] }}</a>{% if 'replyeder' in status_comment %}
+                    回复
+                <a href="/profile/{{ status_comment['replyeder']['_id'] }}" data-userid="{{ status_comment['replyeder']['_id'] }}">
+                    {{ status_comment['replyeder']['name'] }}</a>{% end %}<span class="black-color">:</span>
+            </small>
+            {{ status_comment['content'] }}
+            <span class="note-color">{{ handler.translate_time(status_comment['comment_time'])}}</span>
+        </div>
+    </td>
+    <td width="40px" align="right">
+        {% if status_comment['author']['_id'] != current_user['_id'] %}
+        <div id="status-comment-reply-{{ status_comment['_id'] }}" style="display: none">
+            <small>
+                <a href="javascript:void(0)" class="reply-status-comment-link" data-status-id="{{ status['_id'] }}" data-author-id="{{ status_comment['author']['_id'] }}" data-author-name="{{ status_comment['author']['name'] }}">
+                    <i class="fa fa-reply"></i> 回复
+                </a>
+            </small>
+        </div>
+        {% end %}
+    </td>
+</tr>

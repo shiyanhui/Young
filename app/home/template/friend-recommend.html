@@ -1,0 +1,39 @@
+<div id="random-recommend-block" class="flat-block recommand-friend-list-part">
+    <div class="flat-block-header">
+        <div class="pull-left">
+        随机推荐
+        </div>
+        <div class="pull-right">
+            <a href="javascript:void(0)" id="friend-recommend-link" class="coffee-color">换一批</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    {% if not random_user_list %}
+    <div class="no-recommand-friend-list">
+        暂无推荐
+    </div>
+    {% else %}
+    <div class="recommand-friend-list">
+        <table>
+            {% for user in random_user_list %}
+            <tr>
+                <td width="50px">
+                    <a href="/profile/{{ user['_id'] }}" >
+                        <img src="{{ handler.get_avatar(user['_id'], 'thumbnail50x50')}}">
+                    </a>
+                </td>
+                <td width="60px">
+                    <a href="/profile/{{ user['_id'] }}" data-userid="{{ user['_id'] }}" data-extra-direction="bottom"
+                        class="coffee-color">{{ user['name'] }}</a>
+                </td>
+                <td width="60px" align="center">
+                    <a href="javascript:void(0)" class="add-friend-button" data-user-id="{{ user['_id'] }}">
+                        <span class="label label-success"><i class="fa fa-plus"></i>朋友</span>
+                    </a>
+                </td>
+            </tr>
+            {% end %}
+        </table>
+    </div>
+    {% end %}
+</div>

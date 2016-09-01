@@ -1,0 +1,23 @@
+{% if message_list %}
+<div class="flat-block">
+    <div class="flat-block-header">
+        评论和回复
+    </div>
+    <div class="flat-block-content message-list">
+        <table id="message-list">
+            {% for message in message_list %}
+                {% include 'message-comment-and-reply-list-item.html' %}
+            {% end %}
+        </table>
+    </div>
+</div>
+{% else %}
+<div class="flat-block no-message-list">
+    <div class="flat-block-header">
+        评论和回复
+    </div>
+    <div class="flat-block-content no-message-list-inner text-center note-color">
+        没有评论和回复
+    </div>
+</div>
+{% end %}

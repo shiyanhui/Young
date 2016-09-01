@@ -1,0 +1,172 @@
+{% extends "../../base/template/appbase.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('plugin/Jcrop/css/jquery.Jcrop.min.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/community/css/node-one.css') }}">
+{% end %}
+
+{% block javascript_in_head %}
+<script type="text/javascript" src="{{ static_url('plugin/MathJax/MathJax.js') }}" defer></script>
+{% end %}
+
+{% block javascript_in_body %}
+<!-- build:fileuploadjs -->
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.iframe-transport.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.fileupload.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-load-image/js/load-image.all.min.js') }}" defer></script>
+<!-- endbuild -->
+
+<script type="text/javascript" src="{{ static_url('plugin/Jcrop/js/jquery.Jcrop.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/community/js/community_base.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/community/js/node-one.js') }}" defer></script>
+{% end %}
+
+{% block nav_collapse %}
+<ul class="nav">
+    <li class="active">
+        <a href="/community">
+            社区
+        </a>
+    </li>
+    <li>
+        <a href="/share">
+            分享
+        </a>
+    </li>
+</ul>
+{% end %}
+
+{% block body %}
+<div class="container mt60">
+    <div class="main-content">
+        <div class="flat-block">
+            <div class="flat-block-content">
+                <div class="node">
+                     <table>
+                        <tbody>
+                            <tr>
+                                <td width="60px" valign="top">
+                                    <div class="node-avatar">
+                                        <div>
+                                            {% if node_avatar_url %}
+                                            <img src="{{ node_avatar_url }}">
+                                            {% else %}
+                                            <img src="{{ static_url('img/node.png') }}">
+                                            {% end %}
+                                        </div>
+                                        <div class="font12 node-avatar-edit-link">
+                                            <span class="file-button">
+                                                <span>&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil"></i> 修改</span>
+                                                <input id="fileupload" type="file" name="avatar">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td valign="top" width="590px">
+                                    <div style="padding-left: 10px">
+                                        <div>
+                                            <div class="pull-left node-name">{{ current_node['name'] }}</div>
+                                            <div class="pull-right">
+                                                <span id="topic-sum-label" data-node-id="{{ current_node['_id'] }}" class="note-color">
+                                                    话题总数:
+                                                </span>
+                                                {{ int(current_node['topic_number']) }}
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div id="node-description-label" class="node-description">
+                                            {% include 'node-description.html' %}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="node-sort-part">
+                    <div class="pull-left font12">
+                        <a href="/community/topic/new{% if current_node %}?node_id={{ current_node['_id'] }}{% end %}" class="coffee-color" >
+                            <i class="fa fa-pencil"></i> 创建话题
+                        </a>
+                    </div>
+                    <div class="pull-right font12">
+                        <a href="/community/node/{{ current_node['_id'] }}?sort=time" class="{% if sort is None or sort == 'time' %}red-color{% else %}note-color{% end %}">按时间排序</a>
+                        &nbsp;
+                        <a href="/community/node/{{ current_node['_id'] }}?sort=popularity" class="{% if sort == 'popularity' %}red-color{% else %}note-color{% end %}">按热门排序</a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div>
+                    {% include 'topic-list.html' %}
+                </div>
+            </div>
+        </div>
+
+        {% if len(pages) > 1 %}
+        <div class="pagination pagination-centered">
+            <ul>
+                {% if pages[0] != 1 %}
+                <li>
+                    <a href="/community/node/{{ current_node['_id'] }}?page={{ pages[0] - 10 }}&sort={{ sort }}">
+                        &laquo;
+                    </a>
+                </li>
+                {% end %}
+
+                {% for p in pages %}
+                <li {% if page == p %}class="active"{% end %}>
+                    <a href="/community/node/{{ current_node['_id'] }}?page={{ p }}&sort={{ sort }}">
+                        {{ p }}
+                    </a>
+                </li>
+                {% end %}
+
+                {% if pages[-1] < total_page %}
+                <li>
+                    <a href="/community/node/{{ current_node['_id'] }}?page={{ pages[-1] + 10 }}&sort={{ sort }}">
+                        &raquo;
+                    </a>
+                </li>
+                {% end %}
+            </ul>
+        </div>
+        {% end %}
+
+    </div>
+    <div class="sidebar">
+        <div class="sidebar-inner">
+            <div class="flat-block active-author-list-part">
+                <div class="flat-block-header">
+                    近期该节点活跃人物排行榜
+                </div>
+                <div class="flat-block-content active-author-list">
+                    {% if active_author_list %}
+                    <ol class="rounded-list ol-extend">
+                        {% for active_author in active_author_list %}
+                        <li class="border-bottom">
+                            <a href="/profile/{{ active_author['author']['_id'] }}">
+                                <div class="pull-left">
+                                        {{ active_author['author']['name'] }}
+                                </div>
+                                <div class="pull-right note-color font12">
+                                    话题+评论 {{ active_author['times'] }}
+                                </div>
+                                <div class="clearfix"></div>
+                            </a>
+                        </li>
+                        {% end %}
+                    </ol>
+                    {% else %}
+                    <div class="no-active-author-list note-color">
+                        <div class="no-active-author-list-inner">
+                            无排行
+                        </div>
+                    </div>
+                    {% end %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}

@@ -1,0 +1,16 @@
+/* 
+* @Author: lime
+* @Date:   2014-05-13 09:06:36
+* @Last Modified by:   lime
+* @Last Modified time: 2014-05-13 09:06:58
+*/
+
+.setting-notification{
+    padding: 10px 20px 20px 20px;
+    min-height: 602px
+}
+
+.setting-notification form{
+    padding: 70px 230px; 
+    width: 500px
+}

@@ -1,0 +1,16 @@
+/* 
+* @Author: lime
+* @Date:   2014-06-01 12:00:42
+* @Last Modified by:   lime
+* @Last Modified time: 2014-06-01 12:12:28
+*/
+
+.setting-theme{
+    padding: 10px 20px 20px 20px;
+    min-height: 602px
+}
+
+.setting-theme form{
+    padding: 100px 60px; 
+    width: 500px
+}

@@ -1,0 +1,37 @@
+<tr class="message-list-item border-bottom">
+    <td width="560px">
+
+        {% if message['message_type'] == MessageTopic.STATUS_NEW %}
+            <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+            <a href="/profile/{{ message['sender']['_id'] }}" data-userid="{{ message['sender']['_id'] }}">{{ message['sender']['name'] }}</a>
+            发表了新状态:
+            {% if message['data']['content'] %}
+            <a href="/profile/status/{{ message['sender']['_id'] }}">
+                {{ message['data']['content'] }}
+            </a>
+            {% end %}
+            {% if 'photo' in message['data'] %}
+            <div style="padding: 10px">
+                <a href="/profile/status/{{ message['data']['author']['_id'] }}">
+                    <img src="{{ message['data']['photo']['thumbnail'] }}">
+                </a>
+            </div>
+            {% end %}
+        {% elif message['message_type'] == MessageTopic.TOPIC_NEW %}
+            <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+            <a href="/profile/{{ message['sender']['_id'] }}" data-userid="{{ message['sender']['_id'] }}">{{ message['sender']['name'] }}</a>
+            发布了话题:
+            <a href="/community/topic/{{ message['data']['_id'] }}">
+                {{ message['data']['title'][:20] }}{% if message['data']['title'] > 20 %}...{% end %}
+            </a>
+        {% elif message['message_type'] == MessageTopic.SHARE_NEW %}
+            <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+            <a href="/profile/{{ message['sender']['_id'] }}" data-userid="{{ message['sender']['_id'] }}">{{ message['sender']['name'] }}</a>
+            发布了新分享:
+            <a href="/share/{{ message['data']['_id'] }}">
+                {{ message['data']['title'] }}
+            </a>
+        {% end %}
+
+    </td>
+</tr>

@@ -1,0 +1,13 @@
+.share-table tr:nth-child(odd){
+    border-top: 1px solid #eee;
+}
+.share-table tr:first-child {
+    border-top-width: 0;
+}
+.share-table tr td{
+    padding: 10px 0
+}
+.no-share-table{
+    min-height: 300px;
+    padding-top: 200px;
+}

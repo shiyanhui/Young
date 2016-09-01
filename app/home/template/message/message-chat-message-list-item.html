@@ -1,0 +1,14 @@
+<tr class="message-list-item border-bottom">
+    <td width="560px">
+        {% if message['sender']['_id'] == current_user['_id'] %}
+        我对
+        <img src="{{ handler.get_avatar(message['recipient']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['recipient']['_id'] }}" data-userid="{{ message['recipient']['_id'] }}">{{ message['recipient']['name'] }}</a> 说:
+        {% elif message['recipient']['_id'] == current_user['_id'] %}
+        <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+        <a href="/profile/{{ message['sender']['_id'] }}" data-userid="{{ message['sender']['_id'] }}">{{ message['sender']['name'] }}</a> 对我说:
+        {% end %}
+        {{ message['body'] }}
+        <span class="note-color font12">{{ handler.translate_time(message['send_time']) }}</span>
+    </td>
+</tr>

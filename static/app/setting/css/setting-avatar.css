@@ -1,0 +1,33 @@
+/* 
+* @Author: lime
+* @Date:   2014-03-02 09:49:55
+* @Last Modified by:   lime
+* @Last Modified time: 2014-03-02 10:38:33
+*/
+
+.setting-avatar{
+    padding: 10px 20px 20px 20px; 
+    min-height: 602px
+}
+.setting-avatar .setting-avatar-inner{
+    padding: 50px 0 0 110px; 
+    width: 500px
+}
+.setting-avatar-left{
+    width: 350px
+}
+.setting-avatar-left img{
+    width: 350px!important; 
+    max-width: none!important
+}
+.setting-avatar-actions{
+    margin-top: 30px
+}
+.setting-avatar-preview{
+    width:80px;
+    height:80px; 
+    overflow:hidden;
+}
+.setting-avatar-preview img{
+    max-width: none!important
+}

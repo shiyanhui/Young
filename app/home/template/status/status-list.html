@@ -1,0 +1,19 @@
+<div class="status-list">
+    <div id="status-list" class="status-list-inner">
+        {% if not status_list %}
+        <div class="flat-block note-color no-status-list">
+            你还没有发布状态
+        </div>
+        {% else %}
+            {% for status in status_list %}
+                {% include 'status-list-item.html' %}
+            {% end %}
+        {% end %}
+    </div>
+</div>
+
+{% if status_list and len(status_list) >= HOME_SETTINGS['status_number_per_page'] %}
+<div class="load-more-status">
+    <button id="load-more-status-button" class="btn btn-block btn-primary" type="button" data-page="1">加载更多</button>
+</div>
+{% end %}

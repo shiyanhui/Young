@@ -1,0 +1,215 @@
+{% extends "../../base/template/appbase.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('app/share/css/share-base.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/share/css/share.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('plugin/jquery.pin/jquery.pin.min.js') }}"></script>
+
+<script type="text/javascript" src="{{ static_url('app/share/js/share-base.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/share/js/share.js') }}" defer></script>
+{% end %}
+
+{% block nav_collapse %}
+<ul class="nav">
+    <li>
+        <a href="/community">
+            社区
+        </a>
+    </li>
+    <li class="active">
+        <a href="/share">
+            分享
+        </a>
+    </li>
+</ul>
+{% end %}
+
+{% block body %}
+<div class="container mt60">
+    {% include "share-sidebar.html" %}
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="flat-block main-content-item">
+                <div class="font16 bold main-content-item-header border-bottom">
+                    推荐
+                </div>
+                <div>
+                    {% if recommend_share_list %}
+                    <table class="recommend-share-table">
+                        <tbody>
+                            {% set rows = int(len(recommend_share_list)/2) + (1 if len(recommend_share_list)%2 else 0)%}
+
+                            {% for i in range(rows) %}
+                            <tr class="border-bottom">
+                                {% for j in range(2) %}
+                                    {% if 2*i+j < len(recommend_share_list) %}
+                                <td valign="top" width="150px">
+                                    <a href="/share/{{ recommend_share_list[2*i+j]['_id'] }}">
+                                        <img src="{{ static_url('app/share/img/icons/%s.png' % handler.get_icon_name(recommend_share_list[2*i+j])) }}">
+                                    </a>
+                                </td>
+                                <td width="207px" valign="top">
+                                    <div>
+                                        <a href="/share/{{ recommend_share_list[2*i+j]['_id'] }}" class="coffee-color font18">
+                                            {{ handler.get_filename(recommend_share_list[2*i+j]) }}
+                                        </a>
+                                    </div>
+                                    <div class="font12 mt20">
+                                        {% set _description = handler.get_text(recommend_share_list[2*i+j]['description']) %}
+                                        {{ _description[:50] }}
+                                        {% if len(_description) > 50 %}
+                                        ... <a href="/share/{{ recommend_share_list[2*i+j]['_id'] }}">更多</a>
+                                        {% end %}
+                                    </div>
+                                    <div class="note-color mt20">
+                                        <a href="/profile/{{ recommend_share_list[2*i+j]['uploader']['_id'] }}" data-userid="{{ recommend_share_list[2*i+j]['uploader']['_id'] }}">
+                                            <img src="{{ handler.get_avatar(recommend_share_list[2*i+j]['uploader']['_id'], 'thumbnail50x50') }}" class="avatar-small">
+                                        </a>
+
+                                        {% if recommend_share_list[2*i+j]['score'] >= 0 %}
+                                            <i class="fa fa-star"></i>
+                                            {{ '%.1f' % recommend_share_list[2*i+j]['score'] }}
+                                            {% if recommend_share_list[2*i+j]['like_times'] + recommend_share_list[2*i+j]['download_times'] > 0 %}
+                                            •
+                                            {% end %}
+                                        {% end %}
+
+                                        {% if recommend_share_list[2*i+j]['like_times'] > 0 %}
+                                            <i class="fa fa-thumbs-up"></i>
+                                            {{ recommend_share_list[2*i+j]['like_times'] }}
+                                            {% if recommend_share_list[2*i+j]['download_times'] > 0 %}
+                                            •
+                                            {% end %}
+                                        {% end %}
+
+                                        {% if recommend_share_list[2*i+j]['download_times'] > 0 %}
+                                            <i class="fa fa-download"></i>
+                                            {{ recommend_share_list[2*i+j]['download_times'] }}
+                                        {% end %}
+
+                                    </div>
+                                </td>
+                                    {% end %}
+                                {% end %}
+                            </tr>
+                            {% end %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="no-share-table text-center note-color">
+                        暂无推荐
+                    </div>
+                    {% end %}
+                </div>
+            </div>
+            <div class="flat-block main-content-item">
+                <div class="font16 bold main-content-item-header border-bottom">
+                    最新
+                </div>
+                <div>
+                    {% if newest_share_list %}
+                    <table class="recommend-share-table">
+                        <tbody>
+                            {% set rows = int(len(newest_share_list)/2) + (1 if len(newest_share_list)%2 else 0)%}
+
+                            {% for i in range(rows) %}
+                            <tr class="border-bottom">
+                                {% for j in range(2) %}
+                                    {% if 2*i+j < len(newest_share_list) %}
+                                <td valign="top" width="150px">
+                                    <a href="/share/{{ newest_share_list[2*i+j]['_id'] }}">
+                                        <img src="{{ static_url('app/share/img/icons/%s.png' % handler.get_icon_name(newest_share_list[2*i+j])) }}">
+                                    </a>
+                                </td>
+                                <td width="207px" valign="top">
+                                    <div>
+                                        <a href="/share/{{ newest_share_list[2*i+j]['_id'] }}" class="coffee-color font18">
+                                            {{ handler.get_filename(newest_share_list[2*i+j]) }}
+                                        </a>
+                                    </div>
+                                    <div class="font12 mt10">
+                                        {% set _description = handler.get_text(newest_share_list[2*i+j]['description']) %}
+                                        {{ _description[:50] }}
+                                        {% if len(_description) > 50 %}
+                                        ... <a href="/share/{{ recommend_share_list[2*i+j]['_id'] }}">更多</a>
+                                        {% end %}
+                                    </div>
+                                    <div class="note-color mt20">
+                                        <a href="/profile/{{ newest_share_list[2*i+j]['uploader']['_id'] }}" data-userid="{{ newest_share_list[2*i+j]['uploader']['_id'] }}">
+                                            <img src="{{ handler.get_avatar(newest_share_list[2*i+j]['uploader']['_id'], 'thumbnail50x50') }}" class="avatar-small">
+                                        </a>
+
+                                        {% if newest_share_list[2*i+j]['score'] >= 0 %}
+                                            <i class="fa fa-star"></i>
+                                            {{ '%.1f' % newest_share_list[2*i+j]['score'] }}
+                                            {% if newest_share_list[2*i+j]['like_times'] + newest_share_list[2*i+j]['download_times'] > 0 %}
+                                            •
+                                            {% end %}
+                                        {% end %}
+
+                                        {% if newest_share_list[2*i+j]['like_times'] > 0 %}
+                                            <i class="fa fa-thumbs-up"></i>
+                                            {{ newest_share_list[2*i+j]['like_times'] }}
+                                            {% if newest_share_list[2*i+j]['download_times'] > 0 %}
+                                            •
+                                            {% end %}
+                                        {% end %}
+
+                                        {% if newest_share_list[2*i+j]['download_times'] > 0 %}
+                                            <i class="fa fa-download"></i>
+                                            {{ newest_share_list[2*i+j]['download_times'] }}
+                                        {% end %}
+
+                                    </div>
+                                </td>
+                                    {% end %}
+                                {% end %}
+                            </tr>
+                            {% end %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="no-share-table text-center note-color">
+                        暂无分享
+                    </div>
+                    {% end %}
+                </div>
+            </div>
+
+            {% if uploader_list %}
+            <div class="flat-block main-content-item">
+                <div class="font16 bold main-content-item-header border-bottom">
+                    分享者 <span class="note-color font13">(按分享数量排名)</span>
+                </div>
+                <div>
+                    <table class="uploader-table">
+                        <tbody>
+                            {% set rows = int(len(uploader_list) / 12) + (1 if len(uploader_list) % 12 else 0) %}
+
+                            {% for i in range(rows) %}
+                            <tr>
+                                {% for j in range(12) %}
+                                    {% if i*12+j < len(uploader_list) %}
+                                <td width="60px">
+                                    <a href="/profile/{{ uploader_list[i*12+j]['uploader']['_id'] }}" data-userid="{{ uploader_list[i*12+j]['uploader']['_id'] }}">
+                                        <img src="{{ handler.get_avatar(uploader_list[i*12+j]['uploader']['_id'], 'thumbnail50x50') }}">
+                                    </a>
+                                </td>
+                                    {% end %}
+                                {% end %}
+                            </tr>
+                            {% end %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% end %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+{% end %}

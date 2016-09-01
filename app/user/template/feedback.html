@@ -1,0 +1,44 @@
+{% extends "../../base/template/base.html" %}
+
+{% block javascript %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        var message = '\
+        <div style="width: 400px; height: 300px;"> \
+            <div style="text-align: center; padding-top: 50px"> \
+                {% if "error" in response_data %} \
+                <div>{{ response_data["error"] }}</div> \
+                {% end %} \
+                <div style="margin-top: 10px">\
+                    <span id="seconds" class="red-color" style="font-size: 15px">\
+                    </span>\
+                    秒后将会跳转到<a href="/login">登录界面</a>\
+                </div> \
+            </div> \
+        </div>';
+
+        $.fancybox({
+            padding: 0,
+            modal: true,
+            topRatio: 0.3,
+            scrolling: "no",
+            type: "iframe",
+            content: message,
+            afterShow: function() {
+                var seconds = 5;
+                function count() {
+                    if(seconds > 0) {
+                        $("#seconds").html(seconds);
+                        seconds = seconds - 1;
+                        setTimeout(count, 1000);
+                    }
+                    else {
+                        window.location.href="/login"
+                    }
+                }
+                count();
+            }
+        })
+    });
+</script>
+{% end %}

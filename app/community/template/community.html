@@ -1,0 +1,241 @@
+{% extends "../../base/template/appbase.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('app/community/css/community.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('app/community/js/community_base.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/community/js/community.js') }}" defer></script>
+{% end %}
+
+{% block nav_collapse %}
+<ul class="nav">
+    <li class="active">
+        <a href="/community">
+            社区
+        </a>
+    </li>
+    <li>
+        <a href="/share">
+            分享
+        </a>
+    </li>
+</ul>
+{% end %}
+
+{% block body %}
+<div class="container mt60">
+    <div class="main-content">
+        <div class="flat-block top-header-node-list-part">
+            <ul class="unstyled node-list">
+                {% for top_header_node in top_header_node_list %}
+                <li>
+                    <a href="/community?node={{ top_header_node['_id'] }}"
+                        {% if current_node and str(current_node['_id']) == str(top_header_node['_id'])%}
+                            class="red-color"
+                        {% else %}
+                            class="coffee-color"
+                        {% end %}>
+                        {{ top_header_node['name'] }}
+                    </a>
+                </li>
+                {% end %}
+                <li>
+                    <a href="/community" {% if not current_node %}class="red-color"{% else %}class="coffee-color"{% end %}>
+                        全部
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="flat-block">
+            <div class="flat-block-content" style="min-height: 500px">
+                <div>
+                    <div class="pull-left create-topic-link">
+                        <div class="create-topic-link-inner">
+                            <a href="/community/topic/new{% if current_node %}?node_id={{ current_node['_id'] }}{% end %}" class="coffee-color" >
+                                <i class="fa fa-pencil"></i> 创建话题
+                            </a>
+                        </div>
+                    </div>
+                    <div class="pull-right topic-sort-link">
+                        <div class="topic-sort-link-inner">
+                            <a href="/community?sort=time" {% if sort == 'time' %}class="coffee-color"{% else %}class="note-color"{% end %}>按时间排序</a> &nbsp;
+                            <a href="/community?sort=popularity" {% if sort == 'popularity' %}class="coffee-color"{% else %}class="note-color"{% end %}>按热门排序</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                {% include 'topic-list.html' %}
+            </div>
+        </div>
+
+        {% if len(pages) > 1 %}
+        <div class="pagination pagination-centered">
+            <ul>
+                {% if pages[0] != 1 %}
+                <li>
+                    <a href="/community?page={{ pages[0] - 10 }}&sort={{ sort }}{% if current_node %}&node={{ current_node['_id'] }}{% end %}">
+                        &laquo;
+                    </a>
+                </li>
+                {% end %}
+
+                {% for p in pages %}
+                <li {% if page == p %}class="active"{% end %}>
+                    <a href="/community?page={{ p }}&sort={{ sort }}{% if current_node %}&node={{ current_node['_id'] }}{% end %}">
+                        {{ p }}
+                    </a>
+                </li>
+                {% end %}
+
+                {% if pages[-1] < total_page %}
+                <li>
+                    <a href="/community?page={{ pages[-1] + 10 }}&sort={{ sort }}{% if current_node %}&node={{ current_node['_id'] }}{% end %}">
+                        &raquo;
+                    </a>
+                </li>
+                {% end %}
+            </ul>
+        </div>
+        {% end %}
+
+        {% if hot_node_list %}
+        <div class="flat-block hot-node-list">
+            <div class="flat-block-content">
+                <div class="hot-node-list-header border-bottom">
+                    热门节点 <span class="note-color">Top100</span>
+                </div>
+                <div class="hot-node-list-content">
+                    <ul class="unstyled node-list">
+                        {% for hot_node in hot_node_list %}
+                        <li>
+                            <a href="/community/node/{{ hot_node['_id'] }}" class="coffee-color">{{ hot_node['name'] }}</a>
+                        </li>
+                        {% end %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% end %}
+
+        <div class="flat-block hot-node-list">
+            <div class="flat-block-content">
+                <div class="hot-node-list-header border-bottom">
+                    FAQ
+                </div>
+                <div class="hot-node-list-content">
+                    <div>
+                        <div class="font15">
+                            怎么样可以获取金币，消费规则又是怎样的?
+                        </div>
+                        <div style="padding: 20px">
+                            <p>
+                                目前金币仅在 <strong>社区</strong> 和 <strong>资源分享</strong> 两部分中使用。发帖、赞、下载将会消耗一定的金币，其数额为：
+                            </p>
+                            <ul>
+                                <li>
+                                    发帖 &nbsp;3金币 / 个
+                                </li>
+                                <li>
+                                    赞 &nbsp;1金币 / 次
+                                </li>
+                                <li>
+                                    下载消耗的金币随资源的价值不同而不同
+                                </li>
+                            </ul>
+                            <p>
+                                同样在以下情况你可以收获一定的金币：领取每日登录奖励、收到赞、别人下载你的资源。
+                            </p>
+                            <ul>
+                                <li>
+                                    你可以每天领取一次登录奖励，领取的金币数额跟你连续领取的次数有关，连续领取的次数越多，每次领取的数额越大，每7天领取的数额将增加5金币，其计算方式如下：
+                                    <div class="bold" style="padding: 10px; ">
+                                        领取数额 = 5 x (连续登录天数 ÷ 7 + 1)
+                                    </div>
+                                </li>
+                                <li>
+                                    赞收益为：1金币 / 个
+                                </li>
+                                <li>
+                                    下载收益为：资源价格 / 次
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="sidebar-inner">
+            <div class="flat-block summary-numbers">
+                <div class="flat-block-header">
+                    <a href="/profile" class="coffee-color">
+                        <img src="{{ handler.get_avatar(current_user['_id'], 'thumbnail50x50') }}">
+                        {{ current_user['name'] }}
+                    </a>
+                </div>
+                <div class="info border-bottom">
+                    <table>
+                        <tr>
+                            <td width="150px" align="center">
+                                <a href="/profile/status" class="coffee-color">
+                                    <span class="number">{{ status_number }}</span>
+                                    <br>
+                                    <span>状态</span>
+                                </a>
+                            </td>
+                            <td width="150px" align="center">
+                                <a href="/profile/topic" class="coffee-color">
+                                    <span class="number">{{ topic_number }}</span>
+                                    <br>
+                                    <span>话题</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="font12 wealth">
+                    <div id="fetch-login-reward-label" class="pull-left">
+                        {% if login_reward_fetched_today %}
+                        <span class="note-color">连续 {{ continuous_login_days }} 天</span>
+                        {% else %}
+                        <a href="javascript:void(0)" id="fetch-login-reward-link">领取今日登录奖励</a>
+                        {% end %}
+                    </div>
+                    <div class="pull-right">
+                        <img src="{{ static_url('img/coin.png') }}">
+                        <span id="wealth-quantity-label" class="bold">{{ current_user['wealth'] }}</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="flat-block hot-topic-list-part">
+                <div class="flat-block-header">
+                    <div class="pull-left">
+                        今日热门
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="flat-block-content hot-topic-list">
+                    {% if hot_topic_list %}
+                    <ol class="rounded-list ol-extend">
+                        {% for hot_topic in hot_topic_list %}
+                        <li class="border-bottom">
+                            <a href="/community/topic/{{ hot_topic['_id'] }}">{{ hot_topic['title'] }}</a>
+                        </li>
+                        {% end %}
+                    </ol>
+                    {% else %}
+                    <div class="no-hot-topic-list note-color">
+                        尚无热门话题
+                    </div>
+                    {% end %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}

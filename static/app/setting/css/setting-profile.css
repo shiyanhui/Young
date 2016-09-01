@@ -1,0 +1,22 @@
+/* 
+* @Author: lime
+* @Date:   2014-03-01 16:46:13
+* @Last Modified by:   lime
+* @Last Modified time: 2014-03-21 12:12:55
+*/
+
+input{
+    width: 310px;
+}
+textarea{
+    min-width: 310px; 
+    min-height: 80px;
+    max-height: 80px;
+}
+.setting-profile{
+    padding: 10px 20px 20px 20px;
+    min-height: 602px;
+}
+.setting-profile form{
+    padding: 20px 30px
+}

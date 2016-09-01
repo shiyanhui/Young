@@ -1,0 +1,19 @@
+{% set date_show={} %}
+{% for message in history_messages %}
+    {% set date = message['send_time'].strftime('%Y-%m-%d') %}
+    {% if not date_show.get(date, False) %}
+        {{ date_show.update({date: True}) }}
+        <tr>
+            <td align="center" colspan="3">
+                <div>
+                    <span class="label">{{ date }}</span>
+                </div>
+            </td>
+        </tr>
+    {% end %}
+    {% if str(message['sender'].id) == str(current_user['_id']) %}
+        {% include 'message-mine.html' %}
+    {% else %}
+        {% include 'message-others.html' %}
+    {% end %}
+{% end %}

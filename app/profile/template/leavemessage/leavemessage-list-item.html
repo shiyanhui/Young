@@ -1,0 +1,46 @@
+<tr class="leavemessage-list-item" data-leavemessage-id="{{ leave_message['_id'] }}">
+    <td align="left" valign="top" width="95px" class="border-bottom border-right">
+        <a href="/profile/{{ leave_message['author']['_id'] }}" data-userid="{{ leave_message['author']['_id'] }}">
+            <img src="{{ handler.get_avatar(leave_message['author']['_id'], 'thumbnail180x180') }}" class="avatar">
+        </a>
+    </td>
+    <td valign="top" width="760px" class="border-bottom">
+        <div class="leavemessage-info">
+            <div class="note-color">
+                <a href="/profile/{{ leave_message['author']['_id'] }}" data-userid="{{ leave_message['author']['_id'] }}"
+                    class="red-color">{{ leave_message['author']['name'] }}
+                </a>
+                {% if 'replyeder' in leave_message %}
+                回复
+                <a href="/profile/{{ leave_message['replyeder']['_id'] }}" data-userid="{{ leave_message['replyeder']['_id'] }}">
+                    {{ leave_message['replyeder']['name'] }}
+                </a>
+                {% end %}:
+
+                <span class="font12">{{ handler.translate_time(leave_message['leave_time']) }}</span>
+                {% if leave_message['author']['_id'] == current_user['_id'] and leave_message['private'] %}
+                <span class="font12 black-color">(私密的)</span>
+                {% end %}
+            </div>
+            <div class="leavemessage-content">
+                {% raw leave_message['content'] %}
+            </div>
+        </div>
+    </td>
+    <td valign="top" width="100px" class="border-bottom">
+        <div class="pull-left">
+            <span id="leavemessage-action-{{ leave_message['_id'] }}" class="leavemessage-action">
+                {% if user['_id'] == current_user['_id'] and leave_message['author']['_id'] != current_user['_id'] %}
+                <a href="javascript:void(0)" class="coffee-color reply-leavemessage-link"
+                        data-author-id="{{ leave_message['author']['_id'] }}" data-author-name="{{ leave_message['author']['name'] }}">
+                    <i class="fa fa-reply fa-lg"></i>回复
+                </a>
+                {% end %}
+            </span>
+        </div>
+        <div class="pull-right">
+            <span class="badge">{{ leave_message['floor'] }}楼</span>
+        </div>
+        <div class="clearfix"></div>
+    </td>
+</tr>

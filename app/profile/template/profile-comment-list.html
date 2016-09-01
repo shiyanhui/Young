@@ -1,0 +1,32 @@
+<div class="reply-list">
+    <div class="reply-list-inner">
+        <!-- 一条评论 -->
+        {% for reply in reply_list %}
+        <div class="item">
+            <div class="replyer-avatar" >
+                <img src="{{ handler.get_avatar( reply['replyer']['_id'], 'thumbnail50x50' ) }}">
+            </div>
+            <div class="header">
+                <div class="header-inner">
+                    <small><a href="/profile/{{ reply['replyer']['_id'] }}" data-userid={{ reply['replyer']['_id'] }}>
+                        {{ reply['replyer']['name'] }}</a>
+                    </small>
+                    <div class="pull-right">
+                        <small>{{ handler.translate_time( reply['reply_time'] ) }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                {% raw reply['content'] %}
+            </div>
+            <div class="links">
+                <div class="pull-right">
+                    <small><a href="javascript:void(0)" data-replyed-user-name="{{ reply['replyer']['name'] }}" data-replyed-user-id={{ reply['replyer']['_id'] }} class="reply-link reply-one-link">回复</a></small>
+                </div>
+            </div>
+        </div>
+        {% end %}
+    </div>
+</div>
+
+{% block pagination %}{% end %}

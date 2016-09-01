@@ -1,0 +1,52 @@
+/* 
+* @Author: lime
+* @Date:   2014-03-07 16:17:26
+* @Last Modified by:   lime
+* @Last Modified time: 2014-06-02 15:16:56
+*/
+
+.topic-list-part{
+    margin-bottom: 15px;
+}
+.topic-list{
+    min-height: 647px;
+    padding: 10px 15px
+}
+.topic-list table tr td{
+    padding: 8px 0;
+}
+.topic-list table tr:first-child td{
+    padding-top: 0;
+}
+.topic-list table tr:last-child td{
+    padding-bottom: 0;
+    border-bottom-width: 0;
+}
+.topic-list .topic-title{
+    
+    font-size: 14px;
+}
+.no-topic-list .no-topic-list-inner{
+    padding-top: 100px;
+}
+
+.recommend-topic-list-part{
+    min-height: 200px;
+}
+.recommend-topic-list{
+    padding: 10px
+}
+.recommend-topic-list .recommend-topic-list-item{
+    padding: 5px 0;
+    border-bottom: 1px dashed #ccc;
+}
+.recommend-topic-list .recommend-topic-list-item:first-child{
+    padding-top: 0;
+}
+.recommend-topic-list .recommend-topic-list-item:last-child{
+    padding-bottom: 0;
+    border-bottom-width: 0
+}
+.no-recommend-topic-list{
+    padding-top: 50px;
+}

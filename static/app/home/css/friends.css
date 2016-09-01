@@ -1,0 +1,20 @@
+.friends-list{
+    padding: 0 10px
+}
+.friends-list .flat-block{
+    min-height: 640px
+}
+.friends-list .friends-list-inner{
+    padding: 8px
+}
+.friends-list .friends-list-inner .action-list{
+    display: none;
+}
+.friends-list .friends-list-inner .action-list li{
+    display: inline-block;
+    padding: 0 5px
+}
+.no-friends{
+    text-align: center;
+    margin-top: 20%
+}

@@ -1,0 +1,44 @@
+{% set app = message['message_type'].split(':')[-1] %}
+<tr class="message-list-item border-bottom">
+    <td width="560px">
+
+        {% if app == 'status' %}
+
+            <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+            <a href="/profile/{{ message['sender']['_id'] }}" data-userid="{{ message['sender']['_id'] }}">{{ message['sender']['name'] }}</a>
+            赞了你的状态
+            {% if message['data']['status']['content'] %}
+            <a href="/profile/status">
+                {{ message['data']['status']['content'] }}
+            </a>
+            {% end %}
+            {% if 'photo' in message['data']['status'] %}
+            <div>
+                <a href="/profile/status">
+                    <img src="{{ message['data']['status']['photo']['thumbnail'] }}">
+                </a>
+            </div>
+            {% end %}
+
+        {% elif app == 'topic' %}
+
+            <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+            <a href="/profile/{{ message['sender']['_id'] }}" data-userid="{{ message['sender']['_id'] }}">{{ message['sender']['name'] }}</a>
+            赞了你的话题
+            <a href="/community/topic/{{ message['data']['topic']['_id'] }}">
+                {{ message['data']['topic']['title'][:20] }}{% if len(message['data']['topic']['title']) > 20 %}...{% end %}
+            </a>
+
+        {% elif app == 'share' %}
+
+            <img src="{{ handler.get_avatar(message['sender']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+            <a href="/profile/{{ message['sender']['_id'] }}" data-userid="{{ message['sender']['_id'] }}">{{ message['sender']['name'] }}</a>
+            赞了你的分享
+            <a href="/share/{{ message['data']['share']['_id'] }}">
+                {{ message['data']['share']['title'][:20] }}{% if len(message['data']['share']['title']) > 20 %}...{% end %}
+            </a>
+
+        {% end %}
+
+    </td>
+</tr>

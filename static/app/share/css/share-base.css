@@ -1,0 +1,86 @@
+.main-content {
+    position: relative;
+    float: right;
+    width: 755px;
+}
+.main-content .main-content-inner{
+    padding-left: 10px;
+}
+.main-content-item{
+    padding: 15px;
+    margin-bottom: 10px
+}
+.main-content-item .main-content-item-header{
+    padding-bottom: 8px
+}
+
+.sidebar{
+    position: relative;
+    float: left;
+    width: 205px;
+}
+.sidebar .sidebar-item{
+    margin-bottom: 10px;
+    padding: 15px
+}
+.sidebar .sidebar-item .sidebar-item-header{
+    padding-bottom: 8px;
+}
+
+.share-navbar li{
+    padding: 8px 0 8px 2px;
+    font-size: 14px;
+}
+.share-navbar li:first-child{
+    padding-top: 8px;
+}
+.share-navbar li:last-child{
+    padding-bottom: 0px;
+    border-bottom-width: 0
+}
+.share-navbar li:hover{
+    background: rgba(0,0,0,0.04);
+    cursor: pointer;
+}
+.tags li{
+    margin: 0 7px 6px 0;
+}
+
+.share-modal{
+    width: 415px;
+    padding: 20px
+}
+
+.share-modal .share-field{
+    margin-top: 10px
+}
+
+input[name="title"]{
+    width: 400px
+}
+input[name="tags"]{
+    width: 415px
+}
+input[name="cost"]{
+    width: 220px
+}
+
+.download-button{
+    display: inline-block;
+    font-size: 13px;
+    color: #fff;
+    font-family: inherit;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    line-height: 1.1;
+    background-color: #825d5b;
+    border: 1px solid #825d5b;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+    vertical-align: middle;
+    text-decoration: none;
+}
+.download-button:hover{
+    color: #ddd;
+}

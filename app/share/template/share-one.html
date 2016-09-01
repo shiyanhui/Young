@@ -1,0 +1,264 @@
+{% extends "../../base/template/appbase.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('plugin/alertify.js/themes/alertify.core.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/alertify.js/themes/alertify.bootstrap.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/iCheck/skins/all.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/wysiwyg-young/css/bootstrap-wysiwyg.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/share/css/share-base.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/share/css/share-one.css') }}">
+{% end %}
+
+{% block javascript_in_head %}
+<script type="text/javascript" src="{{ static_url('plugin/MathJax/MathJax.js') }}"></script>
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('plugin/alertify.js/lib/alertify.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/wysiwyg-young/external/jquery.hotkeys.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/wysiwyg-young/js/bootstrap-wysiwyg.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/iCheck/icheck.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/jquery.scrollTo/jquery.scrollTo.min.js') }}" defer></script>
+
+<!-- build:fileuploadjs -->
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.iframe-transport.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.fileupload.js') }}" defer></script>
+<!-- endbuild -->
+
+<script type="text/javascript" src="{{ static_url('app/share/js/share_.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/share/js/share-one.js') }}" defer></script>
+{% end %}
+
+{% block nav_collapse %}
+<ul class="nav">
+    <li>
+        <a href="/community">
+            社区
+        </a>
+    </li>
+    <li class="active">
+        <a href="/share">
+            分享
+        </a>
+    </li>
+</ul>
+{% end %}
+
+{% block body %}
+<div class="container mt60">
+    <div class="main-content">
+        <div class="flat-block">
+            <div class="flat-block-content share">
+                <div>
+                    <ul class="inline-list unstyled note-color">
+                        <li>
+                            <a href="/share" class="note-color">分享</a>
+                        </li>
+                        <li>
+                            <span>/</span>
+                        </li>
+                        <li>
+                            <a href="/share/category?category={{ share['category'] }}" class="note-color">
+                                {{ share['category'] }}
+                            </a>
+                        </li>
+                        <li>
+                            <span>/</span>
+                        </li>
+                        <li class="active">
+                            {{ handler.get_filename(share) }}
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="pull-left share-file-type">
+                        <img src="{{ static_url('app/share/img/icons/%s.png' % handler.get_icon_name(share)) }}">
+                    </div>
+                    <div class="pull-left share-main">
+                        <div class="font18">
+                            <div class="pull-left share-name">
+                                {{ handler.get_filename(share) }}
+                            </div>
+                            <div class="pull-right share-uploader">
+                                <a href="/profile/{{ share['uploader']['_id'] }}" data-userid="{{ share['uploader']['_id'] }}">
+                                    <img src="{{ handler.get_avatar(share['uploader']['_id'], 'thumbnail50x50') }}" class="avatar avatar-small">
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div>
+                            {% raw share['description'] %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="share-actions">
+                    <div class="pull-left note-color font12" style="padding-top: 8px">
+                        {% if not share['liked'] %}
+                        <a href="javascript:void(0)" data-share-id="{{ share['_id'] }}" class="note-color share-like-link">
+                            <i class="fa fa-thumbs-o-up"></i>
+                            赞{% if share['like_times'] > 0 %}{{ share['like_times'] }}{% end %}
+                        </a>
+                        {% else %}
+                        <span class="red-color">
+                            <i class="fa fa-thumbs-o-up"></i>
+                            赞{% if share['like_times'] > 0 %}{{ share['like_times'] }}{% end %}
+                        </span>
+                        {% end %}
+                        •
+                        <a id="comment-link" href="javascript:void(0)" class="note-color">
+                            评论
+                            {% if share['comment_times'] > 0 %}
+                                {{ share['comment_times'] }}
+                            {% end %}
+                        </a>
+                        •
+                        <span class="note-color">
+                            下载次数
+                            {{ share['download_times'] }}
+                        </span>
+                    </div>
+                    <div class="pull-right font12 note-color">
+                        <span class="note-color">
+                            {{ handler.translate_byte(share['size']) }}
+                        </span>
+                        •
+                        <span class="note-color">
+                            {% if share['cost'] <= 0 %}免费{% else %}{{share['cost']}}金币{% end %}
+                        </span>
+                        &nbsp;
+                        <span>
+                            <a href="javascript:void(0)" data-share-id="{{ share['_id'] }}" {% if share['uploader']['_id'] != current_user['_id'] %}data-cost="{{share['cost']}}"{% end %} class="share-download-button button button-flat-caution button-tiny">下载</a>
+                        </span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'share-comment-list.html' %}
+
+        {% include '../../base/template/modals.html' %}
+
+        <div class="btn-toolbar mt50" data-role="editor-toolbar" data-target="#editor">
+            <div class="btn-group" >
+                <a class="btn" data-edit="bold" title="粗体"><i class="fa fa-bold"></i></a>
+                <a class="btn" data-edit="italic" title="斜体"><i class="fa fa-italic"></i></a>
+                <a class="btn" data-edit="underline" title="下划线"><i class="fa fa-underline"></i></a>
+            </div>
+            <div class="btn-group">
+                <a class="btn" data-edit="insertUnorderedList" title="无序列表"><i class="fa fa-list-ul"></i></a>
+                <a class="btn" data-edit="insertOrderedList" title="有序列表"><i class="fa fa-list-ol"></i></a>
+            </div>
+            <div class="btn-group">
+                <a class="btn command-InsertLink" title="插入链接"><i class="fa fa-chain"></i></a>
+                <a class="btn command-InsertCode" title="插入代码"><i class="fa fa-code"></i></a>
+                <a class="btn command-InsertMath" title="数学公式"><i class="fa fa-superscript"></i></a>
+                <a class="btn command-AddImage" title="添加图片"><i class="fa fa-picture-o"></i></a>
+            </div>
+            <div class="btn-group">
+                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+            </div>
+        </div>
+        <div id="show-replyer-label"></div>
+        <div id="editor" class="wysiwyg-editor mt5"></div>
+        <div class="submit-comment-part">
+            <div class="pull-left anonymous-checkbox">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input id="comment-anonymous-checkbox" type="checkbox" name="anonymous">
+                            </td>
+                            <td>
+                                匿名评论
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pull-right">
+                <button id="submit-comment-button" data-share-id="{{ share['_id'] }}" type="button" class="button button-flat-caution">提交</button>
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="sidebar-inner">
+            <div class="flat-block like-list-part">
+                <div class="flat-block-header">
+                    他们觉得很赞
+                </div>
+                <div class="flat-block-content like-list">
+                    {% set rows = (0 if len(like_list) % 5 == 0 else 1) + int(len(like_list) / 5) %}
+                    {% if rows %}
+                        <table>
+                            {% for i in xrange(rows) %}
+                            <tr {% if i >= 2 %}class="like-list-item hidden"{% end %}>
+                                {% for j in xrange(5) %}
+                                    {% if 5*i+j < len(like_list) %}
+                                    <td width="50px" align="center">
+                                        <div>
+                                            <a href="/profile/{{ like_list[5*i+j]['liker']['_id'] }}" data-userid="{{ like_list[5*i+j]['liker']['_id'] }}">
+                                                <img src="{{ handler.get_avatar(like_list[5*i+j]['liker']['_id'], 'thumbnail50x50') }}"
+                                                    class="avatar avatar-small">
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <small>{{ like_list[5*i+j]['liker']['name'][:6] }}</small>
+                                        </div>
+                                    </td>
+                                    {% end %}
+                                {% end %}
+                            </tr>
+                            {% end %}
+                        </table>
+                        {% if rows > 2 %}
+                            <div style="padding: 0 10px">
+                                <div class="pull-right">
+                                    <a id="like-toggle-link" href="javascript:void(0)" data-status="closed">展开<i class="fa fa-long-arrow-down"></i></a>
+                                </div>
+                                <div class="clearfix">
+                                </div>
+                            </div>
+                        {% end %}
+
+                    {% else %}
+                    <div class="like-list-none note-color">
+                        尚未有人点赞
+                    </div>
+                    {% end %}
+                </div>
+            </div>
+            <div class="flat-block">
+                <div class="flat-block-header">
+                    你可能感兴趣
+                </div>
+                <div class="recommend-share-list">
+                    {% if recommend_share_list %}
+                    <ul class="unstyled similar-share-list">
+                        {% for recommend_share in recommend_share_list %}
+                        <li>
+                            <a href="/share/{{ recommend_share['_id'] }}" class="black-color">
+                                {{ handler.get_filename(recommend_share) }}
+                            </a>
+                        </li>
+                        {% end %}
+                    </ul>
+                    {% else %}
+                    <div class="no-recommend-share-list">
+                        <div class="no-recommend-share-list-inner note-color text-center">
+                            暂无推荐
+                        </div>
+                    </div>
+                    {% end %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% end %}

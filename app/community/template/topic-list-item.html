@@ -1,0 +1,133 @@
+<div class="topic-list-item list-item">
+    <div>
+        {% if topic['top'] %}
+        <div class="pull-left" style="width: 600px">
+            <a href="/community/topic/{{ topic['_id'] }}" class="red-color topic-title">
+                {{ topic['title'] }}
+            </a>
+        </div>
+        <div class="pull-right">
+            <span class="red-color font14">置顶</span>
+        </div>
+        <div class="clearfix"></div>
+        {% elif topic['perfect'] %}
+        <div class="pull-left" style="width: 600px">
+            <a href="/community/topic/{{ topic['_id'] }}" class="red-color topic-title">
+                {{ topic['title'] }}
+            </a>
+        </div>
+        <div class="pull-right">
+            <span class="red-color font14">精贴</span>
+        </div>
+        <div class="clearfix"></div>
+        {% else %}
+        <table>
+            <tbody>
+                <tr>
+                    <td class="author-image">
+                        <a href="/profile/{{ topic['author']['_id'] }}" class="coffee-color">
+                            <img src="{{ handler.get_avatar(topic['author']['_id'], 'thumbnail50x50') }}" class="avatar avatar-small">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/community/topic/{{ topic['_id'] }}" class="topic-title">
+                            {{ topic['title'] }}
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {% end %}
+    </div>
+
+    {% if 'content' in topic and topic['content'] %}
+    {% set text = handler.get_text(topic['content']) %}
+    <div class="topic-content">
+        <blockquote>
+            {{ text[:100] }}{% if len(text) > 100 %}...<a href="/community/topic/{{ topic['_id'] }}" class="coffee-color">查看更多</a>{% end %}
+        </blockquote>
+    </div>
+    {% end %}
+
+    {% if 'images' in topic and topic['images'] %}
+    <div class="topic-image-table">
+        {% set rows = len(topic['images']) / 3 + (1 if len(topic['images']) % 3 else 0) %}
+        <table>
+            <tbody>
+                {% for i in xrange(rows) %}
+                    {% if i < 3 %}
+                <tr>
+                    {% for j in xrange(3) %}
+                        {% if 3*i+j < len(topic['images']) %}
+                    <td>
+                        <div>
+                            <a href="{{ topic['images'][3*i+j]['url'] }}" class="topic-image fancybox.image" rel="fancybox-thumb" data-fancybox-title='<a href="/community/topic/{{ topic["_id"] }}" class="white-color">{{ topic["title"] }}</a>'>
+                                <img src="{{ topic['images'][3*i+j]['thumbnail'] }}">
+                            </a>
+                        </div>
+                    </td>
+                        {% end %}
+                    {% end %}
+                </tr>
+                    {% end %}
+                {% end %}
+            </tbody>
+        </table>
+        {% if rows > 3 %}
+        <div class="mt10">
+            <a href="/community/topic/{{ topic['_id'] }}">查看更多</a>
+        </div>
+        {% end %}
+    </div>
+    {% end %}
+    <div class="font12 note-color topic-actions">
+        <div class="pull-left">
+            {% if not topic['liked'] %}
+            <a href="javascript:void(0)" class="note-color topic-like-link" data-topic-id="{{ topic['_id'] }}">
+                <i class="fa fa-thumbs-o-up"></i>
+                赞{% if topic['like_times'] > 0 %}{{ topic['like_times'] }}{% end %}
+            </a>
+            {% else %}
+            <span class="red-color">
+                <i class="fa fa-thumbs-o-up"></i>
+                赞{% if topic['like_times'] > 0 %}{{ topic['like_times'] }}{% end %}
+            </span>
+            {% end %}
+            •
+            <a href="/community/topic/{{ topic['_id'] }}" class="note-color">
+                评论{% if topic['comment_times'] > 0 %}{{ topic['comment_times'] }}{% end %}
+            </a>
+            •
+            浏览{{ topic['read_times'] }}
+            &nbsp;
+            {% for node in topic['nodes'] %}
+            <a href="/community/node/{{ node['_id'] }}" class="small-tag">{{ node['name'] }}</a>
+            {% end %}
+        </div>
+        <div class="pull-right note-color">
+            {% if 'last_comment' in topic and topic['last_comment'] %}
+                最后评论来自
+                {% if topic['last_comment']['anonymous'] %}
+                    <strong>匿名</strong>
+                {% else %}
+                    <a href="/profile/{{ topic['last_comment']['author']['_id'] }}" data-userid="{{ topic['last_comment']['author']['_id'] }}" class="note-color">
+                        {{ topic['last_comment']['author']['name'] }}
+                    </a>
+                {% end %}
+                •
+                {{ handler.translate_time(topic['last_update_time']) }}
+            {% else %}
+                {% if topic['anonymous'] %}
+                    <strong>匿名</strong>
+                {% else %}
+                    <a href="/profile/{{ topic['author']['_id'] }}" data-userid="{{ topic['author']['_id'] }}" class="note-color">
+                        {{ topic['author']['name'] }}
+                    </a>
+                {% end %}
+                发布于 {{ handler.translate_time(topic['publish_time']) }}
+            {% end %}
+        </div>
+        <div class="clearfix">
+        </div>
+    </div>
+</div>

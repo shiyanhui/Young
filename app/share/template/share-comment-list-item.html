@@ -1,0 +1,53 @@
+ <div class="share-comment-item border-bottom" data-comment-id="{{ comment['_id'] }}">
+    <div>
+        <div class="pull-left share-author-avatar">
+            {% if not comment['anonymous'] %}
+            <a href="/profile/{{ comment['author']['_id'] }}" data-userid="{{ comment['author']['_id'] }}">
+                <img src="{{ handler.get_avatar(comment['author']['_id'], 'thumbnail50x50') }}" class="avatar avatar-small">
+            </a>
+            {% else %}
+                <img src="{{ static_url('img/default.jpg') }}" class="avatar avatar-small">
+            {% end %}
+        </div>
+        <div class="pull-right share-main">
+            <div>
+                <div class="pull-left">
+                    <div>
+                        <span>
+                            {% if not comment['anonymous'] %}
+                            <a href="/profile/{{ comment['author']['_id'] }}" data-userid="{{ comment['author']['_id'] }}"
+                                class="red-color">{{ comment['author']['name'] }}</a>{% if 'replyeder' in comment and comment['replyeder'] %}
+                            回复<a href="/profile/{{ comment['replyeder']['_id'] }}" data-userid="{{ comment['replyeder']['_id'] }}">{{ comment['replyeder']['name'] }}</a>{% end %}:
+                            {% else %}
+                            匿名:
+                            {% end %}
+                        </span>
+                        <span class="share-publish-time">
+                            <small>{{ handler.translate_time(comment['comment_time']) }}</small>
+                        </span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <span id="share-comment-action-{{ comment['_id'] }}" class="share-comment-action">
+                        <small>
+                            {% if not comment['anonymous'] and current_user['_id'] != comment['author']['_id'] %}
+                            <a href="javascript:void(0)" class="coffee-color reply-share-comment-link"
+                                    data-author-id="{{ comment['author']['_id'] }}" data-author-name="{{ comment['author']['name'] }}">
+                                <i class="fa fa-reply fa-lg"></i>回复
+                            </a>
+                            {% end %}
+                        </small>
+                    </span>
+                    <span class="badge">{{ comment['floor'] }}楼</span>
+                </div>
+                <div class="clearfix">
+                </div>
+            </div>
+            <div class="share-comment-content">
+                {% raw comment['content'] %}
+            </div>
+        </div>
+        <div class="clearfix">
+        </div>
+    </div>
+</div>

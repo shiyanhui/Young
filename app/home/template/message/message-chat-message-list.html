@@ -1,0 +1,23 @@
+{% if message_list %}
+<div class="flat-block">
+    <div class="flat-block-header">
+        私聊信息
+    </div>
+    <div class="message-list flat-block-content">
+        <table id="message-list">
+            {% for message in message_list %}
+                {% include 'message-chat-message-list-item.html' %}
+            {% end %}
+        </table>
+    </div>
+</div>
+{% else %}
+<div class="flat-block no-message-list">
+    <div class="flat-block-header">
+        私聊信息
+    </div>
+    <div class="flat-block-content no-message-list-inner text-center note-color">
+        没有私聊信息
+    </div>
+</div>
+{% end %}

@@ -1,0 +1,80 @@
+body{
+    background-image: url("");
+}
+.main-content{
+    background-image: url("/static/img/landing.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.main-content .main-content-inner{
+    height: 450px;
+    padding-top: 100px;
+}
+.main-content .main-content-inner .slogan{
+    -webkit-font-smoothing: antialiased;
+    font-size: 48px;
+    padding-top: 70px;
+    color: #fff;
+}
+.main-content .main-content-inner .slogan .slogan-content{
+    margin-top: 50px;
+    font-size: 20px;
+    word-break: break-word;
+}
+.main-content .main-content-inner .login-form{
+    padding-top: 40px;
+    color: #ffffff;
+    text-align: center
+}
+.main-content .main-content-inner .login-form .login-item{
+    margin-top: 20px;
+}
+.main-content .main-content-inner .login-form .login-item:first-child{
+    margin-top: 0px;
+}
+.main-content .main-content-inner .login-form .login-item input {
+    font-size: 14px;
+    padding: 10px 12px;
+    width: 275px;
+}
+
+.register-list{
+    list-style: none;
+}
+.register-list li{
+    display: inline-block;
+    margin: 2px 0px!important;
+}
+
+.register-form{
+    width: 400px;
+    min-height: 200px
+}
+.register-form .register-form-inner{
+    padding: 30px
+}
+.register-form .register-form-inner .register-field{
+    margin-top: 20px
+}
+.register-form .register-form-inner .register-field input {
+    width: 325px;
+}
+.register-form .register-form-inner .register-actions{
+    margin-top: 50px
+}
+
+.hot-topic-table td{
+    padding: 4px 0;
+}
+.hot-topic-table tr td:first-child{
+    padding-right: 8px;
+}
+
+.white-color,
+.white-color:focus,
+.white-color:visited{
+    color: #f1f1f1;
+}
+.white-color:hover{
+    color: #ffffff;
+}

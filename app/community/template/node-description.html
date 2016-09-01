@@ -1,0 +1,21 @@
+{% if 'description' in current_node and current_node['description'] %}
+    {{ current_node['description'] }}
+
+    <a href="javascript:void(0)" class="note-color node-description-edit-link" data-node-id="{{ current_node['_id'] }}">
+        <i class="fa fa-edit"></i>修改
+    </a>
+    {% if 'last_modified_by' in current_node %}
+    <div class="mt5">
+        <span class="note-color font12">
+            最后修改来自:
+            <a href="/profile/{{ current_node['last_modified_by']['_id'] }}" data-userid="{{ current_node['last_modified_by']['_id'] }}" class="note-color">
+                {{ current_node['last_modified_by']['name'] }}
+            </a>
+        </span>
+    </div>
+    {% end %}
+{% else %}
+<a href="javascript:void(0)" class="note-color node-description-edit-link" data-node-id="{{ current_node['_id'] }}">
+    <i class="fa fa-plus"></i> 添加描述
+</a>
+{% end %}

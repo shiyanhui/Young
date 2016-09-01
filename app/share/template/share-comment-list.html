@@ -1,0 +1,13 @@
+<div id="share-comment-list" class="flat-block share-comment-list">
+    {% for comment in comment_list %}
+        {% include 'share-comment-list-item.html' %}
+    {% end %}
+</div>
+
+{% if comment_list and len(comment_list) >= SHARE_SETTINGS['share_comment_number_per_page'] %}
+<div class="load-more-share-comment-part">
+    <button id="load-more-share-comment-button" class="btn btn-block btn-primary"
+        type="button" data-share-id="{{ share['_id'] }}" data-page="1">更多评论
+    </button>
+</div>
+{% end %}

@@ -1,0 +1,380 @@
+<div id="insert-link-modal" class="block block-extend modal hide fade">
+    <div class="header">
+        <div class="pull-left">
+            插入链接
+        </div>
+        <div class="pull-right">
+            <a id="cancel-insert-link-button" href="javascript:void(0)" class="close-button color-black"><i class="fa fa-times"></i></a>
+        </div>
+        <div class="clearfix">
+        </div>
+    </div>
+    <div class="content">
+        <input type="text" name="insert-link-input" value="" placeholder="链接地址" style="width: 96%">
+        <input type="text" name="insert-link-text" value="" placeholder="文本内容(可选)" style="width: 96%; margin-top: 10px">
+        <div class="mt5">
+            <div class="pull-right">
+                <button id="do-insert-link-button" class="btn small">确定</button>
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="insert-code-modal" class="block block-extend modal hide fade" data-backdrop="static">
+    <div class="header">
+        <div class="pull-left">
+            插入代码
+        </div>
+        <div class="pull-right">
+            <a id="cancel-insert-code-button" href="javascript:void(0)" class="close-button color-black"><i class="fa fa-times"></i></a>
+        </div>
+        <div class="clearfix">
+        </div>
+    </div>
+    <div class="content">
+        <textarea name="insert-code-textarea" style="width: 96%;min-height: 200px;font-family: monospace;">
+        </textarea>
+        <div class="mt5">
+            <div class="pull-right">
+                <button id="do-insert-code-button" class="btn small">确定</button>
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="insert-math-modal" class="block block-extend modal hide fade">
+    <div class="header">
+        <div class="pull-left">
+            数学公式
+        </div>
+        <div class="pull-right">
+            <a id="cancel-insert-math-button" href="javascript:void(0)" class="close-button color-black"><i class="fa fa-times"></i></a>
+        </div>
+        <div class="clearfix">
+        </div>
+    </div>
+    <div class="content">
+        <div>
+            <div class="btn-group">
+                <button class="btn btn-small dropdown-toggle" data-toggle="dropdown" >
+                    √x
+                    <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu">
+                    <div style="padding: 0 5px">
+                        <table class="latex-symbol">
+                            <tbody>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="x_{a}">\(x_{a}\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="x^{b}">\(x^{b}\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="x_{a}^{b}">\(x_{a}^{b}\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\bar{x}">\(\bar{x}\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\tilde{x}">\(\tilde{x}\)</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\frac{a}{b}">\(\frac{a}{b}\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\sqrt{x}">\(\sqrt{x}\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\sqrt[n]{x}">\(\sqrt[n]{x}\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\bigcap_{a}^{b}">\(\bigcap_{a}^{b}\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\bigcup_{a}^{b}">\(\bigcup_{a}^{b}\)</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\prod_{a}^{b}">\(\prod_{a}^{b}\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\coprod_{a}^{b}">\(\coprod_{a}^{b}\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\left( x \right)">\(\left( x \right)\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\left[ x \right]">\(\left[ x \right]\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\left\{ x \right\}">\(\left\{ x \right\}\)</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\left| x \right|">\(\left| x \right|\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\int_{a}^{b}">\(\int_{a}^{b}\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\oint_{a}^{b}">\(\oint_{a}^{b}\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\sum_{a}^{b}{x}">\(\sum_{a}^{b}{x}\)</a></td>
+                                    <td ><a href="javascript:void(0)" data-latex="\lim_{a \rightarrow b}{x}">\(\lim_{a \rightarrow b}{x}\)</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                    αΣ
+                    <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu">
+                    <div style="padding: 0 5px;">
+                        <table class="latex-symbol">
+                            <tbody>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\alpha">\(\alpha\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\beta">\(\beta\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\gamma">\(\gamma\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\delta">\(\delta\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\varepsilon">\(\varepsilon\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\zeta">\(\zeta\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\eta">\(\eta\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\theta">\(\theta\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\kappa">\(\kappa\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\lambda">\(\lambda\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\mu">\(\mu\)</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\nu">\(\nu\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\xi">\(\xi\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="o">\(o\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\pi">\(\pi\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\rho">\(\rho\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\sigma">\(\sigma\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\tau">\(\tau\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\phi">\(\phi\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\varphi">\(\varphi\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\chi">\(\chi\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\omega">\(\omega\)</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\zeta">\(\zeta\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\vartheta">\(\vartheta\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\iota">\(\iota\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\varpi">\(\varpi\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\varrho">\(\varrho\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\varsigma">\(\varsigma\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\upsilon">\(\upsilon\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\psi">\(\psi\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Gamma">\(\Gamma\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Delta">\(\Delta\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Theta">\(\Theta\)</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\Lambda">\(\Lambda\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Xi">\(\Xi\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Pi">\(\Pi\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Sigma">\(\Sigma\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Upsilon">\(\Upsilon\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Phi">\(\Phi\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Psi">\(\Psi\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Omega">\(\Omega\)</a></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                    +×
+                    <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu">
+                    <div style="padding: 0 5px">
+                        <table class="latex-symbol">
+                            <tbody>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="+">\(+\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="-">\(-\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\pm">\(\pm\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\mp">\(\mp\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\cdot">\(\cdot\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\div">\(\div\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\times">\(\times\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\setminus">\(\setminus\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\cup">\(\cup\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\cap">\(\cap\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\sqcup">\(\sqcup\)</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\sqcap">\(\sqcap\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\vee">\(\vee\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\wedge">\(\wedge\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\oplus">\(\oplus\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\ominus">\(\ominus\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\odot">\(\odot\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\oslash">\(\oslash\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\otimes">\(\otimes\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\bigcirc">\(\bigcirc\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\bigtriangleup">\(\bigtriangleup\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\bigtriangledown">\(\bigtriangledown\)</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\triangleleft">\(\triangleleft\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\triangleright">\(\triangleright\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\ast">\(\ast\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\circ">\(\circ\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\bullet">\(\bullet\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\diamond">\(\diamond\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\uplus">\(\uplus\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\amalg">\(\amalg\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\dagger">\(\dagger\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\ddagger">\(\ddagger\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\wr">\(\wr\)</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                    >=
+                    <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu">
+                    <div style="padding: 0 5px">
+                        <table class="latex-symbol">
+                            <tbody>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="<">\(<\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex=">">\(>\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="=">\(=\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\le">\(\le\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\ge">\(\ge\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\equiv">\(\equiv\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\ll">\(\ll\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\gg">\(\gg\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\doteq">\(\doteq\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\prec">\(\prec\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\succ">\(\succ\)</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\sim">\(\sim\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\preceq">\(\preceq\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\succeq">\(\succeq\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\simeq">\(\simeq\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\subset">\(\subset\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\supset">\(\supset\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\approx">\(\approx\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\subseteq">\(\subseteq\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\supseteq">\(\supseteq\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\cong">\(\cong\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\bowtie">\(\bowtie\)</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\in">\(\in\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\ni">\(\ni\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\propto">\(\propto\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\vdash">\(\vdash\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\dashv">\(\dashv\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\models">\(\models\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\mid">\(\mid\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\parallel">\(\parallel\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\perp">\(\perp\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\notin">\(\notin\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\ne">\(\ne\)</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                    ↑↓
+                    <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu">
+                    <div style="padding: 0 5px">
+                        <table class="latex-symbol">
+                            <tbody>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\leftarrow">\(\leftarrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\rightarrow">\(\rightarrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\leftrightarrow">\(\leftrightarrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Leftarrow">\(\Leftarrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Rightarrow">\(\Rightarrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Leftrightarrow">\(\Rightarrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\leftharpoonup">\(\leftharpoonup\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\rightharpoonup">\(\rightharpoonup\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\leftharpoondown">\(\leftharpoondown\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\rightharpoondown">\(\rightharpoondown\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\rightleftharpoons">\(\rightleftharpoons\)</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-latex="\uparrow">\(\uparrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\downarrow">\(\downarrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\updownarrow">\(\updownarrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Uparrow">\(\updownarrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Downarrow">\(\Downarrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\Updownarrow">\(\Downarrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\nearrow">\(\nearrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\searrow">\(\searrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\swarrow">\(\swarrow\)</a></td>
+                                    <td><a href="javascript:void(0)" data-latex="\nwarrow">\(\nwarrow\)</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <a href="javascript:void(0)" class="btn btn-small" data-latex="\\">换行</a>
+            </div>
+        </div>
+        <div class="mt5">
+            <textarea name="insert-math-textarea" style="width: 96%;"></textarea>
+        </div>
+        <div id="math-preview" style="overflow: scroll">
+        </div>
+        <div class="mt10">
+            <div class="pull-left">
+                <table>
+                    <tr>
+                        <td width="20px">
+                            <input type="checkbox" name="math-mode-inline" style="display: inline-block">
+                        </td>
+                        <td width="250x">
+                            行内嵌入公式<span><small>(注: 行内嵌入公式请不要换行)</small></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="pull-right">
+                <button id="do-insert-math-button" class="btn small">确定</button>
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="insert-image-modal" class="block block-extend modal hide fade">
+    <div class="header">
+        <div class="pull-left">
+            添加图片
+        </div>
+        <div class="pull-right">
+            <a id="cancel-add-image-button" href="javascript:void(0)" class="close-button color-black"><i class="fa fa-times"></i></a>
+        </div>
+        <div class="clearfix">
+        </div>
+    </div>
+    <div class="content">
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#upload-image" data-toggle="tab">上传图片</a></li>
+                <li><a href="#quote-image" data-toggle="tab">引用图片</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="upload-image">
+                    <a href="javascript:void(0)" class="btn file-input">
+                      点击上传<input type="file" id="upload-image-input" name="files[]" data-url="/image/upload">
+                    </a>
+                </div>
+                <div class="tab-pane" id="quote-image">
+                    <input type="text" name="quote-image-input" placeholder="图片地址" style="width: 96%">
+                    <div class="mt5">
+                        <div class="pull-right">
+                            <button id="do-quote-image-button" class="btn small">确定</button>
+                        </div>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

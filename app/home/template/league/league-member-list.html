@@ -1,0 +1,103 @@
+<div class="main-content">
+    <div class="inner">
+        <div class="header">
+            成员
+        </div>
+        <div style="min-height: 706px;font-size: 12px">
+            <table id="member-list-table" class="table-bottom-border comment-reply-list">
+                {% if not league_member_list %}
+                <div style="padding-top: 100px;color: #999999;text-align: center">
+                    还没有成员加入
+                </div>
+                {% else %}
+                    {% for member in league_member_list %}
+                    <tr width="600px" id="member-{{ member['_id'] }}">
+                        <td width="80px" align="center" valign="top">
+                            <div class="mt" style="margin-top: 5px;">
+                                <img src="{{ handler.get_avatar( member['_id'], 'thumbnail50x50' ) }}">
+                            </div>
+                        </td>
+                        <td width="380px" valign="top">
+                            <div style="margin-right: 10px;">
+                                <div>
+                                    <a href="/profile/{{ member['_id'] }}" style="font-size: 13px;color: #6C6351; ">
+                                        {{ member['name'] }}
+                                    </a>
+                                    {% if member['user_type'] == 'league' %}
+                                    <img src="{{ static_url('bootstrap/icons/group.png') }}" style="width: 14px;height: 12px; margin: 0 0 3px 0">
+                                    {% elif member['sex'] == 'male' %}
+                                    <img src="{{ static_url('icons/man.png') }}" style="width: 12px; height:12px;margin: 0 0 3px 0">
+                                    {% else %}
+                                    <img src="{{ static_url('icons/girl.png') }}" style="width: 12px;height:12px;margin: 0 0 3px 0">
+                                    {% end %}
+                                </div>
+                                <div>
+                                    <span><a href="/search?search_type=people&university={{ member['university']['name'] }}" style="color:#3366cc">{{ member['university']['name'] }}</a>{% if member['user_type']=='student' and member['grade'] %}({{ member['grade'] }}){% end %}</span>
+                                    {% if member['user_type'] == 'student' and 'college' in member and member['college'] %}
+                                    <sapn style="color: #bbbbbb;"> | </sapn>
+                                    <span><a href="/search?search_type=people&college={{ member['college'] }}" style="color:#3366cc">{{ member['college'] }}</a></span>
+                                    {% end %}
+                                    {% if member['user_type'] == 'student' and 'dormitory' in member and member['dormitory'] %}
+                                    <sapn style="color: #bbbbbb;"> | </sapn>
+                                    <span ><a href="/search?search_type=people&university={{ member['university']['name'] }}&dormitory={{ member['dormitory'] }}" style="color:#3366cc">{{ member['dormitory'] }}</a></span>
+                                    {% end %}
+                                    {% if member['user_type'] != 'league' and 'home' in member and member['home'] %}
+                                    <sapn style="color: #bbbbbb;"> | </sapn>
+                                    <span><a href="/search?search_type=people&home={{ member['home'] }}" style="color:#3366cc">{{ member['home'] }}</a></span>
+                                    {% end %}
+                                </div>
+                                <div>
+                                    <a href="/profile/watcher/{{ member['_id'] }}">关注</a> {{ member['watcher_num'] }} <span style="color: #cccccc">|</span> <a href="/profile/fans/{{ member['_id'] }}">粉丝</a> {{ member['fans_num'] }}
+                                    <span style="color: #cccccc">|</span> <a href="/profile/status/{{ member['_id'] }}#header">微博</a> {{ member['status_num'] }}
+                                </div>
+                                {% if 'signature' in member and member['signature'] %}
+                                <div class="coffee-color" style="margin-top: 5px;">简介：{{ member['signature'] }}</div>
+                                {% end %}
+                            </div>
+                        </td>
+                        <td width="140px">
+                            <div>
+                                {% if member['watched'] %}
+                                <a href="javascript:void(0)" class="un-watch-button" data-extra-userid="{{ member['_id'] }}">
+                                    <span class="label">取消关注</span>
+                                </a>
+                                {% else %}
+                                <a href="javascript:void(0)" class="watch-button" data-extra-userid="{{ member['_id'] }}">
+                                    <span class="label label-success">关注</span>
+                                </a>
+                                {% end %}
+                                <a href="javascript:void(0)" class="remove-member-link" data-extra-userid={{ member['_id'] }} style="margin-left: 10px;">
+                                    <span class="label label-important">移除成员</span>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% end %}
+                {% end %}
+            </table>
+        </div>
+    </div>
+
+    {% if page_count > 1 %}
+    <div class="pagination pagination-centered">
+        <ul>
+            {% if current_page > 10 %}
+            <li class="league-number-list-page-index" data-page-index={{ int(current_page/10 if current_page%10 else current_page/10 - 1)*10 }} >
+                <a href="javascript:void(0)">«</a>
+            </li>
+            {% end %}
+            {% for i in range( int( current_page/10 if current_page%10 else current_page/10 - 1)*10 + 1,
+            ( ( int(current_page/10) + 1 if current_page%10 else int(current_page/10) ) * 10 if ( int(current_page/10) + 1 if current_page%10 else int(current_page/10) ) * 10 < page_count else page_count ) + 1 ) %}
+            <li {% if current_page == i %}class="active"{% end %}>
+                <a href="javascript:void(0)" {% if current_page != i %}class="league-number-list-page-index"{% end %} data-page-index={{ i }} >{{ i }}</a>
+            </li>
+            {% end %}
+            {% if ( int(current_page/10) + 1 if current_page%10 else int(current_page/10) ) * 10 < page_count %}
+            <li class="league-number-list-page-index" data-page-index={{ int(current_page/10+1 if current_page%10 else current_page/10)*10+1 }}>
+                <a href="javascript:void(0)">»</a>
+            </li>
+            {% end %}
+        </ul>
+    </div>
+    {% end %}
+</div>

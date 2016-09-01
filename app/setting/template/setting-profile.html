@@ -1,0 +1,181 @@
+{% extends "setting.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('plugin/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/iCheck/skins/all.css') }}">
+<link rel="stylesheet" href="{{ static_url('plugin/select2/select2.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/setting/css/setting.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/setting/css/setting-profile.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('plugin/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/select2/select2.min.js' ) }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/iCheck/icheck.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/cityselector/jquery.cityselect.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/setting/js/setting-profile.js') }}" defer></script>
+{% end %}
+
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function(){
+    {% if 'home' in current_user and current_user['home'] and current_user['home'] %}
+    var prov = "{{ current_user['home'].split('-')[0] }}";
+    var city = "{{ current_user['home'].split('-')[1] }}";
+    {% else %}
+    var prov = "";
+    var city = "";
+    {% end %}
+
+    $("#city").citySelect({
+        url:"/static/plugin/cityselector/city.min.js",
+        prov: prov,
+        city: city,
+        nodata:"none",
+        loaded: function(){
+            $("#province-select").select2({
+                width: "157",
+                placeholder: "请选择省份",
+            });
+            $("#province-select").select2("val", prov);
+            $("#city-select").select2({
+                width: "157",
+                placeholder: "请选择城市",
+            });
+            $("#city-select").select2("val", city);
+        }
+    });
+
+    {% if 'birthday' in current_user and current_user['birthday'] %}
+    var birthday = "{{ current_user['birthday'].strftime('%Y-%m-%d') }}";
+    $("#birthday").val(birthday);
+    {% end %}
+
+    $("#birthday").datepicker({
+        format: "yyyy-mm-dd",
+        // startDate: new Date(),
+        language: "zh-CN",
+        autoclose: true,
+    });
+});
+</script>
+{% end %}
+
+{% block setting-navbar %}
+<ul class="unstyled setting-navbar coffee-color">
+    <li class="border-bottom active">
+        <a href="/setting/profile">基本资料</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/avatar">头像设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/theme">主题设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/profile/cover">个人封面</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/password">修改密码</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/private">隐私设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/notification">提醒设置</a>
+    </li>
+</ul>
+{% end %}
+
+{% block setting_content %}
+<div class="main-content">
+	<div class="inner">
+        <div class="flat-block setting-profile">
+            <legend>基本资料</legend>
+            <form id="set-profile-form" class="form-horizontal" data-user-type="{{ current_user['user_type'] }}">
+                {% if current_user['user_type'] != 'league' %}
+                <div class="control-group">
+                    <label id="sex-label" class="control-label"> 性别:</label>
+                    <div class="controls">
+                        <div style="padding-top: 5px">
+                            <table>
+                                <tr>
+                                    <td width="22px">
+                                        <input type="radio" name="sex" value="male" {% if current_user['sex'] == 'male' %}checked{% end %}>
+                                    </td>
+                                    <td width="30px">
+                                        男
+                                    </td>
+                                    <td width="22px">
+                                        <input type="radio" name="sex" value="female" {% if current_user['sex'] == 'female' %}checked{% end %}>
+                                    </td>
+                                    <td>
+                                        女
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"> 家乡:</label>
+                    <div class="controls">
+                        <div id="city">
+                            <select class="prov" name="province" id="province-select"></select>
+                            <select class="city" name="city" id="city-select"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"> 生日:</label>
+                    <div class="controls">
+                        <input id="birthday" type="text" name="birthday" value="1990-1-1"/>
+                    </div>
+                </div>
+                {% end %}
+
+                {% if current_user['user_type'] == 'person' %}
+                <div class="control-group">
+                    <label class="control-label"> 感情:</label>
+                    <div class="controls">
+                        <select id="relationship-status">
+                            <option></option>
+                            <option value="" class="note-color">请选择</option>
+                            <option value="single" {% if 'relationship_status' in current_user and current_user['relationship_status'] == 'single' %}selected{% end %}>单身中</option>
+                            <option value="in_love" {% if 'relationship_status' in current_user and current_user['relationship_status'] == 'in_love' %}selected{% end %}>恋爱中</option>
+                        </select>
+                    </div>
+                </div>
+                {% end %}
+
+                {% if current_user['user_type'] != 'league' %}
+                <div class="control-group">
+                    <label class="control-label">手机号:</label>
+                    <div class="controls">
+                        <input type="text" name="phone" value="{% if 'phone' in current_user and current_user['phone'] %}{{ current_user['phone'] }}{% end %}"/>
+                    </div>
+                </div>
+                {% end %}
+                <div class="control-group">
+                    <label class="control-label">QQ:</label>
+                    <div class="controls">
+                        <input type="text" name="qq" value="{% if 'qq' in current_user and current_user['qq'] %}{{ current_user['qq'] }}{% end %}"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">自我简介:</label>
+                    <div class="controls">
+                        <textarea  name="signature" placeholder="自我介绍，以便别人更好得认识自己，不超过100字" >{% if 'signature' in current_user and current_user['signature'] %}{{ current_user['signature'] }}{% end %}</textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <a id="save-profile-button" class="button button-flat-caution" style="margin: 20px 0;" href="javascript:void(0)">保存</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+	</div>
+</div>
+{% end %}

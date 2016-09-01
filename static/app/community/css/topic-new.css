@@ -1,0 +1,15 @@
+.wysiwyg-editor {
+    min-height: 330px;
+}
+.text-wrap {
+    width: 100%!important;
+}
+#question-title {
+    width: 686px;
+}
+#node-list-input {
+    width: 100%;
+}
+.block .text-content {
+    padding: 40px!important;
+}

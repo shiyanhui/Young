@@ -1,0 +1,25 @@
+{% extends "../../base/template/appbase.html" %}
+
+{% block nav_collapse %}
+<ul class="nav">
+    <li>
+        <a href="/community">
+            社区
+        </a>
+    </li>
+    <li>
+        <a href="/share">
+            分享
+        </a>
+    </li>
+</ul>
+{% end %}
+
+{% block body %}
+<div class="container mt60">
+    {% include 'sidebar-left.html' %}
+    {% include 'sidebar-right.html' %}
+
+    {% block main_content %}{% end %}
+</div>
+{% end %}

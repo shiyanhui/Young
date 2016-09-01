@@ -1,0 +1,34 @@
+{
+  "name": "Young",
+  "version": "0.1.0",
+  "description": "Young",
+  "main": "index.js",
+  "dependencies": {
+    "del": "~2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "~2.0.12",
+    "gulp-concat": "~2.6.0",
+    "gulp-html-replace": "~1.6.1",
+    "gulp-htmlmin": "~2.0.0",
+    "gulp-rev": "^7.1.2",
+    "gulp-rev-collector": "^1.0.5",
+    "gulp-sourcemaps": "~1.6.0",
+    "gulp-uglify": "~2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shiyanhui/Young.git"
+  },
+  "keywords": [
+    "Young"
+  ],
+  "author": "Lime",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shiyanhui/Young/issues"
+  }
+}

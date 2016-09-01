@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{ static_url('plugin/iCheck/skins/all.css') }}">
+        <link rel="stylesheet" href="{{ static_url('plugin/select2/select2.css') }}">
+        <link rel="stylesheet" href="{{ static_url('plugin/wysiwyg-young/css/bootstrap-wysiwyg.css') }}">
+    </head>
+    <body>
+        <div class="share-modal">
+            <div>
+                <input type="text" name="title" placeholder="资源名称（请不要添加后缀），不超过20字">
+            </div>
+            <div class="share-field">
+                <span>资源描述（可选）</span>
+            </div>
+            <div>
+                <div id="editor" class="wysiwyg-editor background-white"></div>
+            </div>
+            <div class="share-field">
+                <select name="category">
+                    <option></option>
+                    {% for category in category_list %}
+                    <option value="{{ category['name'] }}">{{ category['name'] }}</option>
+                    {% end %}
+                </select>
+            </div>
+            <div class="share-field">
+                <table>
+                    <tr>
+                        <td width="320px">
+                            <div class="input-append">
+                                <input type="text" name="cost" placeholder="价格，正整数，0代表免费" value="0">
+                                <span class="add-on">金币</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="progress" class="progress progress-success progress-striped">
+                <div class="bar" style="width: 0%;"></div>
+            </div>
+            <div class="share-field">
+                <span id="file-name"></span>
+            </div>
+            <div class="share-field">
+                <div class="pull-left">
+                    <div>
+                        <span class="button button-flat-caution button-small file-button">
+                            <span>选择文件</span><input id="fileupload" type="file" name="files[]">
+                        </span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="pull-right">
+                    <button id="submit-file-button" class="button button-flat-caution button-small hidden">
+                        开始上传
+                    </button>
+                    <button id="cancel-submit-file-button" class="button button-flat-highlight button-small hidden">
+                        取消
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <!-- build:fileuploadjs -->
+        <script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.iframe-transport.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.fileupload.js') }}" defer></script>
+        <!-- endbuild -->
+
+        <script type="text/javascript" src="{{ static_url('plugin/select2/select2.min.js' ) }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/resumable.js/resumable.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/wysiwyg-young/external/jquery.hotkeys.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/wysiwyg-young/js/bootstrap-wysiwyg.js') }}" defer></script>
+        <script type="text/javascript" src="{{ static_url('plugin/iCheck/icheck.min.js') }}" defer></script>
+
+        <script type="text/javascript" src="{{ static_url('app/share/js/share-new.js') }}" defer></script>
+    </body>
+</html>

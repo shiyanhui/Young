@@ -1,0 +1,29 @@
+<div class="sidebar">
+    <div class="sidebar-pinned">
+        <div class="flat-block sidebar-item">
+            <div class="sidebar-item-header bold font16 border-bottom">
+                资源分享
+            </div>
+            <div class="font12" style="padding: 8px 0">
+                分享你认为有价值的资源，类型不限，文件大小上限为100M。别人下载你的分享需要花费一定的金币。
+            </div>
+            <div>
+                <button id="share-button" class="button button-tiny button-flat-caution">上传 <i class="fa fa-share-alt"></i></button>
+            </div>
+        </div>
+        <div class="flat-block sidebar-item">
+            <div class="sidebar-item-header bold font16 border-bottom">
+                分类
+            </div>
+            <ul class="unstyled share-navbar">
+                {% for category in category_list %}
+                <li class="border-bottom">
+                    <a href="/share/category?category={{ category['name'] }}" {% if current_category == category['name'] %}class="red-color"{% else %}class="coffee-color"{% end %}>
+                        {{ category['name'] }}
+                    </a>
+                </li>
+                {% end %}
+            </ul>
+        </div>
+    </div>
+</div>

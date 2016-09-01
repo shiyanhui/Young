@@ -1,0 +1,21 @@
+<div class="status-list">
+    <div id="status-list" class="status-list-inner">
+        {% if not status_list %}
+        <div class="flat-block no-status-list">
+            <div class="no-status-list-inner note-color">
+                {% if current_user['_id'] == user['_id'] %}我{% elif user['user_type']=='league' or user['sex']=='male' %}他{% else %}她{% end %}还没有发布状态
+            </div>
+        </div>
+        {% else %}
+            {% for status in status_list %}
+                {% include "status-list-item.html" %}
+            {% end %}
+        {% end %}
+    </div>
+</div>
+
+{% if status_list and len(status_list) >= PROFILE_SETTINGS['status_number_per_page'] %}
+<div class="load-more-status">
+    <button id="load-more-status-button" class="btn btn-block btn-primary" type="button" data-page="1">加载更多</button>
+</div>
+{% end %}

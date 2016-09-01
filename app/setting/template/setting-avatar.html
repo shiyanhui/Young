@@ -1,0 +1,131 @@
+{% extends "setting.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('plugin/Jcrop/css/jquery.Jcrop.min.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/setting/css/setting.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/setting/css/setting-avatar.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<!-- build:fileuploadjs -->
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.iframe-transport.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-file-upload/js/jquery.fileupload.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('plugin/blueimp-load-image/js/load-image.all.min.js') }}" defer></script>
+<!-- endbuild -->
+
+<script type="text/javascript" src="{{ static_url('plugin/Jcrop/js/jquery.Jcrop.min.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/setting/js/setting-avatar.js') }}" defer></script>
+{% end %}
+
+{% block setting-navbar %}
+<ul class="unstyled setting-navbar coffee-color">
+    <li class="border-bottom">
+        <a href="/setting/profile">基本资料</a>
+    </li>
+    <li class="border-bottom active">
+        <a href="/setting/avatar">头像设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/theme">主题设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/profile/cover">个人封面</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/password">修改密码</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/private">隐私设置</a>
+    </li>
+    <li class="border-bottom">
+        <a href="/setting/notification">提醒设置</a>
+    </li>
+</ul>
+{% end %}
+
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#target").Jcrop({
+        {% if avatar and 'crop_area' in avatar %}
+        setSelect:[{{ avatar['crop_area']['x'] }}, {{ avatar['crop_area']['y']}},
+        {{ avatar['crop_area']['x'] }} + {{ avatar['crop_area']['w'] }}, {{ avatar['crop_area']['y'] }} + {{ avatar['crop_area']['h'] }} ],
+        {% else %}
+        setSelect:[0, 0, 200, 200],
+        {% end %}
+        onChange: showPreview,
+        onSelect: showPreview,
+        aspectRatio: 1
+    });
+
+    function showPreview(coords){
+        if(parseInt(coords.w) > 0){
+            $("#x").val(coords.x);
+            $("#y").val(coords.y);
+            $("#w").val(coords.w);
+            $("#h").val(coords.h);
+
+            var rx = 80 / coords.w;
+            var ry = 80 / coords.h;
+
+            $("#preview").css({
+                width:Math.round(rx * $("#target").width()) + "px",
+                height:Math.round(rx * $("#target").height()) + "px",
+                marginLeft:"-" + Math.round(rx * coords.x) + "px",
+                marginTop:"-" + Math.round(ry * coords.y) + "px"
+            });
+        }
+    }
+});
+</script>
+{% end %}
+
+{% block setting_content %}
+<div class="main-content">
+    <div class="inner">
+        <div class="flat-block">
+            <div class="flat-content setting-avatar">
+                <legend>头像设置</legend>
+                <div class="setting-avatar-inner">
+                    <div class="pull-left setting-avatar-left">
+                        <div id="targer-part">
+                            {% if preview %}
+                            <img id="target" src="{{ preview }}">
+                            {% end %}
+                        </div>
+                        <div class="setting-avatar-actions">
+                            <div class="pull-left">
+                                <span class="button button-flat-caution file-button">
+                                    <span>添加</span><input id="fileupload" type="file" name="avatar">
+                                </span>
+                            </div>
+                            <div class="pull-right">
+                                <button id="save-avatar-button" type="button" class="button button-flat-caution">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <div>
+                            {% if preview %}
+                            <div id="setting-avatar-preview" class="setting-avatar-preview">
+                                <img id="preview" src="{{ preview }}">
+                            </div>
+                            {% end %}
+                            <div>
+                                <input type="hidden" id="x" name="x" />
+                                <input type="hidden" id="y" name="y" />
+                                <input type="hidden" id="w" name="w" />
+                                <input type="hidden" id="h" name="h" />
+                                <input type="hidden" name="target-width" value="350"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}
+

@@ -1,0 +1,26 @@
+<div class="sidebar">
+    <div class="sidebar-inner">
+        <div class="flat-block">
+            <div class="flat-block-header">
+                你可能感兴趣
+            </div>
+            <div class="flat-block-content recommend-topic-list-part">
+                {% if recommend_topic_list %}
+                <div class="recommend-topic-list">
+                    {% for recommend_topic in recommend_topic_list %}
+                    <div class="recommend-topic-list-item">
+                        <a href="/community/topic/{{ recommend_topic['_id'] }}" class="black-color">
+                            {{ recommend_topic['title'] }}
+                        </a>
+                    </div>
+                    {% end %}
+                </div>
+                {% else %}
+                <div class="no-recommend-topic-list text-center note-color">
+                    暂无推荐
+                </div>
+                {% end %}
+            </div>
+        </div>
+    </div>
+</div>

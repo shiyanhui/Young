@@ -1,0 +1,94 @@
+.topic-comment-list{
+    margin-top: 40px;
+    padding: 0 15px;
+}
+.topic-comment-list .topic-comment-item{
+    padding: 10px 0;
+}
+.topic-comment-list .topic-comment-item:first-child{
+    padding-top: 15px;
+}
+.topic-comment-list .topic-comment-item:last-child{
+    padding-bottom: 15px;
+    border-bottom-width: 0
+}
+.topic-comment-list .topic-comment-item .topic-author-avatar{
+    width: 40px
+}
+.topic-comment-list .topic-comment-item .topic-main{
+    width: 605px
+}
+.topic-comment-list .topic-comment-item .topic-publish-time{
+    margin-left: 5px
+}
+.topic-comment-list .topic-comment-item .topic-main .topic-comment-action{
+    display: none;
+    margin-right: 10px
+}
+.topic-comment-list .topic-comment-item .topic-main .topic-comment-content{
+    padding: 5px 30px 0 0
+}
+
+.topic{
+    padding: 15px;
+}
+.topic .topic-title{
+    font-size: 18px;
+    margin-top: 10px;
+}
+.topic .topic-content{
+    margin-top: 15px;
+    /*font-size: 14px!important;*/
+}
+.topic .topic-info{
+    margin-top: 20px
+}
+
+.submit-comment-part{
+    margin-top: 10px
+}
+.submit-comment-part .anonymous-checkbox{
+    width: 200px
+}
+
+.similar-topic-list{
+    min-height: 200px;
+}
+.similar-topic-list li{
+    border-bottom: 1px solid #eeeeee;
+    padding: 5px 0;
+}
+.similar-topic-list li:last-child{
+    border-bottom-width: 0;
+}
+.similar-topic-list tr td:first-child {
+    min-width: 40px;
+    max-width: 40px;
+}
+
+.recommend-topic-list{
+    padding: 0 10px!important
+}
+.no-recommend-topic-list{
+    min-height: 150px;
+}
+.no-recommend-topic-list .no-recommend-topic-list-inner{
+    padding-top: 50px;
+}
+
+
+.like-list-part{
+    margin-bottom: 15px
+}
+.like-list{
+    min-height: 100px;
+    padding: 5px
+}
+.like-list table th,
+.like-list table td{
+    padding: 5px 0;
+}
+.like-list-none{
+    text-align: center;
+    margin-top: 20px
+}

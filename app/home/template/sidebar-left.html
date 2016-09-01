@@ -1,0 +1,34 @@
+<div class="sidebar-left">
+    <div class="flat-block summary-numbers">
+        <div class="flat-block-header">
+            <div>
+                <a href="/profile" class="coffee-color">
+                    <img src="{{ handler.get_avatar(current_user['_id'], 'thumbnail50x50') }}" >
+                    {{ current_user['name'] }}
+                </a>
+            </div>
+        </div>
+        <div class="info">
+            <table>
+                <tr>
+                    <td width="90px" align="center">
+                        <a href="/profile/status" class="coffee-color">
+                            <span class="number">{{ status_number }}</span>
+                            <br>
+                            <span>状态</span>
+                        </a>
+                    </td>
+                    <td width="90px" align="center">
+                        <a href="/profile/topic" class="coffee-color">
+                            <span class="number">{{ topic_number }}</span>
+                            <br>
+                            <span>话题</span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    {% block sidebar_left %}{% end %}
+</div>

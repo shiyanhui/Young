@@ -1,0 +1,520 @@
+html, body{
+    color: #999;
+    background: url(/static/img/black-bg.jpg) repeat 0 0 scroll;
+    background: url(/static/img/black-bg.gif) repeat 0 0 scroll;
+}
+
+.flat-block{
+    background-color: rgba(0,0,0,0.4);
+    /*background: url(/static/img/texture.png) repeat 0 0 scroll;*/
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.flat-block-bordered{
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radisu: 2px;
+}
+.flat-block-header{
+    padding: 8px 10px;
+    border-bottom: 1px solid #333;
+}
+.flat-block .flat-block-content{
+}
+
+.tags {
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+.tags li {
+    float: left;
+}
+.tag {
+    background: #eee;
+    border-radius: 3px 0 0 3px;
+    color: #999;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 20px 0 23px;
+    position: relative;
+    margin: 0 3px 0px 0;
+    text-decoration: none;
+    -webkit-transition: color 0.2s;
+}
+.tag::before {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+    content:'';
+    height: 6px;
+    left: 10px;
+    position: absolute;
+    width: 6px;
+    top: 10px;
+}
+.tag::after {
+    background: #fff;
+    border-bottom: 13px solid transparent;
+    border-left: 10px solid #eee;
+    border-top: 13px solid transparent;
+    content:'';
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.tag:hover {
+    background-color: #c43c35;
+    color: white;
+}
+.tag:hover::after {
+    border-left-color: #c43c35;
+}
+.small-tag{
+    font-size: 12px;
+    background: #333;
+    border-radius: 3px 0 0 3px;
+    -moz-border-radius: 3px 0 0 3px;
+    -webkit-border-radius: 3px 0 0 3px;
+    color: #999;
+    display: inline-block;
+    height: 18px;
+    line-height: 18px;
+    padding: 0 13px 0 13px;
+    position: relative;
+    margin: 0 3px 0px 0;
+    text-decoration: none;
+    -webkit-transition: color 0.2s;
+     -moz-transition: color 0.2s;
+       -o-transition: color 0.2s;
+          transition: color 0.2s;
+}
+.small-tag::before {
+    background: #999;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+    content:'';
+    height: 6px;
+    left: 5px;
+    position: absolute;
+    width: 6px;
+    top: 5px;
+}
+.small-tag::after {
+    background: rgba(0,0,0,0.4);
+    border-bottom: 9px solid transparent;
+    border-left: 10px solid #333;
+    border-top: 9px solid transparent;
+    content:'';
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.small-tag:hover {
+    background-color: #D32;
+    color: white;
+}
+.small-tag:hover::after {
+    border-left-color: #D32;
+}
+
+.rounded-list {
+    counter-reset: li;
+    list-style: none;
+    *list-style: decimal;
+    padding: 0;
+}
+.rounded-list a {
+    position: relative;
+    display: block;
+    padding: 0.4em 0.1em 0.4em 2em;
+    *padding: 0.4em;
+    color: #999;
+    text-decoration: none;
+    border-radius: 0.3em;
+    -moz-transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+.rounded-list a:hover {
+    background: #333;
+}
+.rounded-list a:hover::before {
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+.rounded-list a::before {
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    left: -0.8em;
+    top: 50%;
+    margin-top: -1.3em;
+    background: #000;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    border: 0.3em solid #333;
+    text-align: center;
+
+    border-radius: 2em;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.coffee-color,
+.coffee-color:hover,
+.coffee-color:focus,
+.coffee-color:visited{
+    color: #f6e6cc;
+    /*color:#6C6351;*/
+}
+.coffee-color a,
+.coffee-color a:hover,
+.coffee-color a:focus,
+.coffee-color a:visited{
+    color: #f6e6cc;
+    /*color:#6C6351*/
+}
+.red-color,
+.red-color:hover,
+.re-color:focus,
+.red-color:visited{
+    color: #D32;
+}
+.red-color-force{
+    color: #D32!important
+}
+.note-color,
+.note-color:hover,
+.note-color:focus,
+.note-color:visited{
+    color: #666;
+}
+
+.gray-color,
+.gray-color:hover,
+.gray-color:focus,
+.gray-color:visited{
+    color: #555;
+}
+
+.black-color,
+.black-color:hover,
+.black-color:focus,
+.black-color:visited{
+    color: #999;
+    /*color: #f6e6cc;*/
+}
+
+.orange-color,
+.orange-color:hover,
+.orange-color:focus,
+.orange-color:visited{
+    color: #f40;
+}
+.white-color,
+.white-color:hover,
+.white-color:focus,
+.white-color:visited{
+    color: #fff;
+}
+
+.coffee-color a:hover,
+a[class*="white-color"]:hover,
+a[class*="gray-color"]:hover,
+a[class*="coffee-color"]:hover,
+a[class*="note-color"]:hover,
+a[class*="black-color"]:hover,
+.coffee-color a:focus,
+a[class*="white-color"]:focus,
+a[class*="gray-color"]:focus,
+a[class*="coffee-color"]:focus,
+a[class*="note-color"]:focus,
+a[class*="black-color"]:focus{
+    color: #d32!important;
+}
+
+.table-top-border th,
+.table-top-border td{
+    border-top: 1px solid #333;
+}
+.table-bottom-border th,
+.table-bottom-border td{
+    border-bottom: 1px solid #333;
+}
+.table-bottom-border tr:last-child th,
+.table-bottom-border tr:last-child td{
+    border-bottom: 0px solid #333;
+}
+.table-bottom-dashed-border tr th,
+.table-bottom-dashed-border tr td{
+    border-bottom: 1px dashed #333;
+}
+.table-bottom-dashed-border tr:last-child th,
+.table-bottom-dashed-border tr:last-child td{
+    border-bottom: 0px dashed #333;
+}
+
+.border-bottom{
+    border-bottom: 1px solid #333;
+}
+.border-right{
+    border-right: 1px solid #333;
+}
+
+.list .list-item{
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+}
+.list .list-item:first-child{
+    padding-top: 0;
+}
+.list .list-item:last-child{
+    padding-bottom: 0;
+    border-bottom-width: 0
+}
+
+blockquote{
+    border-left: 5px solid #444;
+}
+
+legend{
+    color: #999;
+}
+
+.btn-group.open .btn.dropdown-toggle {
+  background-color: #222222;
+}
+.btn {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #363636;
+    *background-color: #222222;
+    background-image: -moz-linear-gradient(top, #444444, #222222);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444444), to(#222222));
+    background-image: -webkit-linear-gradient(top, #444444, #222222);
+    background-image: -o-linear-gradient(top, #444444, #222222);
+    background-image: linear-gradient(to bottom, #444444, #222222);
+    background-repeat: repeat-x;
+    border-color: #222222 #222222 #000000;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff444444', endColorstr='#ff222222', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn.active,
+.btn.disabled,
+.btn[disabled] {
+    color: #ffffff;
+    background-color: #222222;
+    *background-color: #151515;
+}
+.btn:active,
+.btn.active {
+  background-color: #080808 \9;
+}
+.btn .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+.btn.active {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.wysiwyg-editor{
+    background: #222;
+}
+
+textarea{
+    background: #222;
+    border: #333;
+}
+textarea:focus{
+    border: 1px solid #999;
+}
+
+.triangle-border {
+    position:relative;
+    padding:10px;
+    margin-top: 15px;
+    background: rgba(256,256,256,0.1);
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    font-size: 12px;
+}
+.triangle-border:before {
+    content:"";
+    position: absolute;
+    bottom: -20px;
+    left: 40px;
+    border-width: 20px 20px 0;
+    border-style: solid;
+    border-color: rgba(256,256,256,0.1) transparent;
+    display: block;
+    width: 0;
+}
+.triangle-border:after {
+    content:"";
+    position:absolute;
+    bottom:-13px;
+    left:47px;
+    border-width:13px 13px 0;
+    border-style:solid;
+    border-color:rgba(256,256,256,0) transparent;
+    display:block;
+    width:0;
+}
+.triangle-border.top:before {
+    top:-10px;
+    bottom:auto;
+    right:auto;
+    left:30px;
+    border-width:0 10px 10px;
+}
+.triangle-border.top:after {
+    top:-9px;
+    bottom:auto;
+    right:auto;
+    left:31px;
+    border-width:0 9px 9px;
+}
+.triangle-border.top-right:before {
+    top:-10px;
+    bottom:auto;
+    left:auto;
+    right:15px;
+    border-width:0 10px 10px;
+}
+.triangle-border.top-right:after {
+    top:-9px;
+    bottom:auto;
+    left:auto;
+    right:16px;
+    border-width:0 9px 9px;
+}
+
+/*.popover-content{
+    background: rgba(0,0,0,0.75);
+}*/
+
+/*-------community-----------*/
+.create-topic-link{
+    border-bottom: 1px solid #333;
+    border-right: 1px solid #333;
+}
+.topic-sort-link{
+    border-bottom: 1px solid #333;
+    border-left: 1px solid #333;
+}
+.summary-numbers .info table tr td{
+    border-right: 1px solid #333;
+}
+
+/*---------share-------------*/
+
+.share-table tr:nth-child(odd){
+    border-top: 1px solid #333;
+}
+
+/*-----------home-------------*/
+.sidebar-left .summary-numbers .info table tr td{
+    border-right: 1px solid #333;
+}
+.sidebar-left .home-navbar .home-navbar-item{
+    padding: 8px 10px 8px 15px;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+}
+.sidebar-left .home-navbar .message-collapse li:first-child{
+    border-top: 1px solid #333;
+    padding-top: 5px;
+}
+/*--------profile status and home*/
+
+.status-list{
+    background: rgba(0,0,0,0.2);
+}
+.status-list .status-list-inner .status-list-item{
+    border: 1px solid #000;
+    margin-bottom: 35px;
+    background: rgba(0,0,0,0.5);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.status-list .status-list-inner .status-list-item:last-child{
+    margin-bottom: 0
+}
+.status-list .status-list-inner .status-list-item .user-avatar{
+    background: rgba(0,0,0,0.5);
+    z-index: 100;
+    margin-top: -24px;
+    margin-left: 15px;
+    width: 56px;
+    height: 23px;
+    border-left: 1px solid #555;
+    border-top: 1px solid #555;
+    border-right: 1px solid #555;
+}
+.status-list .status-list-inner .status-list-item .user-avatar img{
+    width: 50px;
+    height: 50px;
+    margin: 3px;
+}
+.status-list .status-list-inner .status-list-item .status-header{
+    padding: 5px 10px;
+    background: rgba(0,0,0,0.5);
+    border-bottom: 1px solid #333;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.status-list .status-list-inner .status-list-item .status-header .header-inner{
+    margin-left: 70px;
+}
+.status-list .status-list-inner .status-list-item .content{
+    margin: 15px;
+}
+.status-list .status-list-inner .status-list-item .links{
+}
+.status-list .status-list-inner .status-list-item .links .reply-link{
+    margin-right: 15px;
+}
+.status-content img{
+    max-width: 150px;
+}
+.load-more-status{
+    margin: 10px
+}
+.status-liked{
+    color: red
+}
+.status-liked:hover{
+    color: red
+}
+.no-status-list{
+    min-height: 700px;
+    margin-top: -20px
+}
+.no-status-list .no-status-list-inner{
+    padding-top: 100px;
+    text-align: center
+}

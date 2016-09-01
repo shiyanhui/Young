@@ -1,0 +1,13 @@
+{% if topic_list %}
+<div id="topic-list" class="topic-list list">
+    {% for topic in topic_list %}
+        {% include 'topic-list-item.html' %}
+    {% end %}
+</div>
+{% else %}
+<div class="no-topic-list">
+    <div class="note-color text-center no-topic-list-inner">
+        尚未有话题
+    </div>
+</div>
+{% end %}

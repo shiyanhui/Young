@@ -1,0 +1,193 @@
+{% extends "../../base/template/appbase.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('app/share/css/share-base.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/share/css/share-category.css') }}">
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('plugin/jquery.pin/jquery.pin.min.js') }}" defer></script>
+
+<script type="text/javascript" src="{{ static_url('app/share/js/share-base.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/share/js/share_.js') }}" defer></script>
+<script type="text/javascript" src="{{ static_url('app/share/js/share-category.js') }}" defer></script>
+{% end %}
+
+{% block nav_collapse %}
+<ul class="nav">
+    <li>
+        <a href="/community">
+            社区
+        </a>
+    </li>
+    <li class="active">
+        <a href="/share">
+            分享
+        </a>
+    </li>
+</ul>
+{% end %}
+
+{% block body %}
+<div class="container mt60">
+    {% include "share-sidebar.html" %}
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            {% set data = {
+                u'论文': {
+                    'image': 'paper.png',
+                    'description': '毕业论文或者其他类型论文，最好是word文档或者PDF格式。'
+                },
+                u'小说': {
+                    'image': 'book.png',
+                    'description': '有关电子书'
+                },
+                u'音乐': {
+                    'image': 'music.png',
+                    'description': '分享那些令人难以忘怀的音乐。'
+                },
+                u'视频': {
+                    'image': 'video.png',
+                    'description': '可以是电影，也可以是自己拍的微电影、短片或者讲座等'
+                },
+                u'种子': {
+                    'image': 'bittorrent.png',
+                    'description': 'BT或者PT'
+                },
+                u'图片': {
+                    'image': 'picture.png',
+                    'description': '高清图片'
+                },
+                u'文档': {
+                    'image': 'document.png',
+                    'description': 'word、excel、PDF或者其他文档'
+                },
+                u'软件': {
+                    'image': 'software.png',
+                    'description': '把你认为好的软件分享出来吧'
+                }}
+            %}
+
+            {% if current_category != '其他' %}
+            <div class="flat-block" style="padding: 15px; margin-bottom: 15px">
+                <div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td width="120px">
+                                  <img src="{{ static_url('app/share/img/category/%s' % data[current_category]['image']) }}">
+                                </td>
+                                <td valign="top">
+                                    <div style="padding-left: 10px">
+                                        <div class="font18 bold">
+                                            {{ current_category }}
+                                        </div>
+                                        <div class="mt10">
+                                            {{ data[current_category]['description'] }}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% end %}
+
+            <div class="flat-block" style="padding: 15px">
+                {% if share_list %}
+                <table class="share-table">
+                    <tbody>
+                        {% for share in share_list %}
+                        <tr>
+                            <td width="740px" valign="top">
+                                <div class="font12" style="padding-top: 5px">
+                                    <div>
+                                        <div class="pull-left">
+                                            <a href="/share/{{ share['_id'] }}" class="coffee-color font16">
+                                                {{ handler.get_filename(share) }}
+                                            </a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a href="/profile/{{ share['uploader']['_id'] }}" data-userid="{{ share['uploader']['_id'] }}">
+                                                <img src="{{ handler.get_avatar(share['uploader']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+                                            </a>
+                                            &nbsp;
+                                            <span class="note-color">
+                                                |
+                                            </span>
+                                            &nbsp;
+                                            <span class="note-color">
+                                                {% if share['cost'] <= 0%}免费{% else %}{{share['cost']}}金币{% end %}
+                                            </span>
+                                            &nbsp;
+                                            <span class="note-color">
+                                                |
+                                            </span>
+                                            &nbsp;
+                                            <a href="javascript:void(0)" data-share-id="{{ share['_id'] }}" {% if share['uploader']['_id'] != current_user['_id'] %}data-cost="{{share['cost']}}"{% end %} class="share-download-button button button-flat-caution button-tiny">下载</a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    {% set _description = handler.get_text(share['description']) %}
+                                    {% if _description %}
+                                    <div class="mt10">
+                                        {{ _description[:100] }}
+                                        {% if len(_description) > 100 %}
+                                        ... <a href="/share/{{ share['_id'] }}">更多</a>
+                                        {% end %}
+                                    </div>
+                                    {% end %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="pull-left note-color">
+                                    <span>
+                                        <i class="fa fa-thumbs-o-up"></i>
+                                        {{ share['like_times'] }}
+                                        &nbsp;
+                                    </span>
+
+                                    <span>
+                                        <i class="fa fa-comment-o"></i>
+                                        {{ share['comment_times'] }}
+                                        &nbsp;
+                                    </span>
+
+                                    <span class="note-color">
+                                        <i class="fa fa-download"></i>
+                                        {{ share['download_times'] }}
+                                    </span>
+                                </div>
+                                <div class="pull-right">
+                                    <ul class="unstyled inline-list">
+                                        {% for like in share['like_list'] %}
+                                        <li>
+                                            <a href="/profile/{{ like['liker']['_id'] }}" data-userid="{{ like['liker']['_id'] }}">
+                                                <img src="{{ handler.get_avatar(like['liker']['_id'], 'thumbnail50x50') }}" class="avatar avatar-mini">
+                                            </a>
+                                        </li>
+                                        {% end %}
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                            </td>
+                        </tr>
+                        {% end %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="no-share-table text-center note-color">
+                    该分类下无分享
+                </div>
+                {% end %}
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+{% end %}

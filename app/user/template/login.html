@@ -1,0 +1,74 @@
+{% extends "../../base/template/base.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('app/user/css/login.css')}}">
+{% end %}
+
+{% block javascript_in_body %}
+<script type="text/javascript" src="{{ static_url('app/user/js/login.js')}}" defer></script>
+{% end %}
+
+{% block body %}
+<div class="main-content">
+    <div id="main-content-inner" class="main-content-inner container white-color">
+        <div class="row">
+            <div class="span5">
+                <div class="slogan">
+                    <div>
+                        <span>When We Young</span>
+                    </div>
+                    <div class="slogan-content">
+                        <div>
+                            Let me photograph you in this light, in case it is the last time that we might be exactly like we were. &nbsp;&nbsp; --<em>Adele</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span4 offset3">
+                <div class="login-form">
+                    <div class="login-item">
+                        <input type="text" name="email" placeholder="邮箱" onkeydown="enterLogin(event)">
+                    </div>
+                    <div class="login-item">
+                        <input type="password" name="password" placeholder="密码" onkeydown="enterLogin(event)">
+                    </div>
+                    <div class="login-item">
+                        <a href="javascript:void(0)" id="login-button" class="button button-flat-action button-block button-large">
+                            登录
+                        </a>
+                    </div>
+                    <div class="login-item">
+                        <div class="pull-left">
+                            <a id="register-link" href="javascript:void(0)" class="white-color">立刻注册</a>
+                        </div>
+                        <div class="pull-right">
+                            <a id="forget-password-link" href="#forget-password-modal" class="fancybox dating-action white-color">忘记密码?</a>
+                            <div id="forget-password-modal" class="flat-block register-form hidden">
+                                <div class="register-form-inner">
+                                    <div class="register-field">
+                                        <input type="text" name="validate-email" placeholder="请输入你的登陆邮箱" style="width: 325px">
+                                    </div>
+                                    <div class="register-actions text-center">
+                                        <a href="javascript:void(0)" id="submit-validate-button" class="button button-flat-caution button-small">发送验证邮件</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="resend-activation-email-modal" class="flat-block register-form hidden">
+                                <div class="register-form-inner">
+                                    <div class="register-field">
+                                        <input type="text" name="activation-email" placeholder="请输入你的登陆邮箱" style="width: 325px">
+                                    </div>
+                                    <div class="register-actions text-center">
+                                        <a href="javascript:void(0)" id="submit-activation-email-modal-button" class="button button-flat-caution button-small">发送验证邮件</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}

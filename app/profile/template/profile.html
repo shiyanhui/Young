@@ -1,0 +1,65 @@
+{% extends "../../base/template/appbase.html" %}
+
+{% block body %}
+<div class="flat-block container personal-header" >
+    <div class="background-picture" style="background-image: url({{ profile_cover }});"></div>
+    <div id="user-info" class="user-info">
+        <div class="avatar-part">
+            <img src="{{ handler.get_avatar(user['_id'], 'thumbnail180x180') }}" class="user-avatar">
+            <div class="summary-numbers">
+                <table>
+                    <tr>
+                        <td width="90px" align="center" class="border-right">
+                            <a href="/profile/{{ user['_id'] }}">
+                                <span class="number">{{ status_number }}</span>
+                                <div></div>
+                                <span>状态</span>
+                            </a>
+                        </td>
+                        <td width="90px" align="center">
+                            <a href="/profile/topic/{{ user['_id'] }}">
+                                <span class="number">{{ topic_number }}</span>
+                                <div></div>
+                                <span>话题</span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="header"></div>
+        <div class="extra-info">
+            <div class="inner">
+                <span style="font-size: 18px;">{{ user['name'] }}</span>
+
+                {% if 'relationship_status' in user and user['relationship_status'] == 'single' %}
+                <span class="note-color font12">(单身中)</span>
+                {% elif 'relationship_status' in user and user['relationship_status'] == 'in_love' %}
+                <span class="note-color font12">(恋爱中)</span>
+                {% end %}
+
+                {% if current_user['_id'] != user['_id'] %}
+                    {% if can_seen and not is_friend %}
+                    <a href="javascript:void(0)" class="add-friend-button" data-user-id="{{ user['_id'] }}">
+                        <span class="label label-success"><i class="fa fa-plus"></i>朋友</span>
+                    </a>
+                    {% end %}
+
+                    {% if is_friend or user_setting['allow_stranger_chat_with_me'] %}
+                    <a href="javascript:void(0)" class="chat-with" data-chat-with="{{ user['_id'] }}" data-user-name="{{ user['name'] }}">
+                        <span class="label label-success"><i class="fa fa-comments fa-fw"></i>私聊</span>
+                    </a>
+                    {% end %}
+                {% end %}
+
+                {% if 'signature' in user and user['signature'] %}
+                <div class="coffee-color mt10">
+                    {{ user['signature'] }}
+                </div>
+                {% end %}
+            </div>
+        </div>
+    </div>
+</div>
+    {% block app %}{% end %}
+{% end %}

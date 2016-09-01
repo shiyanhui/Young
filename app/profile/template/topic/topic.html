@@ -1,0 +1,28 @@
+{% extends ../profile.html %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ static_url('app/profile/css/profile.css') }}">
+<link rel="stylesheet" href="{{ static_url('app/profile/css/topic.css') }}">
+{% end %}
+
+{% block app %}
+<div class="container mt20">
+    <div class="btn-group">
+        <a href="/profile/status/{{ user['_id'] }}#header" class="btn">
+            <i class="fa fa-comments"></i> 状态
+        </a>
+        <a href="/profile/topic/{{ user['_id'] }}#header" class="btn btn-danger">
+            <i class="fa fa-quote-left"></i> 话题
+        </a>
+        <a href="/profile/leavemessage/{{ user['_id'] }}#header" class="btn">
+            <i class="fa fa-edit"></i> 留言
+        </a>
+    </div>
+</div>
+<div class="container mt20">
+    <div class="main-content">
+        {% include 'topic-main.html' %}
+    </div>
+    {% include 'topic-sidebar.html' %}
+</div>
+{% end %}

@@ -1,0 +1,81 @@
+<div id="status-right-sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        {% if user['user_type'] == 'league' %}
+        <div class="flat-block league-bulletin">
+            <div class="flat-block-header">
+                公告
+                {% if current_user['_id'] == user['_id'] %}
+                <div class="pull-right">
+                    <a href="#change-league-bulletin-fancybox" id="change-league-bulletin-link">修改公告</a>
+
+                    <div id="change-league-bulletin-fancybox" style="display: none">
+                        <div class="header">
+                            修改公告
+                        </div>
+                        <div style="padding: 30px 30px 20px 30px;">
+                            <textarea name="league-bulletin" style="min-width: 300px;max-width: 300px;min-height: 100px;max-height: 100px;"
+                                placeholder="请不要超过300字">
+                                {% if 'league_bulletin' in current_user and current_user['league_bulletin'] %}{{ current_user['league_bulletin'] }}{% end %}</textarea>
+                        </div>
+                        <div class="pull-right" style="margin-right: 30px;margin-bottom: 25px;">
+                            <a href="javascript:void(0)" id="save-league-bulletin-button" class="button button-flat-caution">保存</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                {% end %}
+            </div>
+
+            {% if 'league_bulletin' in user and user['league_bulletin'] %}
+            <div id="league-bulletin-content" class="flat-block-content">
+                {{ user['league_bulletin'] }}
+            </div>
+            {% else %}
+            <div id="league-bulletin-content" class="no-league-bulletin">
+                <div class="no-league-bulletin-inner">
+                    没有公告
+                </div>
+            </div>
+            {% end %}
+        </div>
+        <div class="flat-block league-members-list">
+            <div class="flat-block-header">
+                成员
+            </div>
+            {% if member_list %}
+            <div class="flat-block-content">
+                <table>
+                    {% for i in xrange(int(len(member_list)/4) if len(member_list) % 4 == 0 else int(len(member_list) / 4 + 1)) %}
+                        <tr>
+                        {% for j in xrange(4) %}
+                            {% if 4*i+j < len( member_list ) %}
+                                <td width="70px" align="center">
+                                    <a href="/profile/{{ member_list[4*i+j]['member']['_id'] }}" data-userid="{{ member_list[4*i+j]['member']['_id'] }}">
+                                        <img src="{{ handler.get_avatar(member_list[4*i+j]['member']['_id'], 'thumbnail50x50' ) }}" class="avatar">
+                                    </a>
+                                    <div>
+                                        <small>
+                                            <a href="/profile/{{ member_list[4*i+j]['member']['_id'] }}" class="note-color" 
+                                                data-userid="{{ member_list[4*i+j]['member']['_id'] }}">{{ member_list[4*i+j]['member']['name'] }}</a>
+                                        </small>
+                                    </div>
+                                </td>
+                            {% end %}
+                        {% end %}
+                        </tr>
+                    {% end %}
+                </table>
+            </div>
+            {% else %}
+            <div class="no-league-members-list">
+                <div class="no-league-members-list-inner">
+                    尚无社团成员
+                </div>
+            </div>
+            {% end %}
+        </div>
+        {% end %}
+
+        {% include 'friend-recommend.html' %}
+    </div>
+</div>
