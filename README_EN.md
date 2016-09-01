@@ -1,6 +1,6 @@
 <img src='static/img/logo.png' width='400' title='Young, a full-featured form'>
 
-A Full-featured form software built with love by [Lime](http://lime66.com) in
+A Full-featured forum software built with love by [Lime](http://lime66.com) in
 [Python](https://www.python.org/).
 
 ## Features:
