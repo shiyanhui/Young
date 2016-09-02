@@ -2,7 +2,6 @@
 
 from datetime import datetime
 
-import simplejson
 from bson.dbref import DBRef
 from bson.objectid import ObjectId
 from tornado import gen
@@ -42,8 +41,8 @@ class ImageUploadHandler(BaseHandler):
                 'delete_type': 'POST'
             }]
         }
-        response_data = simplejson.dumps(response_data)
-        self.finish(response_data)
+
+        self.write_json(response_data)
 
 
 class ImageStaticFileHandler(BaseHandler):

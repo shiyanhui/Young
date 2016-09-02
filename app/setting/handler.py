@@ -5,7 +5,6 @@ from StringIO import StringIO
 from datetime import datetime
 
 import Image
-import simplejson as json
 from tornado import gen
 from tornado.web import authenticated, HTTPError
 from bson.objectid import ObjectId
@@ -280,7 +279,7 @@ class PasswordSetHandler(BaseHandler):
                 response_data.update({'error': form.errors[field][0]})
                 break
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class ProfileSetHandler(BaseHandler):
@@ -346,7 +345,7 @@ class ProfileSetHandler(BaseHandler):
                 {'$set': document}
             )
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class PrivateSetHandler(BaseHandler):

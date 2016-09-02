@@ -5,6 +5,7 @@ from datetime import datetime
 
 import motor
 import gridfs
+import simplejson as json
 from bson.objectid import ObjectId
 from bson.dbref import DBRef
 from bs4 import BeautifulSoup
@@ -195,6 +196,10 @@ class BaseHandler(RequestHandler, UtilMixin):
 
         session.clear()
         self.clear_cookie('session_id')
+
+    def write_json(self, data):
+        self.write(json.dumps(data))
+        self.flush(include_footers=True)
 
     def get_theme(self):
         if not self.current_user:

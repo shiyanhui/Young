@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import simplejson as json
 from bson.objectid import ObjectId
 from tornado import gen
 from tornado.web import authenticated, HTTPError
@@ -76,8 +75,7 @@ class StatusMoreHandler(ProfileBaseHandler):
                 status=status
             ) for status in status_list
         )
-
-        self.finish(json.dumps({'html': html, 'page': page + 1}))
+        self.write_json({'html': html, 'page': page + 1})
 
 
 class FriendRecommendHandler(ProfileBaseHandler):
@@ -94,7 +92,7 @@ class FriendRecommendHandler(ProfileBaseHandler):
             'profile/template/status/friend-recommend.html',
             recommend_friend_list=recommend_friend_list
         )
-        self.finish(json.dumps({'html': html}))
+        self.write_json({'html': html})
 
 
 class LeagueBulletinSaveHandler(ProfileBaseHandler):
@@ -111,5 +109,3 @@ class LeagueBulletinSaveHandler(ProfileBaseHandler):
             {'_id': ObjectId(self.current_user['_id'])},
             {'$set': {'league_bulletin': league_bulletin}}
         )
-
-        self.finish()

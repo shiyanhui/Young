@@ -2,7 +2,6 @@
 
 import time
 
-import simplejson as json
 from bson.objectid import ObjectId
 from tornado.web import authenticated, asynchronous, HTTPError
 from tornado.escape import xhtml_escape
@@ -58,9 +57,10 @@ class MessageUpdaterHandler(BaseHandler):
                 **kwargs
             )
 
-            self.finish(json.dumps({
+            self.write_json({
                 'topic': 'unread_message_numbers', 'html': html
-            }))
+            })
+            self.finish()
 
         elif has_unread_chat_message:
             messages = ChatMessageDocument.get_unread_messages(
@@ -70,7 +70,8 @@ class MessageUpdaterHandler(BaseHandler):
 
             ChatMessageDocument.set_read(self.current_user['_id'])
 
-            self.finish(response_data)
+            self.write_json(response_data)
+            self.finish()
         else:
             BrowserCallbackManager.add(
                 self.current_user['_id'], self.new_message
@@ -143,9 +144,9 @@ class MessageUpdaterHandler(BaseHandler):
                     ) * 1000
                 }
                 each_people['messages'].append(new_message)
-
             response_data['each_people'].append(each_people)
-        return json.dumps(response_data)
+
+        return response_data
 
     def _new_message_handler(self, message):
         message['message'] = self.translate_dbref_in_document(
@@ -166,7 +167,7 @@ class MessageUpdaterHandler(BaseHandler):
         }
 
         html = self.render_string('message/template/message.html', **kwargs)
-        return json.dumps({'topic': message_topic, 'html': html})
+        return {'topic': message_topic, 'html': html}
 
     def new_message(self, data):
         '''收到nsq服务器的新消息, data必须具有`topic`和`message`两个字段,
@@ -198,11 +199,11 @@ class MessageUpdaterHandler(BaseHandler):
                 'messages': [data['message']]
             }]
             response_data = self._new_chat_message_handler(messages)
-
         else:
             response_data = self._new_message_handler(data)
 
-        self.finish(response_data)
+        self.write_json(response_data)
+        self.finish()
 
     def on_connection_close(self):
         BrowserCallbackManager.remove(self.current_user['_id'])

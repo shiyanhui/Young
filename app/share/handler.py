@@ -4,7 +4,6 @@ import os
 from datetime import datetime
 
 import pymongo
-import simplejson as json
 from tornado import gen
 from tornado.web import authenticated, HTTPError
 from bson.dbref import DBRef
@@ -302,7 +301,7 @@ class ShareNewHandler(ShareBaseHandler):
                 finally:
                     yield f.close()
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class ShareNewCancelHandler(ShareBaseHandler):
@@ -612,7 +611,7 @@ class ShareCommentNewHandler(ShareBaseHandler):
             )
             response_data.update({'item': item})
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class ShareLikeHandler(ShareBaseHandler):
@@ -742,4 +741,4 @@ class ShareLikeHandler(ShareBaseHandler):
         like_times = yield ShareLikeDocument.get_like_times(share_id)
         response_data.update({'like_times': like_times})
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)

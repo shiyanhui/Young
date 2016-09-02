@@ -6,7 +6,6 @@ from datetime import datetime
 from StringIO import StringIO
 
 import Image
-import simplejson as json
 from tornado.web import authenticated, HTTPError
 from tornado import gen
 from bson.dbref import DBRef
@@ -98,7 +97,7 @@ class FriendRecommendHandler(HomeBaseHandler):
             random_user_list=random_user_list
         )
 
-        self.finish(json.dumps({'html': html}))
+        self.write_json({'html': html})
 
 
 class StatusNewHandler(HomeBaseHandler):
@@ -258,7 +257,7 @@ class StatusNewHandler(HomeBaseHandler):
                 response_data.update({'error': form.errors[field][0]})
                 break
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class StatusMoreHandler(HomeBaseHandler):
@@ -286,9 +285,8 @@ class StatusMoreHandler(HomeBaseHandler):
                 status=status
             ) for status in status_list
         )
-        response_data = json.dumps({'html': html, 'page': page + 1})
 
-        self.finish(response_data)
+        self.write_json({'html': html, 'page': page + 1})
 
 
 class StatusCommentsHandler(HomeBaseHandler):
@@ -317,7 +315,7 @@ class StatusCommentsHandler(HomeBaseHandler):
             status_comment_list=status_comment_list
         )
 
-        self.finish(json.dumps({'html': html}))
+        self.write_json({'html': html})
 
 
 class StatusCommentNewHandler(HomeBaseHandler):
@@ -426,7 +424,7 @@ class StatusCommentNewHandler(HomeBaseHandler):
                 response_data.update({'error': form.errors[field][0]})
                 break
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class StatusLikeHandler(HomeBaseHandler):
@@ -492,14 +490,12 @@ class StatusLikeHandler(HomeBaseHandler):
         like_list = yield StatusLikeDocument.get_like_list(
             status['_id'], self.current_user['_id']
         )
-
         likers = '、'.join([like['liker']['name'] for like in like_list])
-        response_data = json.dumps({
+
+        self.write_json({
             'like_times': like_times,
             'likers': likers
         })
-
-        self.finish(response_data)
 
 
 class FriendsHandler(HomeBaseHandler):
@@ -587,7 +583,7 @@ class FriendActionHandler(HomeBaseHandler):
             else:
                 raise HTTPError(404)
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class MessageHandler(HomeBaseHandler):
@@ -677,8 +673,7 @@ class MessageMoreHandler(HomeBaseHandler):
             ) for message in message_list
         )
 
-        response_data = json.dumps({'html': html, 'page': page + 1})
-        self.finish(response_data)
+        self.write_json({'html': html, 'page': page + 1})
 
 
 class StatusPhotoStaticFileHandler(HomeBaseHandler):

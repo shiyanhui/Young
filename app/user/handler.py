@@ -7,7 +7,6 @@ import hashlib
 import email.utils
 from datetime import datetime, timedelta
 
-import simplejson as json
 from tornado import gen
 from tornado.web import authenticated, HTTPError
 from bson.objectid import ObjectId
@@ -106,7 +105,7 @@ class LoginHandler(BaseHandler):
                 response_data.update({'error': form.errors[field][0]})
                 break
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class LogoutHandler(BaseHandler):
@@ -224,7 +223,7 @@ class RegisterHandler(BaseHandler):
                 response_data.update({'error': form.errors[field][0]})
                 break
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class AvatarStaticFileHandler(BaseHandler):
@@ -323,7 +322,7 @@ class AccountActiveSendmailHandler(BaseHandler):
             code_id = yield CodeDocument.insert(document)
             WriterManager.pub(MessageTopic.SEND_ACTIVATION_EMAIL, code_id)
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class AccountActiveHandler(BaseHandler):
@@ -398,7 +397,7 @@ class PasswordResetSendmailHandler(BaseHandler):
             code_id = yield CodeDocument.insert(document)
             WriterManager.pub(MessageTopic.SEND_RESET_PASSWORD_EMAIL, code_id)
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class PasswordResetHandler(BaseHandler):
@@ -567,4 +566,4 @@ class FetchLoginRewardHandler(BaseHandler):
                 'continuous_login_days': continuous_login_days
             })
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)

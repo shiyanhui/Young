@@ -2,7 +2,6 @@
 
 from datetime import datetime
 
-import simplejson as json
 from bson.dbref import DBRef
 from bson.objectid import ObjectId
 from tornado import gen
@@ -193,8 +192,7 @@ class LeaveMessageNewHandler(ProfileBaseHandler):
             leave_message=leave_message,
             user=user
         )
-
-        self.finish(json.dumps({'html': html}))
+        self.write_json({'html': html})
 
 
 class LeaveMessageMoreHandler(ProfileBaseHandler):
@@ -224,8 +222,7 @@ class LeaveMessageMoreHandler(ProfileBaseHandler):
             )
             for leave_message in leave_message_list
         )
-
-        self.finish(json.dumps({'html': html, 'page': page + 1}))
+        self.write_json({'html': html, 'page': page + 1})
 
 
 class FriendRequestNewHandler(ProfileBaseHandler):
@@ -280,7 +277,7 @@ class FriendRequestNewHandler(ProfileBaseHandler):
 
             WriterManager.pub(MessageTopic.FRIEND_REQUEST_NEW, message_id)
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class FriendRequestAgreeHandler(ProfileBaseHandler):
@@ -319,8 +316,6 @@ class FriendRequestAgreeHandler(ProfileBaseHandler):
             'message_type': MessageTopic.FRIEND_REQUEST_NEW
         })
 
-        self.finish()
-
 
 class FriendRequestRefuseHandler(ProfileBaseHandler):
     '''拒绝添加其为好友'''
@@ -344,5 +339,3 @@ class FriendRequestRefuseHandler(ProfileBaseHandler):
                 ObjectId(self.current_user['_id'])
             ),
             'message_type': MessageTopic.FRIEND_REQUEST_NEW})
-
-        self.finish()

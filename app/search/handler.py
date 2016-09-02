@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import simplejson as json
 from tornado import gen
-from tornado.web import authenticated, HTTPError
+from tornado.web import HTTPError
 
 from young.handler import BaseHandler
 from app.user.document import UserDocument
@@ -78,4 +77,4 @@ class SearchHandler(BaseHandler):
                 for r in res["hits"]["hits"]
             ]
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)

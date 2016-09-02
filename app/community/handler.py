@@ -4,7 +4,6 @@ from StringIO import StringIO
 from datetime import datetime, timedelta
 
 import Image
-import simplejson as json
 from tornado import gen
 from tornado.web import authenticated, asynchronous, HTTPError
 from bson.objectid import ObjectId
@@ -321,7 +320,7 @@ class TopicNewHandler(CommunityBaseHandler):
                     except:
                         pass
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class TopicEditHandler(CommunityBaseHandler):
@@ -399,7 +398,7 @@ class TopicEditHandler(CommunityBaseHandler):
             {'$set': document}
         )
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class TopicCommentNewHandler(CommunityBaseHandler):
@@ -529,7 +528,7 @@ class TopicCommentNewHandler(CommunityBaseHandler):
             )
             response_data.update({'item': item})
 
-        self.finish(json.dumps(response_data))
+        self.write_json(response_data)
 
 
 class TopicCommentMoreHandler(CommunityBaseHandler):
@@ -558,7 +557,7 @@ class TopicCommentMoreHandler(CommunityBaseHandler):
             ) for comment in comment_list
         )
 
-        self.finish(json.dumps({'html': html, 'page': page + 1}))
+        self.write_json({'html': html, 'page': page + 1})
 
 
 class TopicLikeHandler(CommunityBaseHandler):
@@ -682,9 +681,9 @@ class TopicLikeHandler(CommunityBaseHandler):
                 WriterManager.pub(MessageTopic.LIKE, message_id)
 
         like_times = yield TopicLikeDocument.get_like_times(topic_id)
-
         response_data.update({'like_times': like_times})
-        self.finish(json.dumps(response_data))
+
+        self.write_json(response_data)
 
 
 class NodeHandler(CommunityBaseHandler):
@@ -710,7 +709,7 @@ class NodeHandler(CommunityBaseHandler):
         )
         topic_list = yield TopicDocument.get_topic_list(
             node_id=node_id,
-            user_id=self.current_user and  self.current_user['_id'],
+            user_id=self.current_user and self.current_user['_id'],
             sort=sort,
             skip=(page - 1) * COMMUNITY_SETTINGS["topic_number_per_page"],
             limit=COMMUNITY_SETTINGS['topic_number_per_page']
@@ -761,7 +760,7 @@ class NodeSuggestionHandler(CommunityBaseHandler):
             )
             nodes = [r["_source"]['name'] for r in res["hits"]["hits"]]
 
-        self.finish(json.dumps(nodes))
+        self.write_json(nodes)
 
 
 class NodeAvatarEditTemplateHandler(CommunityBaseHandler):
@@ -914,7 +913,7 @@ class NodeDescriptionEditHandler(CommunityBaseHandler):
             current_node=node
         )
 
-        self.finish(json.dumps({'html': html}))
+        self.write_json({'html': html})
 
 
 class TopicDeleteHandler(CommunityBaseHandler):

@@ -3,7 +3,6 @@
 import time
 from datetime import datetime
 
-import simplejson
 from tornado import gen
 from tornado.web import authenticated, asynchronous, HTTPError
 from bson.dbref import DBRef
@@ -134,4 +133,4 @@ class MessageHistoryHandler(BaseHandler):
             )
             response_data.update({'has': 1, 'since': since, 'html': html})
 
-        self.finish(simplejson.dumps(response_data))
+        self.write_json(response_data)
