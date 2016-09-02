@@ -30,34 +30,28 @@ def register_message_writers():
 def register_message_readers():
     '''为nsq消息系统建立消费者'''
 
+    handlers = {
+        MessageTopic.CHAT_MESSAGE_NEW:
+            chat_message_handler,
+
+        MessageTopic.SEND_ACTIVATION_EMAIL:
+            send_activation_email_handler,
+
+        MessageTopic.SEND_RESET_PASSWORD_EMAIL:
+            send_reset_password_email_handler,
+
+        MessageTopic.SEND_HAS_UNREAD_MESSAGE_EMAIL:
+            send_has_unread_message_email_handler,
+    }
+
     for topic in MessageTopic.all_topic:
-        handler = None
-
-        if topic == MessageTopic.CHAT_MESSAGE_NEW:
-            handler = chat_message_handler
-
-        elif topic == MessageTopic.SEND_ACTIVATION_EMAIL:
-            handler = send_activation_email_handler
-
-        elif topic == MessageTopic.SEND_RESET_PASSWORD_EMAIL:
-            handler = send_reset_password_email_handler
-
-        elif topic == MessageTopic.SEND_HAS_UNREAD_MESSAGE_EMAIL:
-            handler = send_has_unread_message_email_handler
-
-        else:
-            handler = message_handler
-
-        if handler is not None:
-            reader = {
-                'message_handler': handler,
-                "nsqd_tcp_addresses": ['127.0.0.1:4150'],
-                'topic': topic,
-                'channel': topic,
-                'lookupd_poll_interval': 15
-            }
-
-            nsq.Reader(**reader)
+        nsq.Reader(
+            message_handler=handlers.get(topic, message_handler),
+            nsqd_tcp_addresses=['127.0.0.1:4150'],
+            topic=topic,
+            channel=topic,
+            lookupd_poll_interval=15
+        )
 
 
 # controlling is in c, Crtl^C won't exit, so we should kill self
