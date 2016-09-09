@@ -135,7 +135,7 @@
                                         {% set _description = handler.get_text(newest_share_list[2*i+j]['description']) %}
                                         {{ _description[:50] }}
                                         {% if len(_description) > 50 %}
-                                        ... <a href="/share/{{ recommend_share_list[2*i+j]['_id'] }}">更多</a>
+                                        ... <a href="/share/{{ newest_share_list[2*i+j]['_id'] }}">更多</a>
                                         {% end %}
                                     </div>
                                     <div class="note-color mt20">
