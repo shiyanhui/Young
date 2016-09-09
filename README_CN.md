@@ -91,4 +91,4 @@ Young是一个用Python写的功能丰富的、界面小清新的类似NodeBB的
 
 ## License
 
-[GNU General Public License v3 (GPL-3)](http://www.gnu.org/copyleft/gpl.html).
+[GNU Affero General Public License v3 (AGPL-3)](https://www.gnu.org/licenses/agpl-3.0.html).

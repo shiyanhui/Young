@@ -96,4 +96,4 @@ by step.
 
 ## License
 
-Young is licensed under the [GNU General Public License v3 (GPL-3)](http://www.gnu.org/copyleft/gpl.html).
+Young is licensed under the [GNU Affero General Public License v3 (AGPL-3)](https://www.gnu.org/licenses/agpl-3.0.html).
