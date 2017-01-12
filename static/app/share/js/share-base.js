@@ -209,7 +209,7 @@
             if(!(resumable && resumable.isUploading())){
                 resumable = new Resumable({
                     target: '/share/new',
-                    chunkSize: 16*1024*1024,
+                    chunkSize: 10*1024*1024,
                     simultaneousUploads: 4,
                     testChunks: false,
                     query: {
