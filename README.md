@@ -16,13 +16,7 @@ A Full-featured forum software built with love by [Lime](http://lime66.com) in
 
 ## Screenshots
 
-<img src='http://i.imgur.com/jIRssZ8.png' width='280'>
-<img src='http://i.imgur.com/NBajysS.png' width='280'>
-<img src='http://i.imgur.com/9DhFrZW.png' width='280'>
-<img src='http://i.imgur.com/rGjdYBp.png' width='280'>
-<img src='http://i.imgur.com/YXtFTuX.png' width='280'>
-<img src='http://i.imgur.com/olSroBN.png' width='280'>
-<img src='http://i.imgur.com/FW3PkTO.png' width='280'>
+<img src='http://i.imgur.com/jIRssZ8.png' width='280'><img src='http://i.imgur.com/NBajysS.png' width='280'><img src='http://i.imgur.com/9DhFrZW.png' width='280'><img src='http://i.imgur.com/rGjdYBp.png' width='280'><img src='http://i.imgur.com/YXtFTuX.png' width='280'><img src='http://i.imgur.com/olSroBN.png' width='280'><img src='http://i.imgur.com/FW3PkTO.png' width='280'>
 
 ## Installation
 
