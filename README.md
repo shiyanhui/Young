@@ -38,7 +38,7 @@ Then set your mongodb environment:
 
     3. enter mongo client and execute
 
-        mogno
+        mongo
         rs.initiate()
 
 The next step you shoud initialize the database.
