@@ -41,7 +41,7 @@ Then set your mongodb environment:
         mogno
         rs.initiate()
 
-The next step you shoud initialize the database.
+The next step you should initialize the database.
 
     fab init
 
