@@ -42,7 +42,7 @@ class StatusDocument(Document):
 
     @gen.coroutine
     def translate_at(content):
-        '''将status cotent中的@转换成链接'''
+        '''将status content中的@转换成链接'''
 
         result = StatusDocument.REGEX_AT.findall(content)
 
