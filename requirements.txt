@@ -1,7 +1,7 @@
 backports-abc==0.4
 beautifulsoup4==4.5.1
 bs4==0.0.1
-certifi==2016.8.8
+certifi==2022.12.7
 elasticsearch==2.4.0
 greenlet==0.4.10
 motor==0.6.2
